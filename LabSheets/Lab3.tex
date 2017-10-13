@@ -1,0 +1,128 @@
+\documentclass[12pt, a4paper, oneside]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[british]{babel}
+\usepackage{lmodern}
+\usepackage{hyperref}
+
+\renewcommand{\familydefault}{\sfdefault}
+
+\author{}
+\date{}
+
+\title{CM10227 Lab3: Iteration, Strings, Arrays}
+
+\newcounter{qstncntr}
+\newcommand{\exerset}{ \vspace*{-11pt}\setcounter{qstncntr}{0} }
+\newenvironment{exer}[1]{\vspace*{11pt}\noindent {{\bf Exercise} \stepcounter{qstncntr} \theqstncntr:} #1}{}
+
+\begin{document}
+\maketitle
+Answer each question in a different file named \emph{Lab3ex<Number>.c }(e.g.\ Lab3ex1.c) (i.e. one file only per exercise).
+We must be able to compile your code on \href{http://www.bath.ac.uk/guides/connecting-to-linux-bath/}{linux.bath} by typing \emph{gcc -o Lab3ex1 Lab3ex1.c -lm}, etc.
+All your files should be submitted in a single zip, with all source (.c) files in one folder or the root of the zip:
+the file name should be of the form \emph{<username>-lab<number>.zip}, e.g. \emph{abc12-lab3.zip}.
+
+Your code will initially be marked by an automated process, followed by individual feedback and verification by a tutor.
+Please, therefore, adhere to the above instructions and use the \textbf{exact format as given}.
+Failure to do so will delay the marking process, and may incur penalties in the interest in providing everyone prompt feedback.
+You are advised to re-download your Moodle submission and check it thoroughly, in advance of the deadline.
+
+If you have questions about this lab sheet or are stuck with one of the questions talk to the tutors in the lab or post your question on Moodle.
+Please do not include code on Moodle: bring this to a lab session.
+
+This lab is part of your coursework.
+\textbf{Please check Moodle for the submission deadline.}
+
+\section*{Exercises}
+\setlength{\parindent}{0cm} %
+\exerset
+\begin{exer}
+  Create two functions that generate the factorial of a number using iteration (not recursion!). One should use a ``for loop'' and the other a ``while'' or ``do/while'' loop.
+  Write a program which calls the first function with the following numbers and print the results, one per line:
+  1, 2, 4, 5, 8
+  Next call the second function with the same numbers, and print the results, one per line.
+  (Your program should print the same five numbers twice when run.)
+\end{exer}
+
+\begin{exer}
+Create a function or functions that print out a tree shape such as the following:
+\begin{verbatim}
+    *
+   ***
+  *****
+ *******
+*********
+   ***
+   ***
+   ***
+   ***
+\end{verbatim}
+Your code should be written in such a way that both the width of the tree (9 in the example) and the trunk length of the tree (4 for the example) can be passed as parameters to one of your functions.
+You can assume that the width of the tree will be odd and hence every line will have an odd number of asterisks.
+The trunk will always have a width of three.
+
+Ensure your program prints the following trees, one after the other, with a single blank line in between:
+\begin{enumerate}
+\item the example tree
+\item a tree with width 5 and trunk length 2
+\item a tree with width 11 and trunk length 6
+\end{enumerate}
+\end{exer}
+
+\begin{exer}
+Write a program which calculate a square multiplication table for the first \begin{math}N\end{math} integers.
+The program \textbf{must} store it in a two-dimensional array.
+(NB: you cannot return an array from a function without dynamic memory allocation, so do not create a function which returns an array unless you have researched this.)
+Next, print the output of the array, separated by commas and line breaks.
+For example:
+\begin{verbatim}
+$ ./Lab3ex3
+1,2,3,4,5
+2,4,6,8,10
+3,6,9,12,15
+4,8,12,16,20
+5,10,15,20,25
+\end{verbatim}
+
+Modify your code such that your program prints out square multiplication tables for the following values: with a single blank line in between:
+\begin{enumerate}
+\item
+  \begin{math}
+    N=5
+  \end{math}
+\item
+  \begin{math}
+    N=3
+  \end{math}
+\item
+  \begin{math}
+    N=8
+  \end{math}
+\end{enumerate}
+
+\end{exer}
+
+%ex 4%
+\begin{exer}
+Create a function which converts a hexadecimal string into its decimal value.
+(Do not use a C standard library function.)
+Call this function with the following hexadecimal values, and print each result on a separate line:
+FF, 10, ABC, C2, -AB
+\end{exer}
+
+
+\begin{exer}
+  Write a program which takes in number of words (separated by spaces) on the command line (argc/argv) and concatenates them together in reverse order.
+  Print out the concatenated string (and not the individual strings).
+Here is an example usage:
+\begin{verbatim}
+$ ./Lab3ex5 correct. is answer The
+The answer is correct.
+\end{verbatim}
+
+To simplify the problem, you can assume the number of words is limited to six and the number of characters per word (not including spaces) is ten.
+Otherwise, the program should print an error message and terminate.
+
+\end{exer}
+\end{document}

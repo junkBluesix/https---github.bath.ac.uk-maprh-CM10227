@@ -1,0 +1,21 @@
+\frametitle {Ownership}
+\begin{itemize}
+\item Each file has a user as \keytext{owner} and a group as \keytext{group owner}.
+\item Using \lstinline{chmod} the owner can change  permissions that determine the type of access (read,
+write or execute) ...
+\item allowed to three categories of users: the owner herself, the users
+belonging to the group owner group, and all other users.
+\item Note that ''execute'' permission on a directory is interpreted as ''permission to traverse''
+\end{itemize}
+\codesmall
+\reslist
+\begin{lstlisting}
+ls -l
+
+-rw-r--r-- 1 mdv mdv     84 2007-09-27 23:08 earth.pdf
+
+chmod g+w earth.txt
+ls -l
+
+-rw-rw-r-- 1 mdv mdv     84 2007-09-27 22:38 earth.txt
+\end{lstlisting}

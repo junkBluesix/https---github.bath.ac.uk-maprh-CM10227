@@ -1,0 +1,9 @@
+\begin{block}{}
+\begin{lstlisting}
+Question 1
+1. Write a recursive and an iterative version of a function that prints out all even numbers between 0 and 5000. The function/method should be able to operate with positive and negative numbers. You are not allowed to use the * operator [10 marks]
+2. Define a [4 marks]
+3. Explain the difference between b and c [4 marks]
+4. List the key advatages of d and e [2 marks]
+\end{lstlisting}
+\end{block}

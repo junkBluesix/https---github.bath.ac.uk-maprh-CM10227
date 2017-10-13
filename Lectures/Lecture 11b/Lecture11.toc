@@ -1,0 +1,12 @@
+\beamer@endinputifotherversion {3.36pt}
+\beamer@sectionintoc {1}{Complexity}{6}{0}{1}
+\beamer@sectionintoc {2}{Big O notation}{13}{0}{2}
+\beamer@sectionintoc {3}{Problems with Different Components}{29}{0}{3}
+\beamer@sectionintoc {4}{Sorting Algorithms and their Complexity}{34}{0}{4}
+\beamer@sectionintoc {5}{Selection Sort}{36}{0}{5}
+\beamer@sectionintoc {6}{Insert Sort}{42}{0}{6}
+\beamer@sectionintoc {7}{Bubble Sort}{45}{0}{7}
+\beamer@sectionintoc {8}{Merge Sort}{50}{0}{8}
+\beamer@sectionintoc {9}{Crossover of Bubble and Merge Sort}{54}{0}{9}
+\beamer@sectionintoc {10}{Quick Sort}{57}{0}{10}
+\beamer@sectionintoc {11}{Combining Quicksort with Insertion Sort}{64}{0}{11}

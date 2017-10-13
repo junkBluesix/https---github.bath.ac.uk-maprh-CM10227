@@ -1,0 +1,65 @@
+\begin{frame}[fragile]\frametitle{Wildcards}
+\begin{itemize}
+\item Some characters (\textbf{wildcards}) mean special things to the shell
+\begin{itemize}
+    \item * matches zero or more characters
+\begin{itemize}
+          \item So ls *.f77 lists all the Fortran-77 files in a directory
+\end{itemize}
+\begin{lstlisting}[linewidth=6cm]
+      wc *.txt
+
+        4   9  69 earth.txt
+        4   9  69 venus.txt
+        8  18 138 total
+\end{lstlisting}
+    \item ? matches any single character
+\begin{itemize}
+          \item So \lstinline!ls ??.txt! lists all the text files with two-letter prefixes
+          \item And \lstinline!ls ??.*! lists all the files with two-letter prefixes, and any extension
+\end{itemize}
+    \item \textasciitilde on its own means “the current user's home directory”
+    \item \textasciitilde rachid means “rachid's home directory”
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Wildcards}
+\begin{itemize}
+\item Note: the shell expands wildcards before running commands
+\item Note: Be careful using \lstinline!rm! in conjunction with *
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Users}
+\begin{itemize}
+\item Users have a \textbf{user name} and a \textbf{password}
+\item a user also has a \textbf{home directory}, and a \textbf{shell program}.
+\item Internally, the system uses so-called \textbf{UID} numbers to identify users.
+\item All this information is stored in the file \textbf{/etc/passwd}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Users}
+\begin{itemize}
+\item \textbf{/etc/passwd} also stores the user “primary” group id (GID) identifying a group to which the user belongs.
+\item A \textbf{group} is an arbitrary set of users
+\item A user can belong to several groups
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Users}
+\begin{itemize}
+\item There is one special user with UID 0, called \textbf{root}
+\item This user is often called the
+“super user” because she can access all resources on the system, independently of
+any specific permissions
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Next Steps}
+\begin{itemize}
+\item There will be a second (more advanced) lecture on UNIX/Linux later in the course
+\item If you would like to continue learning to use UNIX/Linux in the meantime, there are, of course, a number of good introductions online
+\end{itemize}
+\end{frame}

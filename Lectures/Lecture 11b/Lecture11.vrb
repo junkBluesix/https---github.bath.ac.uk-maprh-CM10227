@@ -1,0 +1,25 @@
+
+Merge Sort: algorithm
+
+\begin{block}{}
+\begin{lstlisting}
+function merge_sort(int[] A):
+    if(A.length == 1){
+        return A;
+    }
+    else{
+        return merge(merge_sort(A[0..A.length/2]), merge_sort(A[A.length/2..A.length]);
+    }
+
+function merge(int[] left, int[] right):
+    int[] result;
+    while left AND right are not empty:
+        if first(left) <= first(right) then
+            append first(left) to result
+            left = rest(left)
+        else
+            append first(right) to result
+            right = rest(right)
+\end{lstlisting}
+\end{block}
+

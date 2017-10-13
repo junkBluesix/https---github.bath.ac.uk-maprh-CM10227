@@ -1,0 +1,645 @@
+\documentclass{beamer}
+% September 2014 
+% Author: Dr Rachid Hourizi and Dr. Michael Wright 
+% Department of Computer Science, University of Bath
+\usepackage{listings}
+\usetheme{Boadilla} 
+\usepackage{fixltx2e}
+\usepackage{hyperref}
+\lstset{language=Java,,
+	basicstyle=\ttfamily\small,
+           keywordstyle=\color{blue}\ttfamily,
+           stringstyle=\color{red}\ttfamily,
+           commentstyle=\color{gray}\ttfamily,
+          breaklines=true}
+
+\begin{document}
+
+\AtBeginSection[]{
+  \begin{frame}
+  \vfill
+  \centering
+  \begin{beamercolorbox}[sep=8pt,center,shadow=true,rounded=true]{title}
+    \usebeamerfont{title}\insertsectionhead\par%
+  \end{beamercolorbox}
+  \vfill
+  \end{frame}
+}
+
+\title{CM 10227: Lecture 8}
+\author{Dr Rachid Hourizi and Dr Michael Wright}
+\date{\today}
+\frame{\titlepage}
+
+\begin{frame} 
+\begin{center}
+\textbf{Resources}
+\end{center}
+\begin{itemize}
+\item More help with this course
+\begin{itemize}
+\item Moodle
+\item E-mail - programming1@lists.bath.ac.uk
+\end{itemize}
+\item Online C and Java IDE
+\begin{itemize}
+\item https://www.codechef.com/ide
+\item Remember to select Java from the drop down menu.
+\end{itemize}
+\item Books
+\begin{itemize}
+\item Java by Dissection (Free pdf online)
+\item The Java Tutorial (https://docs.oracle.com/javase/tutorial/)
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame} 
+\begin{center}
+\textbf{Resources}
+\end{center}
+\begin{itemize}
+\item The places that you can get additional support if you are finding the pace of the course a little fast now include
+\begin{itemize}
+\item A labs (Continued from week 1)
+\item B labs 
+\item ... Wednesday 11:15-13:05 EB0.7
+\item ... Fridays 17:15 to 19:15 in CB 5.13)
+\item The Drop in Session 
+\item ... booked 20 min appointments
+\item ... Friday 11.15-13.05 1E 3.9
+\item PAL sessions (Mondays 14:15 to 15:05 1E 3.9)
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+% *** CONTENT ***
+
+\begin{frame}
+\begin{center}
+\textbf{This Week}
+\end{center} 
+\begin{itemize}
+\item Interfaces 
+\item Abstract Classes
+\bigskip
+\item Choosing to extend a Class or Abstract Class ...
+\item ... or implement an Interface
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{center}
+\textbf{Recap: Interfaces and Abstract Classes}
+\end{center}
+\end{frame}
+
+\begin{frame}
+\begin{center}
+\textbf{Interfaces}
+\end{center}
+\end{frame}
+
+% *** INTERFACES ***
+
+\begin{frame}
+\begin{itemize}
+\item At some point we may want an even looser relationship between superclass and subclass
+\item We may want to specify a superclass in which no methods are implemented...
+\item ... leaving subclasses to do all of the implementation
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{itemize}
+\item A Java Interface is a specification of a type 
+\item ... in the form of a type name and methods 
+\item ... that does not define any implementation of methods
+\bigskip
+\item Interfaces are more properly described as \textbf{design patterns}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\begin{itemize}
+\item Animal interface
+\end{itemize}
+\begin{block}{}
+\begin{lstlisting}
+interface Animal{
+   public static final int CONSTANT_VARIABLE = 42;
+   
+   String makeSound();
+
+}
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\begin{itemize}
+\item Classes implement an interface 
+\end{itemize}
+\begin{block}{}
+\begin{lstlisting}
+
+public class Fox implements Animal{
+    public String makeSound(){
+    	return "Ring-ding-ding-ding-dingeringeding!";
+    }
+}
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\begin{itemize}
+\item NEW : Abstract Classes can also implement an interface 
+\end{itemize}
+\begin{block}{}
+\begin{lstlisting}
+
+abstract class Dog implements Animal { 
+	public String makeSound(){
+	    return "woof";
+	}
+	
+	abstract String breedStandard();
+}
+
+  OR
+
+abstract class Dog implements Animal { 
+	abstract String breedStandard();
+}
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+\begin{frame}
+\begin{itemize}
+\item Important to note that Interfaces are not classes
+\item ... they can not be instantiated 
+\item ... they cannot share a name with a class
+\item ... cannot contain implemented methods 
+\item ... can only contain method stubs and constants
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\begin{itemize}
+\item Classes implementing an Interface do not inherit code, but ...
+\item ... are subtypes of the interface type.
+\item So, polymorphism is available with interfaces as well as classes.
+\end{itemize}
+\begin{block}{}
+\begin{lstlisting}
+Animal fox = new Fox();
+
+Item item = new MusicFile();
+Item item = new VideoFile();
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\begin{itemize}
+\item Why does this produce and error?
+\end{itemize}
+\begin{block}{}
+\begin{lstlisting}
+Animal dog = new FrenchBulldog();
+
+String sound = dog.makeSound();
+String description = dog.breedDescription(); // ERROR
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+% *** ABSTRACT CLASSES ***
+\begin{frame}
+\begin{center}
+\textbf{Abstract Classes}
+\end{center}
+\end{frame}
+
+\begin{frame}
+\begin{itemize}
+\item In some situations, however, we may want to include methods in superclasses but only allow them to be used by subclasses
+\item For example, in the Animal class we might want to include common functionality for all animals 
+\item ... such as average life span
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\begin{itemize}
+\item ... we may also want to include an makeSound() method in the Animal class 
+\item ... but only allow it to be used in classes that describe specific kinds of animal (i.e. in subclasses of Animal)
+\bigskip
+\item In these cases, we can use abstract classes and methods
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\begin{block}{}
+\begin{lstlisting}
+public abstract class Animal{
+   private int averageAge;
+   
+   public Animal(int averageAge){
+       this.averageAge = averageAge;
+   }
+
+   public int getAverageAge(){
+      return averageAge;
+   }
+   
+   // more methods 
+   
+   // Make the sound of this animal
+   abstract String makeSound();  
+}
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\begin{block}{}
+\begin{lstlisting}
+public class Dog extends Animal{
+
+   private String sound;
+   
+   public Dog(int averageAge, String sound){
+       super(averageAge);
+       this.sound = sound;
+   }
+   
+   // Make the sound of this animal
+   public String makeSound(){
+       return sound;
+   }  
+   
+}
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\begin{itemize}
+\item NEW : Abstract Classes can also extend Abstract Classes
+\end{itemize}
+\begin{block}{}
+\begin{lstlisting}
+public abstract class Dog extends Animal{
+   public static final String SOUND = "woof";
+   
+   public Dog(int averageAge){
+       super(averageAge);
+   }
+   
+   // Make the sound of this animal
+   public String  makeSound(){
+   	return sound;
+   }
+   
+   abstract String breedStandard();
+   
+}
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\begin{itemize}
+\item NEW : Abstract Classes can also extend Abstract Classes
+\end{itemize}
+\begin{block}{}
+\begin{lstlisting}
+public class BoxerDog extends Dog{
+   
+   private String breedStandard; 
+   
+   public BoxerDog(int averageAge, String sound, String breedStandard){
+       super(averageAge, sound);
+       this.breedStandard = breedStandard;
+   }
+   
+   public String breedStandard(){
+       return breedStandard;
+   }
+}
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+\begin{frame}
+\begin{itemize}
+\item Note that some methods can still be written in full in an abstract class \ ('implemented{}' methods)
+\bigskip
+\item So an abstract class can have 
+\begin{itemize}
+\item constants
+\item fields
+\item abstract methods
+\item implemented methods
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{itemize}
+\item Also note that, like Interfaces, Abstract Classes can not be instantiated
+\item Classes implementing an Abstract Class are subtypes of the Abstract Class type.
+\item So, polymorphism is available with Abstract Class as well as classes.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{itemize}
+\item Note, however, that Abstract Classes are still classes
+\item ... more specifically, partially implemented classes
+\bigskip
+\item So the rules that govern implemented classes also govern abstract classes 
+\item i.e. no subclass can have two (or more) abstract parents
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{center}
+\textbf{Bringing this all together...}
+\end{center}
+\begin{itemize}
+\item For example, 
+\bigskip
+\item ... consider methods of payment accepted in your application
+\item ... we know we need to take payment but there are different ways of paying
+\item ... e.g. Credit Card, PayPal etc..
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\begin{block}{}
+\begin{lstlisting}
+interface Payment{
+    void makePayment(double debit);
+}
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\begin{block}{}
+\begin{lstlisting}
+public class PayPal implements Payment{
+    public void makePayment(double debit) {
+        // logic for PayPal payment
+        // e.g. Paypal uses username and password for payment
+    }
+}
+public class CreditCard implements Payment{
+    public void makePayment(double debit){
+        // logic for CreditCard payment
+        // e.g. CreditCard uses card number, date of expiry etc...
+    }
+}
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+\begin{frame}
+\begin{center}
+\textbf{Bringing this all together...}
+\end{center}
+\begin{itemize}
+\item BUT, if for example... 
+\item ... each payment type (PayPal, Credit Card etc.) needs to be authorised by a Bank
+\item ... and this process is the same for all types of payment
+\item ... and we don't want programmers to reimplement this each time
+\bigskip
+\item ... we would use an Abstract Class to implement this method
+\item ... but ensure that programmers implement the makePayment method
+\item ... because this is specific to each payment type
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\begin{block}{}
+\begin{lstlisting}
+public abstract class Payment{
+
+    protected boolean authoriseWithBank(String userAuthKey){
+        // logic to authorise payment with bank
+    }
+
+    abstract void makePayment(double debit);
+}
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\begin{block}{}
+\begin{lstlisting}
+public class PayPal extends Payment{
+    public void makePayment(double debit) {
+        // logic for PayPal payment
+        // e.g. Paypal uses username and password for payment
+        super.authoriseWithBank(authToken);
+    }
+}
+public class CreditCard extends Payment{
+    public void makePayment(double debit){
+        // logic for CreditCard payment
+        // e.g. CreditCard uses card number, date of expiry etc...
+        super.authoriseWithBank(authToken);
+    }
+}
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+\begin{frame}
+\begin{center}
+\textbf{Bringing this all together...}
+\end{center}
+\begin{itemize}
+\item What`s important is the following code does not care if Payment is
+\item ... an Interface
+\item ... or an Abstract Class
+\bigskip
+\item ... because we refer to it by its supertype 
+\item ... we know the method(s) we can call on this supertype (specified in the interface or abstract class)
+\item ... and therefore implemented (or inherited) in all of its subtypes
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\begin{block}{}
+\begin{lstlisting}
+public class NozamaUserDetails{
+    
+    private String name;
+    private Payment paymentMethod;
+    
+    public NozamaUserDetails(String name, Payment paymentMethod){
+    	this.name = name;
+	this.paymentMethod = paymentMethod;
+    }
+    
+    // other methods...
+}
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\begin{block}{}
+\begin{lstlisting}
+public class NozamaRegisterUser{
+    
+   public NozamaUserDetails registerUser(String name){
+        Payment p = getPaymentMethod();
+        return new NozamaUserDetails(name, paymentMethod);
+    }
+    
+    private Payment getPaymentMethod(){
+    	return new PayPal();
+    }
+}
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\begin{block}{}
+\begin{lstlisting}
+public class ProcessPayment{
+       
+    public void purchase(NozamaUserDetails user, Item item){
+    	Payment p = user.getPaymentMethod();
+	p.makePayment(item.getPrice());
+    }
+    
+    // other methods...
+}
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\begin{block}{}
+\begin{lstlisting}
+public class Ping implements Payment{
+    public void makePayment(double debit) {
+        // logic for Ping payment
+        // e.g. mobile phone number
+        // ... and authorising with bank ?? 
+    }
+}
+
+public class Ping extends Payment{
+    public void makePayment(double debit) {
+        // logic for Ping payment
+        // e.g. mobile phone number
+        super.authoriseWithBank(authToken);
+    }
+}
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+% *** Choosing An Interface or Abstract Class
+\begin{frame}
+\begin{center}
+\textbf{Interfaces vs Abstract Classes}
+\end{center}
+\begin{itemize}
+\item It can be difficult to identify 
+\begin{itemize}
+\item when to use an abstract class
+\item when to use an interface
+\end{itemize}
+\item As a simple rule of thumb, when faced with a choice between abstract classes and interfaces
+\begin{itemize}
+\item use an abstract class when
+\item you want to implement some but not all of a class's methods
+\item and you are willing to accept the restrictions imposed upon classes
+\item e.g. single inheritance
+\item otherwise use an interface
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+% *** Finally ***
+\begin{frame}
+\begin{center}
+\textbf{Choosing to extend a \\ Class or Abstract Class \\ or Implement an Interface}
+\end{center}
+\end{frame}
+
+\begin{frame}
+\begin{center}
+\textbf{Interfaces Over Abstract Classes or Classes}
+\end{center}
+\begin{itemize}
+\item Want to include methods in superclasses but only allow them to be used by subclasses
+\item Know what we want but not how to do it
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{center}
+\textbf{Abstract Classes Over Interfaces}
+\end{center}
+\begin{itemize}
+\item We know some of want we want to do (i.e. can provide common functionality) ...
+\item ... but not all
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{center}
+\textbf{Classes Over Abstract Classes}
+\end{center}
+\begin{itemize}
+\item When would we choose to override methods rather than declaring them abstract?
+\bigskip
+\item ... lets think about the DOME example
+\item ... real world, physical things on a Book Shelf
+\item ... and a Database to keep track of my stuff
+\end{itemize}
+\end{frame}
+
+%\begin{frame}
+%\begin{center}
+%\textbf{Final Examples}
+%\end{center}
+%\end{frame}
+
+% *** HERE ***
+\begin{frame}
+\begin{center}
+\textbf{Summary}
+\end{center}
+\begin{itemize}
+\item Inheritance can provide shared implementation...
+\item ... both as concrete and abstract classes
+\item Inheritance provides shared type information
+\item ... interfaces
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{center}
+\textbf{Summary}
+\end{center}
+\begin{itemize}
+\item Abstract classes function as incomplete superclasses
+\item Interfaces provide specification without implementation
+\bigskip
+\item Both Interfaces and Abstract Classes support polymorphism
+\end{itemize}
+\end{frame}
+
+\end{document}

@@ -1,0 +1,188 @@
+\documentclass{article}
+
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{graphicx}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage{listings}
+
+\title{CM100227 Coursework 2\\ Dungeon of Doom - Part 1}
+
+\begin{document}
+\maketitle
+
+\section{Introduction}
+The coursework of this unit consists of three parts: the lab sheets and two larger Java courseworks. This document provides the specification for the second large coursework: \textbf{Dungeons of Doom}.
+
+You can use any Integrated Development Environment (IDE) for the development of your scripts, but \textbf{your scripts have to run when we use the command-line on LCPU  without requiring the installation of libraries, modules or other programs}.
+
+Questions regarding the coursework can always be posted on the Moodle Forum and programming1@lists.bath.ac.uk mailing list.
+
+\section{Learning Objectives}
+At the end of this part of the coursework you will be able to design and write medium-sized program using  appropriate object oriented software techniques.
+
+\section{Dungeons of Doom}
+For your first coursework, we asked you to investigate and replicate a piece of code that we 
+supplied (SRPN). In this second piece of coursework you will need to design and write a program that allows a single human player and a computer player (`bot') to play the game `Dungeons of Doom', described below. (Connect4).
+
+\subsection{Game overview}
+% Extend - Rachid
+
+The \textit{Dungeon of Doom} is played on a rectangular grid, which serves as the game's board, on which the player acting as a brave fortune-hunter, can move and pick up gold. The goal is to get enough gold and then exit the dungeon. The game is played on rounds. On each round, the player sends a command and if the command is successful, an action takes place. A full list of the available commands, the \textit{game-protocol}, is available below.
+
+\subsubsection{Board representation}
+The dungeon is made out of square tiles. Each tile can be:
+\begin{enumerate}
+\item{\textbf{Player:}} This tile represent a human player. It is displayed as the letter \textit{P}.
+
+\item{\textbf{Bot:}} This tile represent an AI-controlled player, a bot. It is displayed as the letter \textit{B}.
+
+\item{\textbf{Empty Floor:}} Allows a player to walk over it, some may also contain items such as gold. If empty, it is displayed as a \textit{dot(\.)}.
+
+\item{\textbf{Gold:}} A special floor tile, allows a player to walk over it and pickup the gold in it. If the player pickups the gold, then the tile is converted into an \textit{empty floor} tile. It is displayed as the letter \textit{G}.
+
+\item{\textbf{Exit:}} A special floor tile, that the player can use to exit the dungeon and win the game. It is displayed as the letter \textit{E}.
+
+\item{\textbf{Wall:}} Blocks the player from moving through it. It is displayed as a \textit{hash sign(\#)}.
+\end{enumerate}
+
+\subsection{Set-up}
+You start the game with no gold, and at a random location within the dungeon. This position must not contain any existing players/bots or any gold, but it may be an exit tile. You should not be placed inside a wall. 
+
+\subsection{Protocol commands}
+Your software should support the human player as they enter and see the results of the following `game protocol' i.e. the following commands: 
+
+{\renewcommand\labelitemi{}
+\begin{itemize}
+\item HELLO:
+
+Returns a string, displaying the amount of gold required to be eligible for exit. The format of the reply is: \textit{Gold: <number>}.
+
+\item \begin{verbatim}MOVE<direction>\end{verbatim}
+
+Moves the player one square in the indicated direction. The direction must be either \textit{N, S, E or W}.
+
+\item PICKUP:
+
+Pickups the gold on the player's current location. On success, returns the new total of gold collected.
+
+\item LOOK:
+
+Returns back a 5x5 grid, showing the map around the player. The LOOK window should show walls, empty tiles, Moodle tiles, pieces coursework, other players, and bots each with repented character or symbol. As shown in the example bellow, in the middle of the grid, the player is represented as a P.
+
+\begin{verbatim}
+#.#.E
+..P..
+#....
+X..GX
+\end{verbatim}
+
+\item QUIT:
+Allows the player to quit the game, loosing all progress.
+\end{itemize}
+
+\subsection{Code Specifications}
+We have supplied basic code to get you started with this project (on Moodle). The base code provides an extremely basic definition of fours classes and all the key method signatures within those classes e.g.
+
+\begin{lstlisting}
+    public class Map {
+
+      /**
+       * Returns Gold required to exit the current map.
+       */
+      protected int getGoldRequired() {
+          return 0;
+      }
+    
+    //further code ommitted
+\end{lstlisting}
+
+The four skeleton classes that you need to extend are as follows:
+\begin{enumerate}
+\item{Map:} You need to extend the class \textit{Map} and its methods. The class Map will be responsible for reading the map from a specified \textit{.txt} file and holding a reference of the current state of the map in memory, stored in a 2D char array. Any gold picked up should be removed from the array.
+\item{GameLogic:} You also need to extend the class \textit{GameLogic} and its methods. The class GameLogic will be responsible for processing the commands send by the player.
+\item{Human:} You need to implement the class \textit{Human} and its methods. Human should contain a \textit{main} method to run the game.
+\item{Bot:} Finally, you need to extend the class \textit{Bot}. This class should contain any code needed by the bot to catch the player. In their most basic form, Bot objects should move randomly around the Map (avoiding walls). More marks will be given, however, for programs which make Bots actively chase the player (again, avoiding walls). Bots should move once for each Human move.
+\end{enumerate}
+
+Your task is to (substantially) extend the code that we have provided such that we can use it to play Dungeon of Doom. More specifically, your code should allow us to start a game of Dungeons of Doom and enter the commands listed in the Protocol section below as many times as we like (and in an order that we chose) until we have completed the game i.e. until we are either caught by the bot or have gathered enough gold and exit the dungeon. You should provide a sample dungeon with your code but we will use multiple dungeons during marking. 
+
+There are some fairly strict limitations on the changes that you may make to our basic code:
+
+\begin{itemize}
+\item you must use our four classes
+\item you may not change the method signatures that we have provided e.g. you may not alter ``protected int getGoldRequired()'' in the examp, above.
+\item you may change the return values in the methods that we have provided but not the return types e.g. you may return values other than 0 in the example, above, but must always return an int.
+\item you may add other ''helper''  classes and methods (and interfaces / abstract classes) if you wish to but we must be able to test the game without knowing about them. In other words, the additional functionality that you provide must either be written within or called from the classes and methods that we provide.
+\end{itemize}
+
+ \textbf{We value clean code and good practices. You will be marked on the quality of the code/comments provided and the on design decisions that you make.}
+
+\subsection{Advance Feature: GUI}
+For extra marks, you can research and implement a basic GUI. At a minimum, that GUI must:
+\begin{enumerate}
+\item Allow the game to operate in a window.
+\item Have a control panel consisting of buttons.
+\item Have a pane that shows the user the outcome of their actions. This pane can be either console-like or for additional points, a graphic pane which would display the game in a 2D graphical manner using sprites.
+\end{enumerate}
+GUI code should not replace code from the core assignment.
+
+Please note that we will not be lecturing on Java GUIs as part of CM10227. As the `Marking scheme', below indicates, it is entirely possible to gain a good pass on this courework without implementing a GUI. We will ,however, give a small number of marks to those who read up on this area for themselves and successfully implement a basic GUI. In other words, we will reward self-learning. 
+
+\section{Marking Scheme}
+The below are a rough guide to how you might expect to be marked by an indicative description of what might achieve particular degree categories.
+
+\subsection{Marks  Table}
+\begin{center}
+    \begin{tabular}{ | l | l	 | p{5cm} |}
+    \hline
+    Criteria & Max Score & Description \\ \hline
+      \multicolumn{3}{|c|}{Core Specifications} \\ \hline
+    Functionality satisfying requirements & max 45 & Code satisfied the specification to play the core game as a human-player. \\ \hline
+    Commenting, formatting and clarity & max 30 & Code is clearly written and as simple as possible, implements object-oriented programming techniques, and is consistently commented. \\ \hline
+    Readme & max 5 & The Readme.txt submitted contains useful installation, run, and how to play instructions. \\ \hline
+  \multicolumn{3}{|c|}{Graphical User Interface (GUI)} \\ \hline
+        Functionality satisfying requirements & max 15 & GUI fulfill all specifications and provides at least one additional innovation. \\ \hline
+    Commenting, formatting and clarity & max 5 & Code related to the bot uses clean code practices, object-oriented programming techniques, and is consistently commented. \\ \hline
+    \end{tabular}
+\end{center}
+
+\subsection{Indiciative Marks}
+\subsubsection{Approx 40\%:}
+\begin{enumerate}
+\item Code satisfied the specification to play the core game as a human-player.
+\item Code is properly formatted and commented.
+\item Very sparse ReadMe provided (<1 page).
+\end{enumerate}
+\subsubsection{Approx 60\%:}
+\begin{enumerate}
+\item Meets all the criteria of a 40\% pass.
+\item Code architecture follows Object-Oriented Principles.
+\item Readme contains comprehensive information on the game and your implementation (1-2 pages).
+\item A basic bot is included.
+\end{enumerate}
+\subsubsection{70\% plus:}
+\begin{enumerate}
+\item Meets all the criteria of a 60\% pass.
+\item Bot uses non-random movement.
+\item Game can be played via a GUI.
+\end{enumerate}
+
+\section{Submission}
+You should upload a zip file to Moodle by \textbf{5pm on 16th December 2016}. The name of the zip file should be in the form:
+\begin{center}
+CW2-your id.zip
+\end{center}
+
+The zip file must contain:
+\begin{enumerate}
+\item A project folder, titled \textit{Project}, containing your source code and any resources files needed. You should not include packages or other subfolders. No compiled code or uneccessary files, e.g. no version control files, should be included.
+
+\item A Readme file containing an introduction to your game, how to install and run the game, and a few words about your code (max 2 pages).
+\end{enumerate}
+
+Failure to follow the submission specifications, by providing non-needed files or not following the .zip structured specified, will result in a penalty being applied to the final mark, as a tutor will need to manually edit or remove some of your files.
+
+\end{document}

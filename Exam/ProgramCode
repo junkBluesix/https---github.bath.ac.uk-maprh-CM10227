@@ -1,0 +1,104 @@
+public class ClassA{
+
+	static String name="Class A";
+	int number = 1;
+	String m[] = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", 														"Nov", "Dec"};
+	
+	ClassA(int number){
+		this.number=number;
+		System.out.println("ClassA created");	
+	}
+	
+	ClassA(){
+		System.out.println("created ClassA");
+	}
+	
+		
+	public String getM(){
+		return m[number];	
+	}	
+	
+	public String toString(){
+		return name + ": " + getM();	
+	}
+
+}	
+
+
+class ClassB extends ClassA{
+	
+		static String name="Class B";
+		
+		ClassB(int n){
+			super(n-1);
+			System.out.print("ClassB created");	
+		}
+		
+		public String toString(){
+			return name + ": " + getM();	
+		}
+		
+	
+}
+
+class ClassC extends ClassA{
+	
+	static String name ="Class C";
+		
+	ClassC(int n){
+		super(n-1);
+		System.out.println("ClassC created");
+	}
+}
+
+public class Test{
+	
+	public static void main(String[] args){
+		
+		ClassA[] cbs = new ClassA[9];
+		int i=0;
+		
+		while(i<2)
+			cbs[i++]=new ClassA();
+		while(i<6)
+			cbs[i]=new ClassB(i++%2+6);
+		for(int k=0; k<cbs.length/2+1; k++){
+			System.out.println(""+cbs[k]);
+		}
+	}
+}
+
+
+/*
+Predict the output of the following (error free but not particularly useful) program 
+(made up of four classes). Please explain your answer. If you make mistakes when 
+predicting the output, we will use those explanations as the basis for awarding
+partial marks
+*/
+
+/*
+Full marks (1 mark per line of correct output):
+created ClassA
+created ClassA
+ClassA created
+ClassB createdClassA created
+ClassB createdClassA created
+ClassB createdClass A: Feb
+Class A: Feb
+Class B: Jun
+Class B: Jul
+Class B: Jun
+*/
+
+/*
+Partial marks (1 mark per item given only if the corresponding lines of output are incorrect).
+- correctly describing use of 'this' keyword in first ClassA constructor
+- noting two constructors in ClassA
+- noting implicit use of overwritten toString() in System.out.println()
+- noting super constructor call in ClassB
+- noting that ClassC is never instantiated
+- noting that 5 objects are created 
+- correctly anticipating the number of System.out.println's executed
+- noting that ClassB uses System.out.print not System.out.println
+- correctly anticipating at least one Array element printed in the final for loop
+*/

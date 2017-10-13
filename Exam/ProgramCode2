@@ -1,0 +1,32 @@
+public static void compareNumbers(int a, int b){
+	if((a-->4) || (b++<a)){
+		System.out.println("true");
+		System.out.println("a: " + a);
+		System.out.println("b: " + b);
+	}	
+	else{
+		System.out.println("false");
+		System.out.println("a: " + a);
+		System.out.println("b: " + b);	
+	}
+}
+
+
+/* Rewrite this statement using
+* A single method which does not use || , | , the increment operator or  the decrement operator 
+* multiple methods which reduce code duplication and show good use of generalisation
+* explain your modifications in each case
+*/
+
+Marks
+Multiple methods
+1 mark for separate print method
+1 marks for print method taking boolean as a parameter and using in print statement
+1 marks for print method taking char as a parameter and using it in print statement
+2 marks for explanation
+
+Single method
+1 mark for separating decrement operator from comparison
+1 mark  for spearating increment operator from comparison
+1 marks for switch/case or nested if's
+2 marks for explanation

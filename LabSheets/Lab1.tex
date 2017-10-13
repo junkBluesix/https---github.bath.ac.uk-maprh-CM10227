@@ -1,0 +1,151 @@
+\documentclass[12pt, a4paper, oneside]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[british]{babel}
+\usepackage{lmodern}
+\usepackage{hyperref}
+
+\renewcommand{\familydefault}{\sfdefault}
+
+\author{}
+\date{}
+
+\title{CM10227 Lab1: Variables and Functions}
+
+\newcounter{qstncntr}
+\newcommand{\exerset}{ \vspace*{-11pt}\setcounter{qstncntr}{0} }
+\newenvironment{exer}[1]{\vspace*{11pt}\noindent {{\bf Exercise} \stepcounter{qstncntr} \theqstncntr:} #1}{}
+
+\begin{document}
+\maketitle
+
+Answer each question in a different file named \emph{Lab1ex<Number>.c }(e.g.\ Lab1ex1.c) (i.e. one file only per exercise).
+We must be able to compile your code on \href{http://www.bath.ac.uk/guides/connecting-to-linux-bath/}{linux.bath} by typing \emph{gcc -o Lab1ex1 Lab1ex1.c -lm}, etc.
+All your files should be submitted in a single zip, with all source (.c) files in one folder or the root of the zip:
+the file name should be of the form \emph{<username>-lab<number>.zip}, e.g. \emph{abc12-lab1.zip}.
+
+Your code will initially be marked by an automated process, followed by individual feedback and verification by a tutor.
+Please, therefore, adhere to the above instructions and use the \textbf{exact format as given}.
+Failure to do so will delay the marking process, and may incur penalties in the interest in providing everyone prompt feedback.
+You are advised to re-download your Moodle submission and check it thoroughly, in advance of the deadline.
+
+If you have questions about this lab sheet or are stuck with one of the questions talk to the tutors in the lab or post your question on Moodle.
+Please do not include code on Moodle: bring this to a lab session.
+
+This lab is part of your coursework.
+\textbf{Please check Moodle for the submission deadline.}
+
+\section*{Exercises}
+\setlength{\parindent}{0cm} %
+\exerset
+\begin{exer}
+  Adapt the ``HelloWorld'' code presented in the lecture to produce a program that defines a variable capable of holding an integer of your choice. The program should add 3 to that number, multiply the result by 2, subtract 4, subtract twice the original number, add 3, then print the result and a new line.
+%You can test your code with (paste everything after \$ into the terminal) the following:
+%\tiny
+% \begin{verbatim}
+%$ diff <(./Lab1ex1) <(printf "5\n") && echo Correct || echo Incorrect
+%\end{verbatim}
+\end{exer}
+
+\begin{exer}
+  Write a program which prints every integer from
+  \begin{math}
+    x
+  \end{math}
+to
+\begin{math}
+  x+10
+\end{math},
+ inclusive, for three different values of
+ \begin{math}
+   x
+ \end{math}.
+Do not use loops. Your program should do this with the following numbers: 5, 10 and 12, yielding the following output:
+\begin{verbatim}
+5
+6
+...
+15
+10
+...
+\end{verbatim}
+
+%You can test the first 10 numbers using the following:
+%\tiny
+%\begin{verbatim}
+% $ diff <(head -n 11 <(./Lab1ex2)) <(printf "5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15\n") && echo Correct || echo Incorrect
+%\end{verbatim}
+\end{exer}
+
+\begin{exer}
+  Write a program which converts the height of a person from centimetres to feet and inches.
+Use integer division (rounding down is acceptable, which is the default for integer division).
+Hint: 254 cm is exactly 100 inches and 12 inches is exactly 1 foot.
+Perform five conversions as follows, and ensure your program outputs the following (which "?" replaced with the true value):
+
+\begin{verbatim}
+101 cm is 3 feet 3 inches to the nearest inch.
+3 cm is 0 feet 1 inches to the nearest inch.
+15 cm is ? feet ? inches to the nearest inch.
+92 cm is ? feet ? inches to the nearest inch.
+24 cm is ? feet ? inches to the nearest inch.
+\end{verbatim}
+
+
+%You can test the first two lines as follows:
+%\tiny
+%\begin{verbatim}
+%$ diff <( head -n 2 <(./Lab1ex3)) <(printf "101 cm is 3 feet 3 inches to the nearest inch.\n3 cm is 0 feet 1 inches to the nearest inch.\n") && echo C || echo I
+%\end{verbatim}
+\end{exer}
+
+\begin{exer}
+ Write a program that uses three variables (current, previous, next) to calculate and print out the first ten numbers of the Fibonacci sequence, each on a new line: i.e. the first four lines should be as follows:
+\begin{verbatim}
+0
+1
+1
+2
+\end{verbatim}
+
+%You can test the first four lines as follows:
+%\tiny
+%\begin{verbatim}
+%$ diff <(head -n 4 <(./Lab1ex4)) <(printf "0\n1\n1\n2\n") && echo Correct || echo Incorrect
+%\end{verbatim}
+\end{exer}
+
+\begin{exer}
+  Create a program with two variables: height and radius (or use user defined functions). Use these two variables and print to the screen, the volume of three cylinders with the following dimensions:
+  \begin{enumerate}
+  \item height 7.0cm and radius 4.0cm
+  \item height 20.0cm and radius 3.0cm
+  \item height 14.7cm and radius 5.2cm
+  \end{enumerate}
+  Provide the result to two decimal places with in the format, e.g.\ the following (? replaced with real values):
+\begin{verbatim}
+The cylinder with height 7.0cm and radius 4.0cm has a volume of 351.86cm^3
+The cylinder with height 20.0cm and radius 3.0cm has a volume of ?cm^3
+The cylinder with height 14.7cm and radius 5.2cm has a volume of ?cm^3
+\end{verbatim}
+
+  If you use C math functions you will need to have \emph{\#include <math.h>} with \emph{\#include <stdio.h>}, and add \emph{-lm} as a compile flag, e.g.\ \emph{gcc -o Lab1ex5 Lab1ex5.c -lm}.
+
+%You can test the first line as follows:
+%
+%{\tiny
+%\begin{verbatim}
+%$ diff <(head -n 1 <(./Lab1ex5)) <(printf "The cylinder with height 7.0cm and radius 4.0cm has a volume of 351.86cm^3\n") && echo Correct || echo Incorrect
+%\end{verbatim}
+%}
+
+
+You may wish to use the following print statement:
+
+\tiny
+\begin{verbatim}
+  printf("The cylinder with height %1.1fcm and radius %1.1fcm has a volume of %1.2fcm^3\n", height, radius, vol);
+\end{verbatim}
+\end{exer}
+
+\end{document}

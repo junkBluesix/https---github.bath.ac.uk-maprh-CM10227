@@ -1,0 +1,28 @@
+\begin{itemize}
+\item The wrapper classes also include \textbf{static} methods which return the value represented by a String as a boxed object
+\item E.g. the Integer wrapper class provides a method to return the value represented by a String as an int primitive
+\end{itemize}
+
+\begin{block}{}
+\begin{lstlisting}
+String s ="10";
+int a;
+
+a= Integer.parseInt(s);
+a=a+1;
+System.out.println(""+a);
+
+\end{lstlisting}
+\end{block}
+
+\begin{block}{}
+\begin{lstlisting}
+Output is: 11
+
+\end{lstlisting}
+\end{block}
+\begin{itemize}
+\item Static methods are provided by a class not by an object of that class
+\item This means that we dont need to create an instance of Integer (an Integer object) to use parseInt()
+\item We will return to the idea of static methods later in the course
+\end{itemize}

@@ -1,0 +1,466 @@
+\input{../../cm10192}
+%\input{../../cm10192-handout}
+
+\author[Lecture S.2.]{Lecture S.2.: Introduction to Linux/Unix Part 2
+\\\begin{center}\input{../../copyright}\end{center}}
+
+
+\AtBeginSection[]
+{
+  \begin{frame}<beamer>
+    \frametitle{Outline}
+    \tableofcontents[currentsection,currentsubsection,hideothersubsections]
+  \end{frame}
+}
+
+%\AtBeginSubsection[]
+%{
+%  \begin{frame}<beamer>
+%    \frametitle{Outline}
+%    \tableofcontents[currentsection,currentsubsection,hide]
+%  \end{frame}
+%}
+
+\logo{\vbox{\hbox to 1.1cm{\hfil\includegraphics[width=1cm,height=1.5cm]{../../computer}}}}
+
+
+
+%------------------------------------------------------------------------
+
+\begin{document}
+\maketitle
+
+\begin{frame}\frametitle{Outline}
+\tableofcontents[pausesections,hidesubsections]
+\end{frame}
+
+\begin{frame}\frametitle{Resources}
+\begin{itemize}
+\item Unix for Beginners. Dirk Vermeir
+\item \url{http://osl.iu.edu/~lums/swc/www/index.html}
+\end{itemize}
+\end{frame}
+
+\section{Questions \& Answers}
+
+\begin{frame}\frametitle{Q \& A}
+\begin{center}
+\includegraphics[height=7cm,keepaspectratio]{question}
+\end{center}
+\end{frame}
+
+\section{Linux Part 2}
+\begin{frame}{Previous Commands}
+\rowcolors[]{1}{\lightrow}{\darkrow}
+\begin{tabular}{|l|l|l|}
+pwd & rm & cat\\
+ls & chmod & whoami\\
+cd & wc & passwd\\
+mkdir & more & users\\
+cp & less & groups\\
+mv & diff & 
+\end{tabular}
+\end{frame}
+
+\subsection{Redirecting IO}
+
+\begin{frame}{Redirecting Input and Output}
+\begin{itemize}
+\item A running program is called a process
+\begin{itemize}
+\item By default, every process has three connections to the outside world:
+\begin{itemize}
+    \item Standard input (stdin): connected to the keyboard
+    \item Standard output (stdout): connected to the screen
+    \item Standard error (stderr): also connected to the screen (Used for error messages)
+\end{itemize}
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Redirecting Input and Output II}
+You can tell the shell to connect standard input and standard output to files instead
+\begin{itemize}
+    \item \lstinline!command < inputFile! reads from inputFile instead of from the keyboard
+\begin{itemize}
+          \item Don't need to use this very often, because most Unix commands let you specify the input file (or files) as command-line arguments
+\end{itemize}
+    \item \lstinline!command > outputFile! writes to outputFile instead of to the screen
+\begin{itemize}
+          \item Only “normal” output goes to the file, not error messages
+\end{itemize}
+    \item \lstinline!command < inputFile > outputFile! does both
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Redirecting Input and Output III}
+\begin{itemize}
+\item Example: save number of words in all text files to words.len
+\codesmall
+\codelist
+\begin{lstlisting}[linewidth=5cm]
+\$ wc -w *.txt > words.len
+\end{lstlisting}
+\item Nothing appears, because output is being sent to the file words.len
+\reslist
+\begin{lstlisting}[linewidth=5cm]
+\$ ls -t
+words.len       venus.txt       earth.txt
+\$ cat words.len
+ 9  earth.txt
+ 9  venus.txt
+ 12 words.len
+ 30 total
+\end{lstlisting}
+\codenormal
+Try typing \lstinline!cat > junk.txt!
+\begin{itemize}
+    \item No input file specified, so cat reads from the keyboard
+    \item Output sent to a file
+    \item Voila: the world's dumbest text editor
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\subsection{Pipes}
+
+\begin{frame}[fragile]\frametitle{Pipes I}
+\begin{itemize}
+\item Suppose you want to use the output of one program as the input of another
+\begin{itemize}
+    \item E.g., use \lstinline!wc -w *.*! to count the words in some files, then \lstinline!sort -n! to sort numerically
+\end{itemize}
+\item Option 1: send output of first command to a temporary file, then read from that file
+\codelist
+\begin{lstlisting}[linewidth=5cm]
+wc *.txt > temp
+sort -n < temp
+\end{lstlisting}
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}[fragile]\frametitle{Pipes II}
+\begin{itemize}
+\item Option 2: use a \keytext{pipe} to connect the two programs
+\begin{itemize}
+    \item Written as \lstinline!"|"!
+    \item Tells the operating system to send what the first program writes to its stdout to the second program's stdin
+\end{itemize}
+\codelist
+\begin{lstlisting}[linewidth=5cm]
+wc -w *.* | sort -n
+9 earth.txt
+9 venus.txt
+12 words.len
+30 total
+\end{lstlisting}
+\item More convenient (and much less error prone) than temporary files
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Pipes III}
+\begin{itemize}
+\item Can chain any number of commands together
+\begin{itemize}
+    \item And combine with input and output redirection
+    \item \codelist \codesmall 
+\begin{lstlisting}[linewidth=7cm]
+      wc *.txt | sort -n | head -5 > shortest.files
+\end{lstlisting}
+\end{itemize}
+\item Any program that reads from standard input and writes to standard output can use redirection and pipes
+\begin{itemize}
+    \item Programs that do this are often called \keytext{filters}
+    \item If you make your programs work like filters, you can easily combine them with others
+    \item A combinatorial explosion of goodness
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\subsection{Environment Variables}
+
+\begin{frame}[fragile]\frametitle{Environment Variables}
+\begin{itemize}
+\item Like any other program, the shell has variables
+\item Since they define a user's environment, they are usually called environment variables
+\item Usually all upper case
+\item Type set at the command prompt to get a listing: (a cut down version)\\
+\codelist
+\begin{lstlisting}[linewidth=7cm]
+\$ set
+BASH=/bin/bash
+HOME=/home/mdv
+HOSTNAME=alis-tablet1
+\end{lstlisting}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Environment Variables II}
+\begin{itemize}
+\item Get a particular variable's value by putting a "\$" in front of its name
+\begin{itemize}
+\item E.g., the shell replaces "\$HOME" with the current user's home directory
+\item Often use the echo command to print this out
+\codelist
+\begin{lstlisting}[linewidth=5cm]
+$ echo $HOME
+/home/mdv
+\end{lstlisting}
+\item Question: why must you type echo \$HOME, and not just \$HOME?
+\end{itemize}
+\item To set or reset a variable's value temporarily, use this:
+\codelist
+\begin{lstlisting}[linewidth=5cm]
+\$ export VARNAME=value
+\end{lstlisting}
+\begin{itemize}
+    \item Only affects the current shell (and programs run from it)
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Environment Variables III}
+\begin{itemize}
+\item To set a variable's value automatically when you log in, set it in ~/.bashrc
+\begin{itemize}
+    \item Remember, "~" is a shortcut meaning “your home directory”
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Environment Variables IV}
+\rowcolors[]{1}{\lightrow}{\darkrow}
+\footnotesize{
+\begin{tabular}{|l|l|l}
+\textbf{Name} & \textbf{Typical Value} & \textbf{Notes}\\
+DISPLAY & 0:0 & \begin{minipage}{4cm}The display variable used for X11 graphics.\end{minipage}\\
+HOME & /home/mdv &	The current user's home directory\\
+HOMEDRIVE & C:	& \begin{minipage}{4cm}The current user's home drive (Windows only)\end{minipage}\\
+HOSTNAME &	"alis-tablet"	 & This computer's name\\
+HOSTTYPE &	"i486"	& What kind of computer this is\\
+OSTYPE &	"linnux-gnu"	& What operating system is running\\
+PATH	& \begin{minipage}{3cm}"/usr/local/sbin: \\/usr/local/bin: \\/usr/sbin:/usr/bin: \\/sbin:/bin:/usr/bin/X11: /usr/games"\end{minipage} & Where to look for programs\\
+PWD	& /home/mdv/Desktop/ &	Present working directory \\
+SHELL	& /bin/bash	& What shell is being run\\
+TEMP	& /tmp &	Where to store temporary files\\
+USER	& "mdv"	& The current user's ID
+\end{tabular}}
+\end{frame}
+
+\begin{frame}\frametitle{How the Shell Finds Programs}
+\begin{itemize}
+\item The most important of these variables is PATH
+\begin{itemize}
+    \item The search path that tells the shell where to look for programs
+    \item When you type a command like tabulate, the shell:
+\begin{itemize}
+          \item Splits \$PATH on colons to get a list of directories
+          \item Looks for the program in each directory, in left-to-right order
+          \item Runs the first one that it finds
+\end{itemize}
+\end{itemize}
+\item Example
+\begin{itemize}
+    \item PATH is /home/mdv/bin:/usr/local/bin:/usr/bin:/bin:/Python24
+    \item Both /usr/local/bin/tabulate and /home/mdv/bin/tabulate exist
+    \item /home/mdv/bin/tabulate will be run when you type tabulate at the command prompt
+    \item Can run the other one by specifying the path, instead of just the command name
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{How the Shell Finds Program}
+\begin{itemize}
+\item Warning: it is common to include . in your path
+\begin{itemize}
+    \item This allows you to run a program in the current directory just by typing whatever, 
+instead of ./whatever
+    \item  But it also means you can never be quite sure what program a command will invoke
+    \item  Though you can use the command \lstinline!which program_name!, which will tell you
+\end{itemize}
+\item Common entries in PATH include:
+\begin{itemize}
+    \item /bin, /usr/bin: core tools like ls (Note: the word “bin” comes from “binary”, which is geekspeak for “a compiled program”)
+    \item  /usr/local/bin: optional (but common) tools, like the gcc
+    \item \$HOME/bin: tools you have built for yourself
+\end{itemize}          
+\end{itemize}
+\end{frame}
+
+\subsection{Some More Tools}
+
+\begin{frame}{Basic Tools I}
+\rowcolors[]{1}{\lightrow}{\darkrow}
+\footnotesize{
+\begin{tabular}{|l|l}
+man &	Documentation for commands. \\
+cat &	Concatenate and display text files.\\
+cd &	Change working directory.\\
+chmod &	Change file and directory permissions.\\
+clear &	Clear the screen.\\
+cp &	Copy files and directories.\\
+date &	Display the current date and time.\\
+diff &	Show differences between two text files.\\
+echo &	Print arguments.\\
+env &	Show environment variables.\\
+head &	Display the first few lines of a file.\\
+ls &	List files and directories.\\
+mkdir &	Make directories.\\
+\end{tabular}}
+\end{frame}
+
+\begin{frame}{Basic Tools II}
+\rowcolors[]{1}{\lightrow}{\darkrow}
+\footnotesize{
+\begin{tabular}{|l|l}
+more &	Page through a text file.\\
+mv &	Move (rename) files and directories.\\
+od &	Display the bytes in a file.\\
+passwd &	Change your password.\\
+pwd & Print current working directory.\\
+rm & Remove files.\\
+rmdir &	Remove directories.\\
+sort &	Sort lines.\\
+tail &	Display the last few lines of a file.\\
+uniq &	Remove duplicate lines.\\
+wc &	Count lines, words, and characters in a file.\\
+which &	locate a command\\
+\end{tabular}}
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Compressing and Decompressing}
+\begin{itemize}
+\item If large files have to be stored, emailed or transported, it is easier to \keytext{compress} them, making the file size smaller. 
+\item When needed later they can be restored or \keytext{decompressed}
+\item A variety of compressing/decompressing algorithms exists.
+\item A simple example: the sequence "aaaaa" could for example be represented more compactly as "5a"
+\item The most common in linux systems are "gzip - gunzip","bzip2 - bunzip2" and "zip", which gives you the extensions ".gz",".bz2",".zip"
+\end{itemize}
+\reslist
+\codesmall
+\begin{lstlisting}
+-rw-r--r-- 1 mdv mdv 514826 2007-10-11 00:01 lecture2.pdf
+gzip lecture2.pdf
+gunzip lecture2.pdf.gz
+-rw-r--r-- 1 mdv mdv 382068 2007-10-11 00:01 lecture2.pdf.gz
+bzip2 lecture2.pdf
+-rw-r--r-- 1 mdv mdv 380635 2007-10-11 00:01 lecture2.pdf.bz2
+bunzip2 lecture2.pdf.bz2
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Creating Archives}
+\begin{itemize}
+\item For storing purposes, emailing or transporting a number of files, it is sometimes more convenient to be able to bundle all these files together as one big file. Such a file is called an \keytext{archive}
+\item In linux we use a program called "tar", so we call those archives tarfiles.
+\item Format: \lstinline!tar -flags pathname [pathname]!
+\item Common flags: 
+\rowcolors[]{1}{\lightrow}{\darkrow}
+\footnotesize{\begin{tabular}{l|l}
+ c & create an archive\\
+ x & extract an archive\\
+t & display what is an archive\\
+ v & verbose, display the files being dealt with\\
+ f & use filename for archive\\
+ z & filter through gzip/gzunip \\
+j & filter through bzip2/bunzip2\\
+\end{tabular}}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Creating Archives: Some examples}
+\begin{itemize}
+\item \lstinline!tar -cvfz myfiles.tar.gz lectures/!: creates an archive called myfiles.tar which is also being compressed using gzip and will include the directory lectures and all files that are in the directory lectures.
+\item \lstinline!tar -tvf myfiles.tar!: this command will list all files that are stored in the archive myfiles.tar
+\item \lstinline!tar -xvfz myfiles.tar.gz!: this will command will decompress the file myfiles.tar.gz and will then extract the archive in the current directory. This will result in a directory lectures being created (if this directory does not exist) where all the files of archive are going to be put.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{More Advanced Tools II}
+\rowcolors[]{1}{\lightrow}{\darkrow}
+\footnotesize{
+\begin{tabular}{|l|l}
+du	& Print the disk space used by files and directories.\\
+bzip    & Compress a file\\
+bunzip  & Decompresses a file\\
+find	& Find files that match a pattern.\\
+grep	& Print lines matching a pattern.\\
+gunzip	& Uncompress a file.\\
+gzip	& Compress a file.\\
+lpr	& Send a file to a printer.\\
+lprm	& Remove a print job from a printer's queue.\\
+lpq	& Check the status of a printer's queue.\\
+ps	& Display running processes.\\
+tar	& Archive files.\\
+which	& Find the path to a program.\\
+who	& See who is logged in.\\
+xargs	& Execute a command for each line of input.
+\end{tabular}}
+\end{frame}
+
+\begin{frame}{The Last Linux Slide: Making life Easier}
+\begin{itemize}
+\item When halfway typing a command on the command-line, try pressing the tab and see what happens.
+\item After typing and executing a command on the command-line, try the arrow keys and see what happens
+\end{itemize}
+\end{frame}
+
+\section{Problem Solving}
+
+\begin{frame}[fragile]\frametitle{Scope}
+\begin{multicols}{2}
+\codelist
+\begin{lstlisting}[linewidth=8cm]
+x = 7
+
+def scopetest(param):
+   x = param
+   print x
+   if x == 0:
+      return "yes"
+   elif (x % 2) == 0:
+      x = param / 2 - 1
+      scopetest(x)
+   else:
+      x = x + 1
+      scopetest(x)	
+
+scopetest(x)	
+\end{lstlisting}
+\mbox{}\\
+\mbox{}\\
+\mbox{}\\
+\mbox{}\\
+\mbox{}\\
+\onslide<2| handout:0| trans:0| article:0>
+\reslist
+\begin{lstlisting}[linewidth=2cm]
+7
+8
+3
+4
+1
+2
+0
+\end{lstlisting}
+\end{multicols}
+\end{frame}
+
+\begin{frame}{How would you start on these?}
+\begin{enumerate}[<+->]
+\item Write a program that implements multiplication without using the use of \keytext{*}
+\item Write a program that finds all prime dividers of a given number
+\item Python has a module called random with a function random() providing random numbers between 0.0 and 1.0. How can you get numbers between 1 and 6 inclusive
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{And on these?}
+\begin{enumerate}[<+->]
+\item Given an ordered tree containing numbers, how would you go about finding a given number?
+\item How would you go about writing a program that implements the game of Yahtzee?
+\item Challenge! Global variables are not always a good idea. Everybody can access them. Suppose you want to limit access to a particular variables in such a way that can accessed in way you as a programmer intended.
+\end{enumerate}
+\end{frame}
+
+\end{document}

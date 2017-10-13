@@ -1,0 +1,7 @@
+\beamer@endinputifotherversion {3.07pt}
+\beamer@sectionintoc {1}{Linux Part 2}{5}{0}{1}
+\beamer@subsectionintoc {1}{1}{Redirecting IO}{7}{0}{1}
+\beamer@subsectionintoc {1}{2}{Pipes}{10}{0}{1}
+\beamer@subsectionintoc {1}{3}{Environment Variables}{13}{0}{1}
+\beamer@subsectionintoc {1}{4}{Some More Tools}{19}{0}{1}
+\beamer@sectionintoc {2}{Problem Solving}{26}{0}{2}

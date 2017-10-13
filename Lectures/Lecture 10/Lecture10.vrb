@@ -1,0 +1,19 @@
+\begin{itemize}
+\item Other examples of static methods in the Java API
+\end{itemize}
+\begin{block}{}
+\begin{lstlisting}
+java.awt.Color
+
+// static variables
+Color.BLACK
+Color.RED
+
+// static methods
+public static Color getColor(String nm)
+
+public static int HSBtoRGB(float hue,
+           float saturation,
+           float brightness)
+\end{lstlisting}
+\end{block}

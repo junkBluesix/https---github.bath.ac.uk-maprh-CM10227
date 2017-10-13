@@ -1,0 +1,37 @@
+\frametitle {Scope}
+\begin{multicols}{2}
+\codelist
+\begin{lstlisting}[linewidth=8cm]
+x = 7
+
+def scopetest(param):
+   x = param
+   print x
+   if x == 0:
+      return "yes"
+   elif (x % 2) == 0:
+      x = param / 2 - 1
+      scopetest(x)
+   else:
+      x = x + 1
+      scopetest(x)
+
+scopetest(x)
+\end{lstlisting}
+\mbox{}\\
+\mbox{}\\
+\mbox{}\\
+\mbox{}\\
+\mbox{}\\
+\onslide<2| handout:0| trans:0| article:0>
+\reslist
+\begin{lstlisting}[linewidth=2cm]
+7
+8
+3
+4
+1
+2
+0
+\end{lstlisting}
+\end{multicols}

@@ -1,0 +1,81 @@
+\documentclass{beamer}
+% September 2014
+% Author: Dr Rachid Hourizi and Dr. Michael Wright 
+% Department of Computer Science, University of Bath
+\usepackage{listings}
+\usetheme{Boadilla} 
+\usepackage{fixltx2e}
+\usepackage{hyperref}
+\lstset{language=Java,,
+	basicstyle=\ttfamily\small,
+           keywordstyle=\color{blue}\ttfamily,
+           stringstyle=\color{red}\ttfamily,
+           commentstyle=\color{gray}\ttfamily,
+          breaklines=true}
+
+\begin{document}
+
+\AtBeginSection[]{
+  \begin{frame}
+  \vfill
+  \centering
+  \begin{beamercolorbox}[sep=8pt,center,shadow=true,rounded=true]{title}
+    \usebeamerfont{title}\insertsectionhead\par%
+  \end{beamercolorbox}
+  \vfill
+  \end{frame}
+}
+
+\title{CM 10227: Help For Coursework 2 (DoD)}
+\author{Dr. Rachid Hourizi and Dr. Michael Wright}
+\date{\today}
+\frame{\titlepage}
+
+\begin{frame}
+\begin{itemize}
+\item These slides should help you to complete Coursework 2 (DoD)
+\item They will provide information about \textbf{one} approach that can be used to complete the coursework (There are others)
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{itemize}
+\item In some places, we provide small snippets of code that you may wish to include in your coursework 
+\item We have, however, deliberately avoided providing so much code that Coursework 2 becomes trival
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{itemize}
+\item In the best case, therefore, these slides will help you to \textbf{get started} with Coursework 2 
+\item If you find that you are still stuck after seeing them, please ask for further help via the programming1 mailing list, in the labs/drop-ins/PAL sessions or directly from Rachid/Michael
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{FAQs}
+\begin{itemize}
+\item How should we start using the 4 classes provided?
+\item How can we track both HumanPlayer position and BotPlayer position in a Map object?
+\item which method(s), should we use to support HELLO, PICKUP, MOVE, LOOK AND QUIT commands from both HumanPlayer and BotPlayer?
+\item How can we get more help
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{itemize}
+\item How should we start using the 4 classes provided?
+\begin{itemize}
+\item You only need one instance each of HumanPlayer, BotPlayer, GameLogic and Map
+\item i.e. one HumanPlayer Object, one BotPlayer Object, one GameLogic Object and one Map Object
+\item The HumanPlayer and BotPlayer should be able to see \textbf{the same} GameLogic object (but not the Map)
+\item The GameLogic Object (and only the GameLogic Object) shold have direct access to the Map
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\includegraphics[height=5cm, keepaspectratio]{Slide1}
+\end{frame}
+
+\end{document}

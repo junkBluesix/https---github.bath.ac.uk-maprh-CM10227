@@ -1,0 +1,1209 @@
+\documentclass{beamer}
+% September 2014 
+% Author: Dr Rachid Hourizi and Dr. Michael Wright 
+% Department of Computer Science, University of Bath
+\usepackage{listings}
+\usetheme{Boadilla} 
+\usepackage{fixltx2e}
+\usepackage{hyperref}
+\lstset{language=Java}
+
+\begin{document}
+
+\AtBeginSection[]{
+  \begin{frame}
+  \vfill
+  \centering
+  \begin{beamercolorbox}[sep=8pt,center,shadow=true,rounded=true]{title}
+    \usebeamerfont{title}\insertsectionhead\par%
+  \end{beamercolorbox}
+  \vfill
+  \end{frame}
+}
+
+\title{CM 10227: Lecture 10}
+\author{Dr Rachid Hourizi and Dr. Michael Wright}
+\date{\today}
+\frame{\titlepage}
+
+\section{xx}
+\begin{frame} 
+\begin{itemize}
+\item How to Think Like a Computer Scientist (Java Version)
+\item \url{http://www.greenteapress.com/thinkjava/thinkjava.pdf}
+\item The Java Tutorial (http://docs.oracle.com/javase/tutorial)
+\item Moodle \url{http://moodle.bath.ac.uk/course/view.php?id=30475}
+\end{itemize}
+\end{frame}
+
+\begin{frame} 
+\begin{itemize}
+\item The places that you can get additional support if you are finding the pace of the course a little fast still include
+\begin{itemize}
+\item \text{The A and B labs}
+\item The PAL sessions at 1:15 on Monday. Note the time/room change from your
+timetables
+\item \text{The Drop in Sessions}
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{itemize}
+\item Last week 
+\begin{itemize}
+\item Errors
+\item Exceptions
+\item Writing Better Code
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+
+\begin{itemize}
+\item This week 
+\begin{itemize}
+\item The Java API
+\item Complexity
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{itemize}
+\item Next Week
+\begin{itemize}
+\item Mopping Up
+\item Revision
+\item Introduction to the Exam
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\section{The Java API Libraries}
+
+\begin{frame}
+The Java API class libraries
+\begin{itemize}
+\item As we have seen throughout the course, a large part of learning to program is learning how to re-use code e,g.
+
+\begin{itemize}
+\item Classes
+\item Methods
+\item Inheritance
+\item Abstract Classes
+\item Interfaces
+\end{itemize}
+\item As well as reusing out \ own code, however, we have also discussed opportunities to use those provided by the
+developers of the Java language
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+
+The Java API class libraries
+
+\begin{itemize}
+\item Java comes delivered with a library of useful classes, which are referred to as the Java API 
+\item There really is no point in reinventing the wheel e.g
+
+\begin{itemize}
+\item Java.lang.Math
+\item System
+
+\begin{itemize}
+\item System.out.println()
+\item System.err
+\item System.in
+\end{itemize}
+\end{itemize}
+\end{itemize}
+
+\end{frame} 
+
+\begin{frame}[fragile]
+
+An example Java library class - Random
+
+\begin{itemize}
+\item The library class Random can be used to generate random numbers
+\end{itemize}
+
+\begin{block}{}
+\begin{lstlisting}
+import java.util.Random;
+
+....
+
+Random randomGenerator=new Random();
+
+....
+ 
+
+int index1=randomGenerator.nextInt();
+int index2=randomGenerator.nextInt(100); 
+\end{lstlisting}
+\end{block}
+
+\end{frame}
+
+\begin{frame} 
+
+The Java class library
+
+\begin{itemize}
+\item Thousands of classes
+\item Tens of thousands of methods
+\item Many useful classes that make life much easier
+\item These classes are organised in packages that follow a directory structure
+\item A competent Java programmer must be able to work with the libraries.
+\item (Just as competent programmers using other languages must be able to work with the libraries provided by those
+languages)
+\end{itemize}
+
+\end{frame} \begin{frame}
+
+Class documentation
+
+\begin{itemize}
+\item We have looked at the specification of individual clases
+\item Comprehensive documentation of the Java libraries is however available in HTML format; Readable in a web browser
+\item Class API: Application Programmers Interface: 
+\end{itemize}
+
+\begin{itemize}
+\item Interface description for all library classes
+\item \url{http://java.sun.com/j2se/1.5.0/docs/api/}
+\end{itemize}
+
+\end{frame} \begin{frame}
+
+Class libraries
+
+Diagram: Class libraries
+
+\end{frame} \begin{frame}
+
+Working with the library
+
+\begin{itemize}
+\item As you go forward with your Java programming, you should:
+
+\begin{itemize}
+\item know some important classes by name; 
+\item know how to find out about other classes.
+\end{itemize}
+\item Remember:
+
+\begin{itemize}
+\item We only need to know the interface, not the implementation.
+\end{itemize}
+\end{itemize}
+
+\end{frame} 
+\begin{frame}
+
+Using the Java libraries (public methods and constants)
+
+\begin{itemize}
+\item In some cases, you will need to know about a library class because you will use objects of that class to provide
+common functionality within your programs
+
+\begin{itemize}
+\item E.g. you may use objects of the Random class to generate Random numbers (as shown in the example, above)
+\end{itemize}
+\item In this case, we use the class library in just the same way that we might use classes that we have created
+ourselves:
+\item We create a new instance of the class (a new Object) using the new keyword
+
+\begin{itemize}
+\item Random randomGenerator=new Random();
+\end{itemize}
+\item And can then use that Object's methods to provide the functionality that we need within our own program
+
+\begin{itemize}
+\item int index2=randomGenerator.nextInt(100);
+\end{itemize}
+\end{itemize}
+
+ 
+
+\end{frame} 
+
+\begin{frame}
+
+Using the Java libraries (public methods and constants)
+
+{\textbullet}\ \ In other cases, however, you may simply want to use a constant provided by one of those classes
+
+{\textbullet}\ \ a constant is an identifier (a name) with an associated value which cannot be altered by the program
+during normal execution -- the value is constant. 
+
+{\textbullet}\ \ This is contrasted with a variable, which is an identifier (a name) associated with a value that can be
+changed during normal execution -- the value is variable.
+
+\end{frame} \begin{frame}
+
+Final
+\begin{itemize}
+\item Variables can change their value by means of assignment.
+\item Sometimes, when programming you need a mechanism that can guarantee you that the value does not change at all
+\item Constants provide you a way in doing so
+\item similar to maths or physics: pi, 
+\item The key word final is Javas syntax to express constants 
+\item Once given a value, initialized, they can change value 
+\item Trying to do so will result in a syntax error.
+\end{itemize}
+
+\end{frame} \begin{frame}
+
+Pi
+
+\begin{itemize}
+\item Math.PI (the number pi) is and example of a constant 
+\item We only need to store pi once 
+\item And can then use it over and over again in our programs
+\item If we look at the documentation for Math.PI in the Java API 
+\item (i.e. the documentation for the field PI within the Math class)
+\item We can see the keyword final associated with it (to indicate a constant:
+\end{itemize}
+
+\end{frame} \begin{frame}
+
+Pi
+
+\begin{itemize}
+\item public static final double PI
+
+\begin{itemize}
+\item public: visibility modifier as usual (visible from outside the class)
+\item double: data type 
+\item final: indicates a constant i.e. value cannot be changed after initial allocation of a value
+\end{itemize}
+\item Importantly, however PI has one more keyword associated with it that we have seen previously but have not
+discussed in detail:
+
+\begin{itemize}
+\item Static
+\end{itemize}
+\end{itemize}
+
+\end{frame} \begin{frame}
+
+Class variables (static)
+\begin{itemize}
+\item So far we have created classes for the sake of objects, which should have each a state of their own.
+\item Sometimes, objects should be able to share common properties (fields)
+\item PI is one such property -- it is shared by all circles and cylinders
+\item We can, however, imagine other fields that we might wish to share
+
+\begin{itemize}
+\item For physical Objects on earth it could be the earth's gravitational pull
+\item For Employees of the same company this could be the company's details
+\end{itemize}
+\end{itemize}
+
+\end{frame} 
+
+\begin{frame}
+
+Static
+
+\begin{itemize}
+\item Instead of having these properties stored in every Object that needs them, it would be better to store this at one
+central point:
+\item THE CLASS
+\item Classes themselves can also have state
+\item class variables or static variables
+\item Exactly one copy exists of a class variable at all times, independent of the number of created instances
+\item The key word static is Javas syntax to define class variables 
+\item methods at object level can access static variables
+\end{itemize}
+
+\end{frame} 
+
+\begin{frame}[fragile]
+
+Static
+
+\begin{itemize}
+\item Remember that MATH.PI is declared as static
+\item This means that it is a class variable
+\item i.e. we do not have to create an instance of the MATH class to be able to use it:
+\end{itemize}
+
+\begin{block}{}
+\begin{lstlisting}
+Public class myClass{
+
+  Public void printCircumference(double radius){
+
+    Double circumference = 2*Math.PI*radius;
+    System.out.println(''circumference is: '' 
+                  +circumference);
+  }
+}
+\end{lstlisting}
+\end{block}
+\end{frame} 
+
+\begin{frame}
+
+Static methods
+
+\begin{itemize}
+\item Note that it is also possible to create class methods
+\item i.e. methods that are declared as static
+\item these methods can be called directly from the class rather than from an Obejct that instantiates that class
+\item The MATH class, for example, provides a method that raises the first argument (a) to the power of the second
+argument (b):
+\item static double pow(double a, double b);
+
+\end{itemize} 
+\end{frame}
+\begin{frame}[fragile]
+\begin{block}{}
+\begin{lstlisting}
+Public class myClass{
+
+  Double radius = 3.0; 
+
+  Public void printVolume(double radius){
+
+    Double volume = MATH.pow(Math.PI*radius, 2);
+    System.out.println(`'volume is: `' +volume);
+  } 
+}
+\end{lstlisting}
+\end{block}
+\end{frame} 
+\begin{frame}
+
+Static 
+
+\begin{itemize}
+\item Note that we can create our own
+
+\begin{itemize}
+\item constants
+
+\begin{itemize}
+\item final int myConstant = 1;
+\end{itemize}
+\item class variables
+
+\begin{itemize}
+\item static int myClassVariable = 2;
+\end{itemize}
+\item and class constants
+
+\begin{itemize}
+\item static int myClassConstant = 3;
+\end{itemize}
+\end{itemize}
+\item We can also create our own class methods
+
+\begin{itemize}
+\item public static void myClassMethod()\{//some code\} 
+\end{itemize}
+\end{itemize}
+
+\end{frame} 
+
+\begin{frame}
+
+Interface vs. Implementation
+
+\begin{itemize}
+\item Back to class libraries, however:
+\item For each class provided by the Java API, the Java developers provide documentation
+\item The documentation includes:
+
+\begin{itemize}
+\item the name of the class;
+\item a general description of the class;
+\item a list of constructors and methods
+\item return values and parameters for constructors and methods
+\item a description of the purpose of each constructor and method
+\end{itemize}
+\item the interface of the class
+\end{itemize}
+
+\end{frame} \begin{frame}
+
+Constructors and Methods
+
+\begin{itemize}
+\item Remember that constructors have a similar form to methods
+\item And are occasionally described as methods
+\item But are strictly separate (i.e. constructor != a subset of method)
+\end{itemize}
+
+\end{frame} \begin{frame}
+
+Interface vs. Implementation
+\begin{itemize}
+\item The documentation does not include
+\item private fields 
+
+\begin{itemize}
+\item (most fields are private) 
+\end{itemize}
+\item private methods
+\item the bodies (implementation code) for each method
+\item detailed implementation of the class
+\end{itemize}
+
+\end{frame} \begin{frame}
+
+Using library classes
+
+\begin{itemize}
+\item Most classes from the library must be imported using an import statement 
+\item (Those from java.lang, however, do not)
+\item They can then be used like classes from the current project.
+\end{itemize}
+
+\end{frame} \begin{frame}
+
+Importing (a very brief recap)
+
+\begin{itemize}
+\item Classes are organised in packages. 
+\item Single classes may be imported:
+
+\begin{itemize}
+\item import java.util.ArrayList;
+\end{itemize}
+\item Whole packages can be imported:
+
+\begin{itemize}
+\item import java.util.*;
+\end{itemize}
+\end{itemize}
+
+\end{frame} \begin{frame}
+
+\centering
+Documentation
+
+\end{frame} 
+
+\begin{frame}
+
+You can gain hints on how to document your own classes by looking at the documentation provided with the Java API
+
+\begin{itemize}
+\item Your own classes should be documented the same way library classes are.
+\item Other people should be able to use your class without reading the implementation.
+\item Make your class a 'library class'!
+\end{itemize}
+
+\end{frame} \begin{frame}
+
+NB: documenting is not the same as commenting. 
+
+\begin{itemize}
+\item Documentation is what you make available to people who want to use your class 
+\item but need not know how it is implemented
+\item Comments are provided to people (including yourself) who are looking at the implementation code \ 
+\end{itemize}
+\end{frame}
+\begin{frame}
+Elements of class documentation
+
+\begin{itemize}
+\item Documentation for a class should include: the class name
+\item a comment describing the overall purpose and characteristics of the class
+\item a version number[2028?]the authors names[2028?]documentation for each constructor and each method
+\end{itemize}
+\end{frame} 
+
+\begin{frame}[fragile]
+Class comments
+\begin{block}{}
+\begin{lstlisting}
+/**
+*The Responder class represents a response
+* generator object. It is used to generate an
+* automatic response toa correctly generated request
+* @author Michael K Iling and David J Barnes
+*@version 1.0 (1.Feb.2002)
+*/
+\end{lstlisting}
+\end{block}
+\end{frame} 
+
+\begin{frame}
+Documentation of methods
+
+\begin{itemize}
+\item The documentation for each constructor and method should include:
+\item the name of the method
+\item the return type
+\item the parameter names and types
+\item a description of the purpose and function of the method a description of each parameter
+\item a description of the value returned
+\end{itemize}
+
+\end{frame} 
+
+\begin{frame}[fragile]
+Method comments
+\begin{block}{}
+\begin{lstlisting}
+/**
+* Read a line of text from standard input 
+* (the text terminal) 
+* and return it as a set of words.
+*
+* @param prompt A prompt to print to screen. 
+* @return A set of Strings , where each String is 
+* one of the words typed by the user
+*/
+
+public HashSet getInput (String prompt){
+  ...
+}
+\end{lstlisting}
+\end{block}
+\end{frame} 
+
+\begin{frame}
+
+Public versus private: another reminder
+
+\begin{itemize}
+\item Public attributes (fields, constructors, methods) are accessible to other classes.
+\item Fields should not be public.
+
+\begin{itemize}
+\item Data encapsulation
+\end{itemize}
+\item Private attributes are accessible only within the same class.
+\item Only methods that are intended for other classes should be public.
+\end{itemize}
+
+\end{frame} \begin{frame}
+
+Information hiding (yet another reminder)
+
+\begin{itemize}
+\item Data belonging to one object is hidden from other objects. 
+\item Know what an object can do, not how it does it. 
+\item Information hiding increases the level of independence of one piece of code from another
+\item Independence of classes is important for large systems and maintenance.
+\end{itemize}
+\end{frame} 
+
+The Java API class libraries
+\begin{frame}
+Complexity
+\begin{itemize}
+\item To this point in the course, we have, on a number of occasions talked about algorithms, pseudo code and
+implementation (more detailed definitions of each one will follow, below)
+\item We have also discussed the fact that most if not all programming problems can be approached in many different ways
+\item i.e. that different algorithms can be employed to address the challenges of a given programming task
+\item that different programmers will take different approaches to developing pseudo-code when fleshing out the details
+of a given algorithm
+\item and that even quite detailed pseudo code leaves room for different programmers to make different design decisions
+during implementation
+\item We have not, yet, however talked about the ways in which we might compare algorithms (i.e. decide whether one is
+`better' or another `worse')
+\end{itemize}
+
+\end{frame} 
+
+\begin{frame}
+
+\begin{definition}{Algorithm:}
+a process or set of rules to be followed in calculations or other problem-solving operations
+\end{definition}
+
+
+\end{frame} \begin{frame}
+
+\begin{definition}{Pseudo Code:}
+a notation resembling a simplified programming language, used in program design.
+\end{definition}
+
+\end{frame} \begin{frame}
+
+\begin{definition}{Implementation:}
+the process of putting a decision or plan into effect; execution.
+\end{definition}
+
+\end{frame}
+
+\begin{frame}
+
+Problem
+
+\begin{itemize}
+\item we need a machine, implementation independent way of comparing algorithms
+\end{itemize}
+
+\end{frame} \begin{frame}
+
+Complexity
+
+\begin{itemize}
+\item Complexity is a (the?) way we can tell whether one method is better than another.
+\item We get a measure of how long an algorithm will take to get the answer.
+\item We seek a measure of the size of a problem: e.g., number of items to sort, numbers of items to search, but this
+can be any other measure we wish.
+\item We need to know
+
+\begin{itemize}
+\item how long it will take to solve, and
+\item how much memory the solution will need.
+\end{itemize}
+\item It's good to have an estimate of these two; time complexity and space complexity.
+\end{itemize}
+
+\end{frame} \begin{frame}
+
+Basic arithmetic
+
+Copy Basic arithmetic slide
+
+\end{frame} \begin{frame}
+
+Big O notation
+
+\begin{itemize}
+\item Suppose we find two algorithms that take times \textit{n}\textsuperscript{2 }and 100\textit{n }to run
+respectively.
+\item At first, the \textit{n}\textsuperscript{2 }seems better, but the square term is eventually going to dominate:
+\item For n= 1million, n squared is a quadrillion. So the 100\textit{n }algorithm is actually the better one (for large
+datasets).
+\end{itemize}
+Big O table
+
+\end{frame} 
+
+\begin{frame}
+
+Big O notation
+
+Diagram: Big O curves
+
+\end{frame} \begin{frame}
+
+Big O notation
+
+\begin{itemize}
+\item Next, suppose we have an algorithm that takes time \textit{n}\textsuperscript{2 }+ 100\textit{n}.
+\item For \textit{n }= 1000000, the 100\textit{n }is 100 million, which is just 1/100\% of a quadrillion.
+\item So when we are talking about big values for \textit{n }we need only think about the quadratic term as that forms
+the overwhelming part of the time.
+\item The linear term is important for small \textit{n}, but we are really concerned with big \textit{n}.
+\item We can simplify by ignoring the small stuff.
+\end{itemize}
+
+\end{frame} \begin{frame}
+
+Big O notation
+
+\begin{itemize}
+\item We say the problem has complexity \textit{O}(\textit{n}\textsuperscript{2}). This notation means that
+\item the problem grows like \textit{an}\textsuperscript{2 }+ stuff where \textit{a }is some constant, and ``stuff''
+grows slower than \textit{n}\textsuperscript{2}, and so will be minuscule relative to \textit{n}\textsuperscript{2 }for
+large \textit{n}
+\item this statement is valid for all large enough values of \textit{n }this statement says nothing about small
+\textit{n}, or what ``large
+\item enough'' is supposed to mean
+\item we're not too concerned as to whether it is 100\textit{n}\textsuperscript{2 }+ stuff or
+2\textit{n}\textsuperscript{2 }+ stuff
+\end{itemize}
+\end{frame} \begin{frame}
+
+Implications of Big O
+
+\begin{itemize}
+\item when the problem doubles in size, the problem takes 4 times (roughly) longer to run as
+(2\textit{n})\textsuperscript{2}/\textit{n}\textsuperscript{2 }= 4; 
+\item if it triples in size, it takes 9 times as long, and so on.
+\item The last is the important bit: if a problem takes 10s to run, 
+\item then a problem twice the size will take about 40s; 
+\item one 10 times the size will take 1000s.
+\end{itemize}
+\end{frame} \begin{frame}
+
+Implications of Big O
+
+\begin{itemize}
+\item The important part is how the time grows with \textit{n}.
+\item All sorts of factors determine the actual time a program takes to run: the speed of the computer, how good the
+compiler of the language is, whether the processor has a good multiply operation, and so on.
+\item It is much more useful to compare relative times for various sizes of problem, i.e., \textit{n}.
+\item If the complexity is \textit{O}(2\textit{\textsuperscript{n}}), doubling the size increases the time taken by much
+more than 4 times: 2\textsuperscript{2}\textit{\textsuperscript{n}}/2\textit{\textsuperscript{n }}=
+2\textit{\textsuperscript{n}}, meaning if a problem of size \textit{n }= 10 is doubled it takes 2\textsuperscript{10 }=
+1024 times as long.
+\item If a problem of size \textit{n }= 100 is doubled it takes 2\textsuperscript{100 }or approx.. 10\textsuperscript{30
+}times as long.
+\end{itemize}
+\end{frame} \begin{frame}
+
+Hard problems / easy Problems
+\begin{itemize}
+\item It's best to avoid solutions that take exponential time, but some problems don't appear to have faster solutions.
+\item For example the Travelling Salesman.
+\item Ditto factoring large integers: the security of the Internet relies on this!
+\item Note that just because they don't \textit{appear }to have fast solutions doesn't mean they don't!
+\item New solutions to old problems are being found all the time.
+\item It's good to find polynomial time solutions; the smaller the degree the better. Linear is nice, logarithmic is
+better.
+\end{itemize}
+\end{frame} 
+
+\begin{frame}
+
+Definition of O notation
+
+\begin{itemize}
+\item Notice that it doesn't matter (to the definition) what \textit{c }and \textit{N }are, only that they exist. The
+value \textit{c }is called the \textit{hidden constant}.
+\item The \textit{O }notation is a little strange, 
+\item but turns out to be really useful. Even though you say 
+\item {}``blah = \textit{O}(blah)'' it is really ``blah{\textless} blah''.
+\end{itemize}
+
+\end{frame} \begin{frame}
+
+Examples 1
+
+Copy example slide
+
+\end{frame} \begin{frame} 
+
+Exmples 2
+
+Copy examples slide
+
+\end{frame} \begin{frame}
+
+Heirarchy
+
+\begin{itemize}
+\item There is a hierarchy:
+\item constant {\textless} logarithmic {\textless} 1/\textit{r}th power {\textless} linear {\textless} quadratic
+{\textless} \textit{r}th power {\textless} exponential
+\end{itemize}
+
+hierarchy table
+
+\end{frame} \begin{frame}
+
+Orders of growth
+
+Diagram: Orders of growth diagram
+
+\end{frame} \begin{frame}
+
+Problems with different components
+
+\begin{itemize}
+\item Suppose a problem that has two parts, the first takes time O(n), the second O(n2).
+\item Taken together, the whole problem has complexity
+\item O(n) + O(n2) = O(n2), as the linear part can be disregarded for large n.
+\item Note this does not imply that O(n) = 0! It means that
+\item c1n + c2n2 {\textless} cn2 for some c and large n.
+\item Similarly, if a problem has two parts, both taking time O(n), then the total is O(n) + O(n) = O(n).
+\item A problem of complexity O(1) is one that takes no more than a constant time to solve, regardless of its size.
+Again, that the constant time could be 1ms or 1 million years: the important point is it is independent of n. 
+\item Here the hidden constant can be very important.
+\end{itemize}
+
+\end{frame} \begin{frame}
+
+Slow functions
+
+\begin{itemize}
+\item Confusingly, we say a function is slow if it grows slowly (like log).
+\item When an algorithm complexity corresponds to a slow function, it is fast, i.e., the time it takes to run increases
+slowly.
+\end{itemize} 
+
+\end{frame} \begin{frame}
+Cases
+
+\begin{itemize}
+\item Algorithms are measured in many ways, but some popular cases are
+
+\begin{itemize}
+\item Best case: What is the best possible situation for this algorithm? Data are allowed to be in just the right values
+and in just the right places to make the algorithm perform at its best.
+\item Average case: What happens in the average case? This should be the behaviour we would expect to see normally with
+data that are in no particular configuration.
+\end{itemize}
+\end{itemize}
+
+\end{frame} \begin{frame} 
+
+Cases
+
+\begin{itemize}
+\item Worst case: What is the worst that can happen? When the data happen to be in just the wrong configuration.
+\item Common case: Is there something special we know about the data we can use to our advantage? For example, nearly
+sorted data. Ideally, we want the common case to be the same as the best case.
+\end{itemize}
+
+\end{frame} 
+
+\begin{frame}
+
+Conclusion
+
+\begin{itemize}
+\item If you want to get solutions to even larger problems you can
+
+\begin{itemize}
+\item get a faster computer or
+\item find a solution method with a better complexity
+\end{itemize}
+\item The second may be harder but will always win in the long run
+\item Algorithms with better complexity than previously known are still being discovered.
+\item In 2002 a significant new algorithm to determine whether a number is prime was discovered.
+\item It's importance is that its complexity is polynomial (O(n something)) rather than nO(log log n) which was the best
+previously known.
+\end{itemize}
+
+\end{frame} \begin{frame}
+
+Sorting algorithms and their complexity
+
+\begin{itemize}
+\item Selection Sort
+\item Insertion Sort 
+\item Bubble Sort 
+\item Merge Sort 
+\item Quick Sort
+\end{itemize}
+
+\end{frame} \begin{frame}
+
+Selection sort
+
+Code 
+
+Pseudo Code
+
+Function selection sort:
+
+Given a list A of n numbers indexed 0 to n-1
+
+for i from 0 to n-2
+
+k=i //this is the index of the smallest value so far
+
+for j from i+ to n-1
+
+if A[j] < A[k]
+
+then k=j
+
+swap A[i] and A[k]
+
+\end{frame} \begin{frame}
+
+Selection sort complexity
+
+\begin{itemize}
+\item The complexity of this algorithm is fairly easy to compute:
+\item the first \textit{j }loop takes \textit{n }steps, 
+\item the next \textit{n }$-$ 1, and so on. 
+\item \textsubscript{The total is }
+\item \textit{n}+(\textit{n}$-$1)+(\textit{n}$-$2)+{\textperiodcentered}{\textperiodcentered}{\textperiodcentered}+3+2=
+\textit{n}(\textit{n }+ 1)/2 $-$ 1 = \textit{O}(\textit{n}\textsuperscript{2})
+\item Notice this time is independent of the data: even if the data
+\item is already sorted it takes \textit{O}(\textit{n}\textsuperscript{2}) time!
+\end{itemize}
+
+\end{frame} \begin{frame}
+
+Selection sort complexity
+
+\begin{itemize}
+\item Time: best O(n2), average O(n2), worst O(n2).
+\item Space O(n). More precisely: n + O(1)
+\item Other criteria: moves items directly to their destination, which can be important if the cost of moving is high. 
+\item A quadratic algorithm, so bad for large datasets.
+\end{itemize}
+
+\end{frame} \begin{frame}
+
+Finer comparisons
+
+\begin{itemize}
+\item Sometimes the complexity of sorting algorithms is more finely subdivided.
+\item We might not just count the number of steps, but also
+
+\begin{itemize}
+\item the number of comparisons made, 
+\item and the number of moves made.
+\end{itemize}
+\item For example, selection sort takes O(n2) comparisons but only O(n) moves.
+\end{itemize}
+
+\end{frame} 
+
+\begin{frame}
+
+Finer comparisons
+
+\begin{itemize}
+\item Sometimes moving an object is much more expensive than comparing
+\item Example: think of sorting a line of cars into number plate order: 
+\item (you want to move the cars as little as possible).
+\item In such a case you might want an algorithm that uses as few moves as possible, even to the extent of doing a lot
+more comparisons.
+\item Sometimes, a comparison is more expensive than a move. 
+\item In this case you would want to minimise comparisons.
+\item For example, when sorting long strings of nearly-identical DNA into order, the comparison would be quite costly.
+\end{itemize}
+\end{frame} \begin{frame}
+
+Insert Sort: Algorithm
+
+Copy from insertSort Slide
+
+\end{frame} \begin{frame}
+
+Insert Sort Complexity
+
+\begin{itemize}
+\item If the data are already ordered, the \textit{j }loop exits immediately every time, and we take
+\textit{O}(\textit{n}) steps.
+\item If not, the comparing against the sorted part takes
+1+2+3+{\textperiodcentered}{\textperiodcentered}{\textperiodcentered}+(\textit{n}$-$2)=\textit{O}(\textit{n}\textsuperscript{2})
+steps again.
+\item Time: best O(n), average O(n2), worst O(n2). 
+\item Space: O(n)
+\item Other criteria: exceptionally good for nearly sorted data. Low overhead, so good for small datasets. Bad, since
+the O(n2) means this performs really poorly for large datasets. A lot of shuffling, thus is poor if moving objects is
+costly.
+\item Comparisons: O(n2). Moves: O(n2).
+\end{itemize} 
+
+\end{frame} \begin{frame}
+
+Bubble Sort Algorithm
+
+Copy Pseudo code from slide
+\end{frame} \begin{frame}
+
+Bubble Sort Complexity
+
+\begin{itemize}
+\item If the data are already sorted, we make one pass through and stop immediately.
+\item Otherwise, we do about
+\item (n $-$ 2) + (n $-$ 3) + {\textperiodcentered} {\textperiodcentered} {\textperiodcentered} + 3 + 2 + 1 = O(n2)
+steps.
+\end{itemize}
+
+\end{frame} \begin{frame}
+
+Bubble Sort Complexity
+
+\begin{itemize}
+\item Time: best O(n), average O(n2), worst O(n2). Space O(n).
+\item Other criteria: good for nearly sorted data. Low overhead, so good for small datasets. Bad, since the O(n2) means
+this performs really poorly for large datasets.
+\item Not so good for sorting lists. Comparisons: O(n2). Moves: O(n2).
+\end{itemize}
+
+\end{frame} \begin{frame}
+
+Merge Sort: algorithm
+
+Copy Pseudo Code from Slide
+
+\end{frame} 
+
+\begin{frame} 
+
+Merge Sort Complexity
+
+\begin{itemize}
+\item The complexity of this algorithm takes a little thought. Suppose sorting n object takes time T (n).
+\item The algorithm sorts each half and then merges the two, so T (n) = T (n/2) + T (n/2) + n = n + 2T (n/2)
+\item Here, for now, we are taking the cost of merging to be n. Similarly, T (n/2) = n/2 + 2T (n/4), so
+\item T (n) = n + 2T (n/2) = n + 2(n/2 + 2T (n/4)) =
+\item n + n + 4T (n/4) = 2n + 4T (n/4)
+\item Continuing, T(n) = 2n + 4T(n/4) = 3n + 8T(n/8) =
+\item 4n + 16T (n/16) = . . . so that T (n) = kn + 2k T (n/2k ). Eventually, n/2k = 1, which is n = 2k or k = logn.
+\item Now T (1) = 0 (it takes no time to sort 1 object), so
+\item T (n) = n log n + 2log n T (1) = n log n.
+\end{itemize}
+
+\end{frame} \begin{frame}
+
+Merge Sort Complexity: Merging
+
+\begin{itemize}
+\item the merge is the hard part.
+\item This either requires an extra list (assuming again we are not allowed to delete and insert elements) to merge
+into, or it requires a lot of data shuffling.
+\end{itemize}
+
+\end{frame} \begin{frame}
+
+Merge Sort Complexity: Merging
+
+Copy Code from slide
+
+\end{frame} \begin{frame}
+
+Other considerations
+
+\begin{itemize}
+\item Other criteria: not so good as bubble sort with nearly sorted data.
+\item Merge requires extra space or extra time to shuffle.Two list merge sort has very stable predictable
+behaviour.
+\item One improvement is not to recurse all the way down to single elements: better is to switch to, say, insertion sort
+or even bubble sort when \textit{n }is small enough.
+\item This takes advantage of the low overhead of such a sort and its speed on small datasets.
+\end{itemize}
+
+\end{frame} \begin{frame}
+
+Crossover of Bubble and Merge Sort
+
+Diagram Bubble vs Merge
+
+\end{frame} \begin{frame}
+
+Overhead
+
+\begin{itemize}
+\item The overhead of an algorithm is the amount of messing about in the algorithm that is needed to make it work but
+doesn't really contribute much.
+\item For example, shuffling in the mergesort is overhead bubblesort only has a tiny amount of overhead, but is a poor
+algorithm.
+\item mergesort has more overhead, but is a better algorithm.
+\item This is why they have a crossover point: where the larger overhead is outweighed by the better algorithm.
+\item The choice of algorithm is never easy to make!
+\end{itemize}
+
+\end{frame} \begin{frame}
+
+Quick Sort Algorithm
+
+Copy Pseudo Code from slide
+
+\end{frame} \begin{frame}
+
+Quick Sort Complexity
+
+\begin{itemize}
+\item We can find complexity of this algorithm is like we did for mergesort.
+\item Suppose sorting n objects takes time T (n). If we get a perfect split, we see that
+\item T (n) = n + T (n/2) + T (n/2) = n + 2T (n/2) where n is the division, and T (n/2) is the time to sort n/2
+\item objects.
+\item Just as with mergesort, we find the algorithm takes time
+\item O(n log n), if we get even splits every time.
+\item Unfortunately, we can have bad splits too
+\end{itemize}
+
+\end{frame} \begin{frame}
+
+Quick Sort Complexity
+
+\begin{itemize}
+\item in the worst case we get a partition into 0 plus \textit{n }$-$ 1 elements, and we get\textit{T
+}(\textit{n}) = \textit{n }+ \textit{T }(0) + \textit{T }(\textit{n }$-$ 1) = \textit{n }+ \textit{T }(\textit{n }$-$
+1), as \textit{T }(0) = 0, the time to sort no objects. 
+\item So now
+\end{itemize}
+
+Diagram
+
+\begin{itemize}
+\item So, if we get bad splits, the time is \textit{O}(\textit{n}\textsuperscript{2}). 
+\end{itemize}
+
+\end{frame} \begin{frame}
+
+Worst case
+
+\begin{itemize}
+\item Choosing the pivot is critical
+\item When the data is already sorted or nearly sorted, quicksort does really poorly.
+\item Ditto for reversed or nearly reversed data.
+\item It is a strange feature of quicksort that sorted data is its worst case!
+\end{itemize}
+
+\end{frame} \begin{frame} 
+
+Finding the pivot point
+
+\begin{itemize}
+\item One approach, rather counter-intuitively, is to randomise the order of the data before using quicksort: this might
+well give us a better run time!
+\item Random element as pivot
+\item Use two pivots
+\item Use information about the pivots
+\end{itemize}
+
+\end{frame} \begin{frame}
+
+Quicksort finding the middle
+
+\begin{itemize}
+\item It turns out that we can find the middle value of an array in O(n) time.
+\item Consider the algorithm select:
+\item 1 consider the array in groups of 5 values: sort each 5 (using bubblesort, perhaps) and find the middle value of
+each
+\item 2 call select recursively on these middle values to find the overall middle value
+\end{itemize}
+
+\end{frame} 
+
+\begin{frame}
+
+Quicksort with finding middle
+
+\begin{itemize}
+\item Using select to find a pivot, we can guarantee that quicksort has a good behaviour, with additional O(n log n)
+time (O(n) for log n sort steps) taken to find the pivot.
+\item Thus, still a total time of O(n log n), but somewhat longer than previously.
+\item Of course, it may or may not be worthwhile spending this amount of time finding the pivot when one of the methods
+above might be just as good: it all depends on the data.
+\end{itemize}
+
+\end{frame} \begin{frame}
+
+Combining Quicksort with Insertion sort
+
+\begin{itemize}
+\item Just as with any other divide and conquer method, there is no need to recurse all the way down to single elements
+in quicksort.
+\item Better is to stop at 3 or 4 elements and sort these directly;
+\item or revert to insertion (or bubble, selection or other low-overhead sort) when the list is short enough.
+\item This cut-over length must be determined experimentally as it will vary from implementation to implementation.
+\end{itemize}
+
+\end{frame} \begin{frame}
+
+Quicksort insertion summary
+
+Copy from slide
+
+\end{frame} 
+
+
+
+
+
+
+
+
+
+
+
+ 
+\end{document}
+

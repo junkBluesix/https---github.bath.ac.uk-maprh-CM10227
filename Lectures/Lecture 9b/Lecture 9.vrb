@@ -1,0 +1,18 @@
+\begin{center}
+\textbf{BufferedReader : To Read From a File}
+\end{center}
+\begin{block}{}
+\begin{lstlisting}
+File myFile = new File("example.txt");
+FileReader fileIn = new FileReader(myFile);
+BufferedReader input = new BufferedReader(fileIn);
+
+try {
+    String line = input.readLine();
+    ...
+}
+catch (IOException e) {
+    e.printStackTrace();
+}
+\end{lstlisting}
+\end{block}

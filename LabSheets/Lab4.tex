@@ -1,0 +1,139 @@
+\documentclass[12pt, a4paper, oneside]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[british]{babel}
+\usepackage{lmodern}
+\usepackage{hyperref}
+
+\renewcommand{\familydefault}{\sfdefault}
+
+\author{}
+\date{}
+
+\title{CM10227 Lab 4 (Optional)}
+
+\newcounter{qstncntr}
+\newcommand{\exerset}{ \vspace*{-11pt}\setcounter{qstncntr}{0} }
+\newenvironment{exer}[1]{\vspace*{11pt}\noindent {{\bf Exercise} \stepcounter{qstncntr} \theqstncntr:} #1}{}
+
+\begin{document}
+\maketitle
+
+This is an optional lab for those who wish to hone their programming skills.
+The exercises are designed to be challenging and the lab is \textbf{not} assessed.
+We would encourage you to ask questions on Moodle.
+
+\section*{Exercises}
+\setlength{\parindent}{0cm} %
+\exerset
+
+\begin{exer}
+  Use brute force to find a solution to the following (i.e. try every possible number up to one hundred and stop if it works):
+  In a sports contest, there were
+  \begin{math}
+    m
+  \end{math}
+ medals awarded on
+ \begin{math}
+   n
+ \end{math}
+successive days (\begin{math}
+  n > 1
+\end{math}).
+ On the first day, one medal and
+ \begin{math}
+   \frac{1}{7}
+ \end{math}
+of the remaining
+\begin{math}
+  m - 1
+\end{math}
+medals were awarded.
+On the second day, two medals and
+\begin{math}
+  \frac{1}{7}
+\end{math}
+of the now remaining medals were awarded; and so on. On the
+\begin{math}
+  n
+\end{math}th and last day, the remaining
+\begin{math}
+  n
+\end{math}
+medals were awarded. How many days did the contest last, and how many medals were awarded altogether?
+ [1967 IMO, Problem 6]
+\end{exer}
+
+\begin{exer}
+  Determine all (there are two) three-digit numbers
+  \begin{math}
+    N
+  \end{math}
+  having the property that
+  \begin{math}
+    N
+  \end{math}
+ is divisible by
+ \begin{math}
+   11
+ \end{math},
+ and
+ \begin{math}
+   \frac{N}{11}
+ \end{math}
+ is equal to the sum of the squares of the digits of
+ \begin{math}
+   N
+ \end{math}. [1960 IMO, problem 1]
+\end{exer}
+
+%pi
+\begin{exer}
+  One way to calculate
+  \begin{math}
+    \pi
+  \end{math}
+  is to test locations over a uniform grid of a
+  \begin{math}
+    2 \times 2
+  \end{math}
+  square containing a circle with radius
+  \begin{math}
+    1
+  \end{math}.
+  Use the distance from the centre to indicate whether or not the location lies in the circle.
+  Simulate this and calculate
+  \begin{math}
+    \pi
+  \end{math}
+  as
+  \begin{math}
+    (2)(2)\frac{L_i}{L_i+L_o}
+  \end{math} where
+  \begin{math}
+    L_i
+  \end{math}
+  is the number of locations inside the circle and
+  \begin{math}
+    L_o
+  \end{math}
+  is the number of locations outside the circle.
+\end{exer}
+
+\begin{exer}
+  Find the smallest odd and non-prime number which cannot be written as the sum of a prime and twice a square:
+  e.g.
+  \begin{math}
+    21 = 3 + 2\times3^2
+  \end{math}.
+  [Project Euler Problem 46]
+\end{exer}
+
+\begin{exer}
+  A ``knight's tour'' is is a path through which a knight visits every square of a (international) chess board only once.
+  Write a program to find a ``knight's tour'' for an 8 by 8 chess board.
+  (Hint: use Warnsdorf's rule)
+\end{exer}
+
+
+\end{document}

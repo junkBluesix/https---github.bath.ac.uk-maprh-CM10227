@@ -1,0 +1,4 @@
+\beamer@endinputifotherversion {3.36pt}
+\beamer@sectionintoc {1}{Assertions}{49}{0}{1}
+\beamer@sectionintoc {2}{Error Recovery}{55}{0}{2}
+\beamer@sectionintoc {3}{Style : Writing Better Code}{62}{0}{3}

@@ -1,0 +1,1111 @@
+\documentclass{beamer}
+% September 2014 
+% Author: Dr Rachid Hourizi and Dr. Michael Wright 
+% Department of Computer Science, University of Bath
+\usepackage{listings}
+\usetheme{Boadilla} 
+\usepackage{fixltx2e}
+\usepackage{hyperref}
+\lstset{language=c,
+	basicstyle=\ttfamily\small,
+           keywordstyle=\color{blue}\ttfamily,
+           stringstyle=\color{red}\ttfamily,
+           commentstyle=\color{green}\ttfamily,
+          breaklines=true}
+
+\begin{document}
+
+\AtBeginSection[]{
+  \begin{frame}
+  \vfill
+  \centering
+  \begin{beamercolorbox}[sep=8pt,center,shadow=true,rounded=true]{title}
+    \usebeamerfont{title}\insertsectionhead\par%
+  \end{beamercolorbox}
+  \vfill
+  \end{frame}
+}
+
+\title{CM 10227: Lecture 4}
+\author{Dr Rachid Hourizi and Dr. Michael Wright}
+\date{\today}
+\frame{\titlepage}
+
+% *** RESOURCES *** 
+\begin{frame} 
+\begin{center}
+\textbf{Resources}
+\end{center}
+\begin{itemize}
+\item The places that you can get additional support if you are finding the pace of the course a little fast now include
+\begin{itemize}
+\item A labs (Continued from week 1)
+\item B labs 
+\item ... \textbf{Wednesday 11:15-13:05 EB0.7}
+\item ... Fridays 17:15 to 19:15 in CB 5.13)
+\item The Drop in Session 
+\item ... booked 20 min appointments
+\item ... \textbf{Friday 11.15-13.05 1E 3.9}
+\item PAL sessions (Mondays 14:15 to 15:05 1E 3.9)
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+ \begin{frame} 
+ \begin{itemize}
+\item If you are finding the pace a little slow on the other hand, you can now sign up to
+\begin{itemize}
+\item The Advanced Programming Labs
+\item ... Wednesday 11.15-13.05 EB 0.7
+\end{itemize}
+\end{itemize}
+ \end{frame}
+ 
+ \section{Questions?}
+ 
+ \begin{frame}
+\begin{center}
+\textbf{Last Week}
+\end{center}
+\begin{itemize}
+\item Iteration
+\item Collections:  Strings and Arrays
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{center}
+\textbf{This Week}
+\end{center}
+\begin{itemize}
+\item Complex Collections
+\item Abstract Data Types
+\end{itemize}
+\end{frame}
+ 
+ \begin{frame}
+\begin{center}
+\textbf{Recap}
+\end{center}
+\begin{itemize}
+\item Programming can be thought of as the process of breaking a large, complex real world task up into smaller and smaller sub-tasks until eventually the sub-tasks are simple enough to be performed with a simple (programmable) instruction.  e.g.
+\begin{itemize}
+\item Get data from the keyboard, or a  file, or some other device.
+\item Perform basic mathematical operations e.g.  addition and/or multiplication.
+\item Check for certain conditions and execute an appropriate sequence of statements in line with those condition
+\item Perform some action repeatedly, usually with some variation
+\item Display data on the screen or send data to a  file or other device.
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{center}
+\textbf{Recap}
+\end{center}
+\begin{itemize}
+\item Over the first three weeks of the course we have looked at...
+\item ... and used 
+\bigskip
+\item Basic data types
+
+\begin{itemize}
+\item int
+\item double
+\item char
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{center}
+\textbf{Recap}
+\end{center}
+\begin{itemize}
+\item Functions
+\begin{itemize}
+\item main
+\item library functions
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\begin{block}{}
+\begin{lstlisting}
+1.    #include <stdio.h>
+2.     
+3.    int main(void) {
+4.        int number;
+5.        number = 10227;
+6.        printf("%d\n", number);
+7.        return 0;
+8.    }
+\end{lstlisting}
+\end{block}
+\begin{block}{}
+\begin{lstlisting}
+$ gcc example.c
+
+$ ./a.out
+10227
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\begin{block}{}
+\begin{lstlisting}
+4.        int number;
+5.        number = 10227;
+\end{lstlisting}
+\end{block}
+\begin{itemize}
+\item line 4 - declared a variable \textbf{number}
+\item line 4 - its type is \textbf{int}
+\item line 5 - initialised \textbf{number} to \textbf{10227}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{itemize}
+\item C is a statically typed language i.e. types matter
+\item ... by declaring that \textbf{number} is an int 
+\item ... C reserves some memory for us to store an int value
+\item ... by initialising it \textbf{10227} we are storing that value in the memory allocated to \textbf{number}
+\item ... and by using \textbf{number} in our code we can get at the value stored there
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{center}
+\textbf{Question! }
+\end{center}
+\begin{center}
+{What happens if you do not initialise a variable?}
+\end{center}
+\end{frame}
+
+\begin{frame}[fragile]
+\begin{block}{}
+\begin{lstlisting}   
+3.    int main(void) {
+
+7.        return 0;
+8.    }
+\end{lstlisting}
+\end{block}
+\begin{itemize}
+\item line 3 - declares the \textbf{main} function ...
+\item ... every program must have a main function to say ``this is what to run first"
+\item line 3 - \textbf{main} returns an \textbf{int}
+\item line 3 - \textbf{main} does not have any parameters
+\item line 7 - return 0 to indicate that ``everything is OK"...
+\item ... if we return anything other than 0 it indicates that something went wrong
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\begin{block}{}
+\begin{lstlisting}[firstnumber=1]
+1.    #include <stdio.h>
+
+6.        printf("%d\n", number);
+\end{lstlisting}
+\end{block}
+\begin{itemize}
+\item line 1 - tells the compiler that we want to use code from another file
+\item line 6 - \textbf{printf} function from the stdio library ...
+\item ... \textbf{printf} has the signature 
+\end{itemize}
+\begin{block}{}
+\begin{lstlisting}[firstnumber=1]
+int printf(const char *format, ...)
+\end{lstlisting}
+\end{block}
+\begin{itemize}
+\item ... it \textbf{returns an int}
+\item ... takes in as a \textbf{parameter} what you want printed including format specifiers
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{center}
+\textbf{Recap}
+\end{center}
+\begin{itemize}
+\item Functions
+\begin{itemize}
+\item written our won
+\end{itemize}
+\bigskip
+\item Iteration 
+\begin{itemize}
+\item e.g. while loops
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\begin{block}{}
+\begin{lstlisting}
+1.    #include <stdio.h>
+2.     
+3.    int main(void) {
+4.        int number;
+5.        number = 10;
+6.        count_down(number);
+7.        return 0;
+8.    }
+9.
+10.    void count_down(int from){
+11.        while(from >= 0){
+12.            printf("%d\n",from);
+13.            from= i - 1;
+14.        }
+15    }
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\begin{block}{}
+\begin{lstlisting}
+$ gcc example.c
+
+$ ./a.out
+10
+9
+8
+7
+6
+5
+4
+3
+2
+1
+0
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\begin{block}{}
+\begin{lstlisting}
+10.   void count_down(int from){
+    
+15    }
+\end{lstlisting}
+\end{block}
+\begin{itemize}
+\item line 10 - function signature...
+\item ... return type - in this case it does not return anything ( \textbf{void} )
+\item ... name of function - \textbf{count\_down}
+\item ... parameters - this function expects an \textbf{int} to be passed to it when called
+\item ... in this function we will refer to this parameter as \textbf{from}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\begin{block}{}
+\begin{lstlisting}
+3.    int main(void) {
+4.        int number;
+5.        number = 10;
+6.        count_down(number);
+7.        return 0;
+8.    }
+\end{lstlisting}
+\end{block}
+\begin{itemize}
+\item line 4 - declared a variable \textbf{number}
+\item line 5 - initialise the variable \textbf{number} to \textbf{10}
+\item line 6 - we call out \textbf{count\_down} function 
+\item ... passing in as its parameter the value stored in \textbf{number}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\begin{block}{}
+\begin{lstlisting}
+10.    void count_down(int from){
+11.        while(from >= 0){
+12.            printf("%d\n",from);
+13.            from= i - 1;
+14.        }
+15    }
+\end{lstlisting}
+\end{block}
+\begin{itemize}
+\item line 11 - while loop ...
+\item ... the code inside the while loop will be executed as long as ... 
+\item ... \textbf{from} is greater than or equal to \textbf{0}
+\item line 12 - call the function \textbf{printf} in the \textbf{stdio} library ...
+\item ... to print to the standard out the current value of \textbf{from}
+\item line 13 - decrease the value stored in \textbf{from} by \textbf{1}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\begin{center}
+\textbf{Recap}
+\end{center}
+\begin{itemize}
+\item Last week we started to consider slightly more complex data structures
+\begin{itemize}
+\item Arrays
+\item Strings
+\end{itemize}
+\bigskip
+\item Arrays allow you to group together elements of the same type
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\begin{block}{}
+\begin{lstlisting}
+1.    int multiples_of_two[10];
+2.     
+3.    void set_multiples_array(){
+4.        int count = 0;
+5.        while(count<10){
+6.            multiple_of_two[count] = mult(count, 2);
+7.        }
+8.
+9.    int mult(int number, int by){
+10.        return number*by;
+11.    }
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\begin{block}{}
+\begin{lstlisting}
+1.    int multiples_of_two[10];
+\end{lstlisting}
+\end{block}
+\begin{itemize}
+\item line 1 - global variable \textbf{multiples\_of\_two} ...
+\item ... is an array of ints 
+\item ... has space for 10 elements
+\item ... accessed by their index which starts at 0 and ends at 9
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\begin{block}{}
+\begin{lstlisting}
+3.    void set_multiples_array(){
+
+5.        while(count<10){
+6.            multiple_of_two[count] = mult(count, 2);
+7.        }
+\end{lstlisting}
+\end{block}
+\begin{itemize}
+\item line 5 - loop 10 times
+\item line 6 - set the value at the index \textbf{count}
+\item ... to the value returned from the function \textbf{mult}
+\item ... where \textbf{mult} takes as parameters \textbf{count} and \textbf{2}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\begin{center}
+\textbf{Recap}
+\end{center}
+\begin{itemize}
+\item Functions
+\bigskip
+\item Encapsulate functionality
+\item ... wrap a piece of code in a function
+\item Aim for as generalised a function as possible
+\item ... e.g. starting with code that prints multiples of 2
+\item ... changing it so that it prints multiples of any integer 
+\end{itemize}
+\end{frame}
+
+\section{Questions?}
+
+% *** HERE ***
+\section{Complex Collections and Abstract Data Types}
+\begin{frame}
+\begin{itemize}
+\item We have looked at basic variable types
+\item We have looked at functions which can manipulate them
+\item We have looked at arrays that allow us to store a fixed number values of the same type
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{itemize}
+\item In some situations, however, we might want to use yet more complex data types
+\begin{itemize}
+\item Lists
+\item Queues
+\item Stacks
+\end{itemize}
+\bigskip
+\item Or even
+\begin{itemize}
+\item Telephone books
+\item Library catalogues
+\item Family trees
+\item etc.
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{itemize}
+\item In C (and other languages) we can create our own abstract data types 
+\bigskip
+\item Abstract Data Types (ADT)
+\begin{itemize}
+\item Data representation
+\item Functions to provide operations on that data representation
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{center}
+\textbf{Data Representations}
+\end{center}
+\begin{itemize}
+\item In C we use \textbf{struct} to define our own data representations  (e.g. Date)
+\item Which can be comprised of one or more basic data types (e.g. int's and char's)
+\item Don't have to be the same basic data type
+\item And can also contain other data representations
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{center}
+\textbf{Operations}
+\end{center}
+\begin{itemize}
+\item Define functions to provide operations on these data representations
+\item e.g. new\_date(), increment\_date();
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\begin{itemize}
+\item Lets create our own ADT 
+\bigskip
+\item Date
+\end{itemize}
+\begin{block}{}
+\begin{lstlisting}
+21 OCT 2015 
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\begin{itemize}
+\item Data representation for our Date ADT 
+\end{itemize}
+\bigskip
+\begin{block}{}
+\begin{lstlisting}
+struct Date
+{
+    int day;
+    char month[3];
+    int year;
+};
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\begin{center}
+\textbf{Aside: Why Our Own Data Representations?}
+\end{center}
+\begin{itemize}
+\item We could just declare these as variables
+\end{itemize}
+
+\begin{block}{}
+\begin{lstlisting}
+int day;
+char month[3];
+int year;
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+\begin{frame}
+\begin{itemize}
+\item But if we had multiple dates we wanted to keep track of 
+\item Our code quickly becomes long, difficult to read, difficult to maintain etc.
+\bigskip
+\item For example, if we want to store the dates for today, tomorrow and yesterday... 
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\begin{block}{}
+\begin{lstlisting}
+#include <stdio.h>
+
+int today_day;
+char today_month[3];
+int today_year;
+
+int tomorrow_day;
+char tomorrow_month[3];
+int tomorrow_year;
+
+int yesterday_day;
+char yesterday_month[3];
+int yesterday_year;
+
+int main(void) {
+	/* Additional Code */
+	return 0;
+}
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\begin{block}{}
+\begin{lstlisting}
+#include <stdio.h>
+
+struct Date
+{
+    int day;
+    char month[3];
+    int year;
+};
+
+int main(void) {
+	struct Date today;
+	struct Date tomorrow;
+	struct Date yesterday;
+	/* Additional Code */
+	return 0;
+}
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+\begin{frame}
+\begin{itemize}
+\item Lets instantiate a Date
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\begin{block}{}
+\begin{lstlisting}
+#include <stdio.h>
+
+struct Date {
+    int day;
+    char month[3];
+    int year;
+};
+
+int main(void) {
+	struct Date today;
+	
+	today.day = 21;
+	today.month[0] = 'O';
+	today.month[1] = 'C';
+	today.month[2] = 'T';
+	today.year = 2015;
+	
+	return 0;
+}
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+\begin{frame}
+\begin{itemize}
+\item Now lets provide functions to operate on our data to complete our ADT definition of Date
+\bigskip
+\item Create a new Date
+\item Increment Date 
+\item etc.
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\begin{block}{}
+\begin{lstlisting}
+struct Date new_date(int d, char m[], int y)
+{
+    struct Date date;
+    date.day = d;
+    date.month[0] = m[0];
+    date.month[1] = m[1];
+    date.month[2] = m[2];
+    date.year = y;
+    
+    return date;
+}
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+\begin{frame}
+\begin{itemize}
+\item We have created out ADT (Date)
+\item We could create any number of Date variables as above
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\begin{block}{}
+\begin{lstlisting}
+int main(void) {
+	struct Date today;
+	struct Date tomorrow;
+	struct Date yesterday;
+	
+	today = new_date(21,"OCT",2015);
+	tomorrow = new_date(22,"OCT",2015);
+	yesterday = new_date(20,"OCT",2015);
+	return 0;
+}
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+\begin{frame}
+\begin{itemize}
+\item We only need to know about the functions that manipulate the data representation
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\begin{block}{}
+\begin{lstlisting}
+struct Date increment_date(struct Date d)
+{
+    struct Date date;
+    date.day = d.day+1;
+    date.month[0] = d.month[0];
+    date.month[1] = d.month[1];
+    date.month[2] = d.month[2];
+    date.year = d.year;
+    
+    return date;
+}
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\begin{block}{}
+\begin{lstlisting}
+int main(void) {
+	struct Date today;
+	struct Date tomorrow;
+	
+	today = new_date(21,"OCT",2015);
+	tomorrow = increment_date(today);
+	return 0;
+}
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\begin{itemize}
+\item If we now change the implementation of increment\_date
+\end{itemize}
+\begin{block}{}
+\begin{lstlisting}
+tomorrow = increment_date(today);
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+\begin{frame}
+\begin{itemize}
+\item Lets look at some more examples which use our Date abstract data type
+\bigskip
+\item Personal Information
+\begin{itemize}
+\item Name
+\item Date-of-Birth
+\item etc.
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\begin{block}{}
+\begin{lstlisting}
+struct PersonalInfo
+{
+    char name[50];
+    struct Date dob;
+};
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+\begin{frame}
+\begin{itemize}
+\item As with Date lets provide functions to perform operations on our data representation
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\begin{block}{}
+\begin{lstlisting}
+struct PersonalInfo new_pi(char n[], struct Date d)
+{
+    struct PersonalInfo pi;
+    int i = 0;
+    while(i < strlen(n)){
+        pi.name[i] = n[i];
+        i++;
+    }
+    pi.dob = d;
+    return pi;
+}
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\begin{block}{}
+\begin{lstlisting}
+int main(void) {	
+    struct Date birthday;
+    birthday = new_date(26,"OCT", 1985);
+    
+    struct PersonalInfo info;
+    info = new_pi("Michael",birthday);
+
+    return 0;
+}
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+\begin{frame}
+\begin{itemize}
+\item In pairs (or threes) how could you define ADT's for...
+\item Netflix?
+\item Spotify?
+\item Amazon?
+\bigskip
+\item What data representations (\textbf{struct}) might you need?
+\item What functions would you implement?
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{itemize}
+\item Another common example of the use of ADTs are Stacks
+\bigskip
+\item Ordered collection of data
+\item We discussed Stacks during the lecture on recursion
+\item Stacks hold data much like a pile of plates
+\item The first item added is the last item removed
+\item First In Last Out (FILO)
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{itemize}
+\item A stack can be described as a collection of elements or items, for which the following operations are defined:
+\begin{itemize}
+\item isEmpty() is a predicate that returns ``true'' if the stack is empty, and ``false'' otherwise;
+\item push(item) adds the given item to the stack
+\item pop() removes the most recently added
+\item top () simply returns the last item to be added to the stack item from the stack S and returns it as the value of
+the function;
+\item The primitive isEmpty is needed to avoid calling pop on an empty stack, which should cause an error.
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\begin{block}{}
+\begin{lstlisting}
+#include <stdio.h>
+
+struct Stack
+{
+    int head;
+    int max_size;
+    int filo[1000];
+};
+
+struct Stack my_stack; 
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\begin{block}{}
+\begin{lstlisting}
+void initialise()
+{
+    my_stack.head = 0;
+    my_stack.max_size = 999;
+}
+
+int isEmpty()
+{
+    return (my_stack.head == 0);
+    
+}
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\begin{block}{}
+\begin{lstlisting}
+void push(int i)
+{
+    if(my_stack.head < my_stack.max_size){
+        my_stack.filo[my_stack.head] = i;
+        my_stack.head = my_stack.head + 1;
+    }
+}
+
+int pop(){
+     if(isEmpty() == 0){
+    	int popped = my_stack.filo[my_stack.head-1];
+    	my_stack.head = my_stack.head - 1;
+    	return popped;
+    }
+    return -1;
+}
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\begin{block}{}
+\begin{lstlisting}
+int peek(){
+    if(isEmpty() == 0){
+        int peeked = my_stack.filo[my_stack.head-1];
+        return peeked;
+    }
+    return -1;
+}
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\begin{block}{}
+\begin{lstlisting}
+int main(void) {
+    initialise();
+	
+    push(10);
+    push(20);
+    push(30);
+    push(40);
+	
+    printf("%d\n", pop());
+    printf("%d\n", pop());
+    printf("%d\n", peek());
+    printf("%d\n", pop());
+	
+    return 0;
+}
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+\begin{frame}
+\begin{itemize}
+\item What will be printed?
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\begin{block}{}
+\begin{lstlisting}
+$ gcc test_stack test_stack.c 
+
+$ ./test_stack
+40
+30
+20
+20
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+\begin{frame}
+\begin{itemize}
+\item Another data structure which we might find interesting is a Map or Dictionary
+\item When we consider a real world dictionary, however, referring to each of the elements in that dictionary by numerical index seems unwieldy
+\item E.g. referring to the entry for ``Aardvark'' as OxfordEnglishDictionary[27] doesn't seem very helpful 
+\bigskip
+\item However, we can use the word itself as the ``key'' to be searched for within the dictionary 
+\item And the entry for that word as the `value'' corresponding to that ``key''
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+
+\begin{itemize}
+\item The combination of each key in the dictionary and the corresponding value it refers to are (unsurprisingly) called key-value pairs
+\item Conceptually, each of those key value pairs form a Tuple
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{itemize}
+\item Tuples are ordered collections of values of different types. 
+\item Unlike arrays or lists, which may contain several values of the same type, tuples may
+``contain'' values of mixed types e.g.
+\begin{itemize}
+\item \ (100, 7, ``abc'', 5.0)
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{itemize}
+\item Commonly used tuples are given specific names
+\bigskip
+\item a tuple of two elements is generally called a~pair~(or~double,~couple,~dual,~twin) and 
+\item a tuple of three elements is generally called a triple.
+\item There are also such names as~quadruple,~quintuple~and so on. 
+\item Note that there are also tuples of 0 and 1 element. 
+\begin{itemize}
+\item A tuple of one element is rarely used as such, since the element itself may be used instead. 
+\item However, for theoretical discussion, it may be useful to consider such tuples. 
+\item A tuple of one element is sometimes called a~single.~
+\end{itemize}
+\item It is sometimes easier to use the name~tuplen~with~n~being the number of elements.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{itemize}
+\item Lets create an ADT for a Map
+\item So we can store ASCII codes for different letters (chars)
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\begin{block}{}
+\begin{lstlisting}
+#include <stdio.h>
+
+struct KeyValuePair
+{
+    char key;
+    int value;
+}; 
+
+struct Map
+{
+    int size;
+    struct KeyValuePair kvp[1000];
+};
+
+struct Map hm;
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\begin{block}{}
+\begin{lstlisting}
+int get(char find){
+    int i;
+    for(i=0; i < hm.size; i++){
+        if(hm.kvp[i].key == find){
+            return hm.kvp[i].value;
+        }
+    }
+    return 0;
+}
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\begin{block}{}
+\begin{lstlisting}
+void put(char key, int value){
+    int next = hm.size;
+    struct KeyValuePair x;
+    x.key = key;
+    x.value = value;
+    hm.kvp[next] = x;
+    hm.size = hm.size + 1;
+}
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\begin{block}{}
+\begin{lstlisting}
+int main(void) {
+	put('a',10);
+	put('b',11);
+	put('c',12);
+	put('d',13);
+	put('e',14);
+	put('f',15);
+	
+	printf("%d\n", get('a'));
+	printf("%d\n", get('c'));
+	printf("%d\n", get('f'));
+	return 0;
+}
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\begin{block}{}
+\begin{lstlisting}
+$ gcc test_map test_map.c 
+
+$ ./test_map
+10
+12
+15
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+\section{Questions?}
+
+\begin{frame}
+\begin{itemize}
+\item In pairs (or threes)
+\item How would you create your own ADT for a Queue?
+\item First In First Out
+\bigskip
+\item What would be your data representation?
+\item What functions would you provide?
+\end{itemize}
+\end{frame}
+
+\end{document}
+
+
+
+
+
+
+
+
+

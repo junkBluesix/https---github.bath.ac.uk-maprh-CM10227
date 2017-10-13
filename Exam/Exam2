@@ -1,0 +1,58 @@
+1. Write a recursive and iterative function/method that implements the behaviour of the multiplication operator for two integers (positive or negative). You are not allowed to use the one provided by the Java language. You do not need to provide a main method.                 [10]
+
+- recursive version: 1 mark for correct handling of negative numbers. 3 marks for working recursion. 1 mark for correctly implemented base case
+- iterative version: 1 mark for correct handling of negative numbers. 3 marks for working iteration. 1 mark for correctly calculated/implemented number of iterations
+
+********************
+
+2. A deque (“double-ended queue”) is like a queue, except that it allows access at both ends. Create a Java class Deque which implements a deque with the capacity to hold 100 Objects. It should implement the following interface:public interface DequeInterface	public void addFront(Object o);	//adds item o to the front of the deque	public void addRear(Object o);	//adds item o to the rear of the deque	public Object removeFront ();	// removes the item at the front and returns it	public Object removeRear();	// removes the item at the rear and returns it
+	
+	
+- copy code
+
+***********************
+
+3. Design a Java program which reflects the roles and the hierarchy of department store as follows:
+
+For each of the following roles, create a class/interface/abstract class (as appropriate): member of staff, CEO, store manager, department manager, salesperson, apprentice. Use at least one abstract class any other interfaces /fully implemented classes that you need.
+- Everyone is a member of staff.
+- Department managers, salespeople and apprentices sell to customers
+- store managers and department managers are trainers
+- The CEO, department managers and store managers are supervisors
+Add to the appropriate classes data fields to capture the following information: 
+- Every member of staff has a name and an employee number.- Every department manager, salesperson and apprentice is attached to a department.- Apprentices take two courses at the local training college every week. Every course has a title but each trainee takes different coursesAdd methods for getting and setting the content of these fields. You must provide an interface for each method. A more detailed implementation of the classes is not required e.g. you do not need to provide the body of the methods that you define.
+
+Marks: 
+
+1 for each of the following (max 5)
+- Stub of Abstract StaffMember Class (or alternative Abstract Class)
+- Correct extension of that abstract class to other subclasses
+- Stub of Selling Interface (or inherited 'sells method")
+- stub of Training interface (not method)
+- stub of Supervising interface (not method)
+
+0.5 for each of the following class definitions with constructors:
+- CEO, StoreManager, DepartmentManager, Salesperson, Aprrentice (max 2.5)
+
+0.5 for setters and getters to handle
+- Staff name, Employee number, department affiliation, apprentice course 1m apprectice course  2 (max 2.5)***********************
+
+4. Not useful code in 2010 (Java)
+
+***********************
+
+5. Rewrite Java code using two different statements (also 2010 Java)
+
+*********************
+
+BACKUP 
+======
+
+***********************
+
+In Pythn implement an ADT for a bank account (2012)
+
+5. Consider the following piece of code:def recList(list1 ,list2=[],list3=[2,4,6]): 
+if len(list1)=0:print list 2∗3return el=0t=0for i in range (len(list1)):l i s t 2 . append ( l i s t 1 . pop ( i )∗ l i s t 3 [ e l ]+ i ) e l =( e l +1)% l e n ( l i s t 3 )t=t+recList(list1 ,list2)l i s t 1 . i n s e r t ( i , l i s t 2 . pop ( ) )return trecList ([2 ,4] ,[3 ,5 ,1])
+
+What is printed on the screen? What is the return value of the function call?

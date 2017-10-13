@@ -1,0 +1,203 @@
+Name 3 different kinds of error
+Give an example of each one
+- Syntax
+(5+2))
+- Logical
+????
+- Run Time
+e.g. Divide by zero
+
+
+Name three steps in experimental debugging
+Hypothesis
+Change
+Compare to hypothesis
+
+Advantages of high level programming languages
+- easier to write
+- easier to read
+- easier to correct
+- easier to port/modify
+
+2 ways for high level languages to be converted to machine specific instructions
+- interpret
+- compile
+
+What is a statement in a programming language? What is an expression
+statement is smallest standalone element of a programming language which expresses some action to be carried our
+expression is a combination of constants variables, operators and functions that produces another value
+
+Rules of precedence in Java when calculating mathematical expressions
+PMDAS
+
+Define a method in the Java programming language 
+named sequence of statements that performs a desired operation
+
+What is the difference between an argument and a parameter
+- parameter is what appears in the definition of a method
+- a argument is the instance passed at runtime
+give an example of each
+
+Difference between statically typed language and dynamically typed language
+Static - langs which fix types at compile time
+Dynamic - lang in which types are discovered at execution time
+
+Difference between strongly typed language and weakly type
+Strongly - types are always enforced
+Weakly - language in which types may be ignored (opposite of strongly)
+
+Define Java in each case
+Strong, Static
+
+if/then/else
+
+(return statements from every branch)
+
+Define a recursive method. 
+- method that calls itself
+
+Define the recursive problem size
+
+What are the advantages to defining a block of code within a method
+- can attach a name 
+- make program easier to read
+- isolate the method code from the rest of the program.
+- debug once
+- re-use within program
+- export to other programs
+
+iteration/loops
+while
+do while
+
+flow of execution of a while loop
+evaluate condition (true/false)
+if false, exit and continue with next statement
+if true execute all statements in body and go back to evaluate
+
+Encapsulation/Generalisation
+
+Describe a way to find the length of of a string in Java
+String.length()
+(Or index of last character = -1)
+
+Describe the difference between an immutable data type and a mutable data type. 
+- Immutable: data types whose contents cannot be modified after creation
+- Mutable: data types whose contents can be modified after creation
+
+What are key differences between the ways in which elements are added to and removed from from Lists (ArrayLists), Queues and Stacks?
+- List can access element in any position using index (random access)
+- Queue adds elements at the end and removes elements from the beginning (FIFO)
+- Stacks add to and remove from the top (FILO)
+
+Define two types of method that might be found in a Java class. Give an example of each one 
+Mutators - methods which change the state of a class
+Accessors - methods which inform the outside world (people or code) about that state
+Constructors (1) - have similar form  but are not methods
+
+Define Modularisation (2 of 4)
+Process of defining a whole into well defined parts which can be built and examined separately and interact in well defined ways
+
+What is the difference between class and object diagrams
+- show classes of an application and relationships between them
+- give information about the source code
+- static view of the program
+
+Is Java an entirely object oriented language? Why / Why not?
+- No
+- primitives are not objects (not subclasses of the Class Object)
+
+What is the difference between an alias and a copy
+alias is a second variable that contains a reference to an object that already has a name
+copy is a duplicate set of data identical to that which is already held in another object or referred to by another variable
+
+What does a Wrapper class do with respect to a Java primitive?
+- holds the value of the primitive within an object (i.e. within an instance of a class that is a subclass of Object)
+
+How could you use overloading to define multiple constructors within a Java class
+- create more than one version of the constructor each of which takes different parameters
+
+Name two destinations for a Java print statement. What might you print to each one?
+System (or Standard) out: Used for writing the anticiapted output of a program
+System (or Standard) error: Used for writing error messages
+
+Name the three parts of a well-written response to a thrown error in Java
+try block
+catch block
+finally block
+
+What is a key-value pair? Where might you find one?
+A key value pair is a combination of a reference object and referenced object in a non-indexed data structure such as a dictionary
+
+What is casting? How do you achieve it in Java
+Casting is the process of specifying a data type (alternatively, preventing type loss) by writing the name of the class being cast in brackets before a variable name
+
+How might a dictionary (or, in Java, a HashMap) be used to speed up the execution of a method containing many repetitions of the same step (e.g. a recursive method)? Give an example
+- as a place to store 'hints' i.e. the result of that repeated method after the first execution
+- e.g. you might use a dictionary to store the results of the lower fibonnaci numbers when calculating a larger fibonacci number
+
+What is the difference between a pure function and a modifier
+- modifiers make changes to the state of the objects passed to them (have side effects)
+- pure functions do not
+
+What is inheritance? Which keyword is used to achieve it in Java
+- the passing of common attributes (fields and methods) from a auperclass to a subcalss
+- the extends keyword
+
+In Jave, how might you call the constructor of a superclass from within a subclass?
+- by using the super keyword
+
+What are the benefits (if any) of inheritance?
+- allows the definition of classes as extension of other classes
+- avoid code duplication
+- enable code re-use
+- facilitate code maintenance
+- improve code extensibility
+- enables substitution (1/2 marks for defining but not using the term)
+
+What is a polymorphic variable. Which variables (or fields) are polymorphic in Java
+- Variables that can hold objects of more than one type
+- all of them
+
+What is the difference between a static type and a dynamic type?
+- Declared type of a variable is its static type
+- the type of the object a variable refers to is its dynamic type
+
+What is the scope of a variable in Java if it is declared as Public? Private? Protected?
+Public: visible from anywhere
+Private: visible only to objects of the same class
+Protected: visible to objects of the same class and/or subtypes of that class
+
+What are the key characteristics of an abstract class in Java
+- have abstract in the signature
+- cannot be instantiated
+- concrete classes complete the implementation
+- contain at least one abstract method
+- abstract methods have no body
+
+How are the inheritance rules different for Interfaces and Superclasses in Java?
+- subclasses can inherit from multiple interfaces
+- but only one superclass
+
+What makes two classes tightly coupled. Is tight or loose coupling more desirable? Why 
+- If each depends closely on many details of the other
+- loose coupling is more desirable
+- makes modifying code easier and less error prone
+
+What is high cohesion. Is high or low cohesion more desirable? Why
+- a characteristic of a unit of code that is responsible for just one logical task
+- high cohesion is more desirable
+- High cohesion
++ makes it easier to understand what a class or method does
++ facilitates re-use
++ facilitates the attachement of a descriptive and meaningful name to cohesive code
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,16 @@
+\begin{center}
+\textbf{Avoiding An Exception}
+\end{center}
+\begin{block}{}
+\begin{lstlisting}
+// use the correct method to put details
+// in the address book.
+if (book.keyInUse( details .getName() ||
+      book.keyInUse(details.getPhone()){
+  book.changeDetails(details);
+}
+else{
+  book.addDetails(details);
+}
+\end{lstlisting}
+\end{block}

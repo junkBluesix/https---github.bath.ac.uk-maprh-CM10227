@@ -1,0 +1,389 @@
+\documentclass{beamer}
+% September 2014 
+% Author: Dr Rachid Hourizi and Dr. Michael Wright 
+% Department of Computer Science, University of Bath
+\usepackage{listings}
+\usetheme{Boadilla} 
+\usepackage{fixltx2e}
+\usepackage{hyperref}
+\lstset{language=Java,,
+	basicstyle=\ttfamily\small,
+           keywordstyle=\color{blue}\ttfamily,
+           stringstyle=\color{red}\ttfamily,
+           commentstyle=\color{gray}\ttfamily,
+          breaklines=true}
+
+\begin{document}
+
+\AtBeginSection[]{
+  \begin{frame}
+  \vfill
+  \centering
+  \begin{beamercolorbox}[sep=8pt,center,shadow=true,rounded=true]{title}
+    \usebeamerfont{title}\insertsectionhead\par%
+  \end{beamercolorbox}
+  \vfill
+  \end{frame}
+}
+
+\title{CM 10227: Lecture 9}
+\author{Dr Rachid Hourizi and Dr Michael Wright}
+\date{\today}
+\frame{\titlepage}
+
+\begin{frame} 
+\begin{center}
+\textbf{Resources}
+\end{center}
+\begin{itemize}
+\item More help with this course
+\begin{itemize}
+\item Moodle
+\item E-mail - programming1@lists.bath.ac.uk
+\end{itemize}
+\item Online C and Java IDE
+\begin{itemize}
+\item https://www.codechef.com/ide
+\item Remember to select Java from the drop down menu.
+\end{itemize}
+\item Books
+\begin{itemize}
+\item Java by Dissection (Free pdf online)
+\item The Java Tutorial (https://docs.oracle.com/javase/tutorial/)
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame} 
+\begin{center}
+\textbf{Resources}
+\end{center}
+\begin{itemize}
+\item The places that you can get additional support if you are finding the pace of the course a little fast now include
+\begin{itemize}
+\item A labs (Continued from week 1)
+\item B labs 
+\item ... Wednesday 11:15-13:05 EB0.7
+\item ... Fridays 17:15 to 19:15 in CB 5.13)
+\item The Drop in Session 
+\item ... booked 20 min appointments
+\item ... Friday 11.15-13.05 1E 3.9
+\item PAL sessions (Mondays 14:15 to 15:05 1E 3.9)
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{center}
+\textbf{This week }
+\end{center}
+\begin{itemize}
+\item Errors
+\item Exceptions
+\item Style : Writing Better Code
+\end{itemize}
+\end{frame}
+
+\section{Style : Writing Better Code}
+
+\begin{frame}
+\begin{center}
+\textbf{Reading from a File}
+\end{center}
+\begin{itemize}
+\item We know how to read from the standard in...
+\item ... using the Scanner class
+\item ... using the BufferedReader class
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\begin{center}
+\textbf{BufferedReader : To Read From Standard In}
+\end{center}
+\begin{block}{}
+\begin{lstlisting}
+BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+
+try {
+    String userInput = input.readLine();
+    ...
+}
+catch (IOException e) {
+    e.printStackTrace();
+}
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\begin{center}
+\textbf{InputStreamReader}
+\end{center}
+\begin{itemize}
+\item From the Java Doc...
+\bigskip
+\item An InputStreamReader is a bridge from byte streams to character streams 
+\item It reads bytes and decodes them into characters using a specified charset
+\item The charset that it uses may be specified by name.. 
+\item ... or may be given explicitly 
+\item ... or the platform's default charset may be accepted
+\bigskip
+\item Subclass of Reader which is an abstract class for reading character streams
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\begin{center}
+\textbf{BufferedReader}
+\end{center}
+\begin{itemize}
+\item From the Java Doc...
+\bigskip
+\item Reads text from a character-input stream...
+\item ... buffering characters so as to provide for the efficient reading of characters, arrays, and lines
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\begin{center}
+\textbf{BufferedReader}
+\end{center}
+\begin{itemize}
+\item So if BufferedReader reads text from a character-input stream...
+\item ... and we know its constructor takes an object of type Reader as it parameter
+\item ... and we know that InputStreamReader is a subclass of Reader
+\item ... and we know that another subclass of Reader is FileReader
+\item ... then (hopefully) the following code is not too surprising 
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\begin{center}
+\textbf{BufferedReader : To Read From a File}
+\end{center}
+\begin{block}{}
+\begin{lstlisting}
+File myFile = new File("example.txt");
+FileReader fileIn = new FileReader(myFile);
+BufferedReader input = new BufferedReader(fileIn);
+
+try {
+    String line = input.readLine();
+    ...
+}
+catch (IOException e) {
+    e.printStackTrace();
+}
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+\section{Style : Writing Better Code}
+
+\begin{frame}
+\begin{center}
+\textbf{Style : Writing Better Code}
+\end{center}
+\begin{itemize}
+\item Maintainance 
+\item Coupling - Cohesion 
+\item Improving Code 
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{center}
+\textbf{Software Changes}
+\end{center}
+\begin{itemize}
+\item Software is not like a novel that is written once and then remains unchanged.
+\item Software is extended, corrected, maintained, ported, adapted
+\item The work is done by different people over time (often decades).
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{itemize}
+\item Change or Become Useless!
+\item There are only two options for software: 
+\begin{itemize}
+\item Either it is continuously maintained
+\item Or it becomes useless.
+\end{itemize}
+\item Software that cannot be maintained will be thrown away.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{center}
+\textbf{Code Quality}
+\end{center}
+\begin{itemize}
+\item Two important concepts for quality of evolving code:
+\bigskip
+\item Coupling 
+\item Cohesion
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{center}
+\textbf{Coupling}
+\end{center}
+\begin{itemize}
+\item Coupling refers to links between separate units of a program.
+\item If two classes depend closely on many details of each other, we say they are tightly coupled.
+\item Aim for loose coupling.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{center}
+\textbf{Loose Coupling}
+\end{center}
+\begin{itemize}
+\item Loose coupling makes it possible to:
+\begin{itemize}
+\item understand one class without reading others
+\item change one class without affecting others
+\end{itemize}
+\item Thus: improves maintainability.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{center}
+\textbf{Cohesion}
+\end{center}
+\begin{itemize}
+\item Cohesion refers to the the number and diversity of tasks that a single unit is responsible for.
+\item If each unit is responsible for one single logical task, we say it has high cohesion.
+\item Cohesion applies to classes and methods. 
+\item Aim for high cohesion.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{center}
+\textbf{High Cohesion}
+\end{center}
+\begin{itemize}
+\item High cohesion makes it easier to:
+\bigskip
+\item Understand what a class or method does
+\item Use descriptive names
+\item Reuse classes or methods
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{center}
+\textbf{Cohesion of Methods}
+\end{center}
+\begin{itemize}
+\item A method should be responsible for one and only one well defined task
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{center}
+\textbf{Cohesion of Classes}
+\end{center}
+\begin{itemize}
+\item Classes should represent one single, well defined entity.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{center}
+\textbf{Design Questions}
+\end{center}
+\begin{itemize}
+\item Common questions
+\begin{itemize}
+\item How long should a class be?
+\item How long should a method be?
+\end{itemize}
+\item Can now be answered in terms of cohesion and coupling
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{center}
+\textbf{Design Guidelines}
+\end{center}
+\begin{itemize}
+\item A method is too long if it does more then one logical task.
+\item A class is too complex if it represents more than one logical entity.
+\item Note these are guidelines. They still leave much open to the designer
+% \item We will look at these guidelines in more detail in this afternoon's lecture
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{center}
+\textbf{Code Duplication}
+\end{center}
+\begin{itemize}
+\item Is an indicator of bad design,
+\item Makes maintenance harder,
+\item Can lead to introduction of errors during maintenance.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{center}
+\textbf{Responsibility-Driven Design}
+\end{center}
+\begin{itemize}
+\item Question: where should we add a new method (which class)?
+\item Each class should be responsible for manipulating its own data.
+\item The class that owns the data should be responsible for processing it.
+\item Responsibility-driven design leads to low coupling.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{center}
+\textbf{Localising Change}
+\end{center}
+\begin{itemize}
+\item One aim of reducing coupling and responsibility-driven design is to localize change.
+\item When a change is needed, as few classes as possible should be affected.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{center}
+\textbf{Thinking Ahead}
+\end{center}
+\begin{itemize}
+\item When designing a class, we try to think what changes are likely to be made in the future.
+\item We aim to make those changes easy.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{center}
+\textbf{Refactoring}
+\end{center}
+\begin{itemize}
+\item When classes are maintained, often code is added. 
+\item Classes and methods tend to become longer.
+\item Every now and then, classes and methods should be refactored to maintain cohesion and low coupling.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{center}
+\textbf{Refactoring and Testing}
+\end{center}
+\begin{itemize}
+\item When refactoring code, separate the refactoring from making other changes.
+\item First do the refactoring only, without changing the functionality.
+\item Test before and after refactoring to ensure that nothing was broken.
+\end{itemize}
+\end{frame}
+
+\end{document}

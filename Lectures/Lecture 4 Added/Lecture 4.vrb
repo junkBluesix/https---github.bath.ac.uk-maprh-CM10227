@@ -1,0 +1,12 @@
+We can also do this with recursion...
+\begin{block}{}
+\begin{lstlisting}
+void printlistrec(struct IntList *l)
+{
+  if (l) {
+    printf("%d\n", l->val);
+    printlistrec(l->next);
+  }
+}
+\end{lstlisting}
+\end{block}

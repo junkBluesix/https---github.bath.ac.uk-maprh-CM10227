@@ -1,0 +1,17 @@
+\begin{itemize}
+\item Explicit print methods can often be omitted from a class:
+\end{itemize}
+\begin{block}{}
+\begin{lstlisting}
+System.out.println(item.toString()) ;
+\end{lstlisting}
+\end{block}
+\begin{itemize}
+\item Calls to println with just an object automatically result in
+\item toString being called:
+\end{itemize}
+\begin{block}{}
+\begin{lstlisting}
+System.out.println(item);
+\end{lstlisting}
+\end{block}

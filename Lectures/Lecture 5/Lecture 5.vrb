@@ -1,0 +1,10 @@
+\frametitle{Local variables}
+\begin{lstlisting}
+public int refundBalance()‏
+{
+    int amountToRefund;
+    amountToRefund = balance;
+    balance = 0;
+    return amountToRefund;
+}
+\end{lstlisting}

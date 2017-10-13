@@ -1,0 +1,23 @@
+\begin{itemize}
+\item note the use of System.currentTime.Millis() which returns the current system time in milliseconds
+\end{itemize}
+\scriptsize
+\begin{block}{}
+\begin{lstlisting}
+//crude pausing method from http://blog.qarea.com/development/java-development/how-to-make-java-wait/
+public static void wait (int k){
+
+        long time0=0;
+        long time1=0;
+
+        time0 = System.currentTimeMillis();
+
+        do{
+            time1 = System.currentTimeMillis();
+        }
+       while ((time1-time0) < k * 1000);
+    }
+}
+\end{lstlisting}
+\end{block}
+

@@ -1,0 +1,386 @@
+\documentclass{exam}
+\title{CM10227: PROGRAMMING 1A}
+\date{}
+\examcode{CM10227}
+\calculators
+\papertype{PartII}
+
+\usepackage{listings}
+\usepackage{color}
+
+\begin{document}
+\maketitle
+
+This paper contains questions designed to test both your understanding of core programming concepts and  your ability to demonstrate that understanding whilst writing short programs (or parts of programs). For the sake of clarity, you should note that the Java language should be used whenever a question asks you to either write code or provide examples. On that basis, wherever the paper asks you to provide one or more programs, classes, methods, statements, expressions, fields, etc. your answers should conform to the syntax rules of the Java language as taught in this year's CM10227 lectures (i.e. Java version 7).  
+
+\clearpage
+% *** 5 questions - 2 C and 3 Java ***
+
+% *** Question 1 - C ***
+\begin{question}
+\begin{roster}
+% *** a ***
+\item[(a)]
+Write a {\em recursive} and {\em iterative} function in C that prints out the first 10 Fibonacci numbers. 
+\marks{10}
+\color{red}
+\begin{lstlisting}
+recursive version: 
+3 marks for working recursion. 
+1 mark for correctly implemented base case
+1 mark for using printf. 
+
+iterative version: 
+3 marks for working iteration. 
+1 mark for correctly calculated/implemented number of iterations
+1 mark for using printf
+\end{lstlisting}
+\color{black}
+
+% *** b ***
+\item[(b)]
+In C describe the effects of declaring an char array.  Give and example of declaring an car array.  Give 3 examples of initialising a char array.
+\marks{6}
+\color{red}
+\begin{lstlisting}
+2 marks for it reserves an area in memory for 
+  the declared number of chars
+1 mark for char[3] my_char_array;
+1 mark for char[3] my_char_array = {'a','b','c'};
+1 mark for char[3] my_char_array = "Hi";
+1 mark for char[3] my_char_array; my_char_array[0] = 'a';
+\end{lstlisting}
+\color{black}
+
+% *** c ***
+\item[(c)]
+What is the difference between a Statically typed and Dynamically typed programming language?
+\marks{2}
+\color{red}
+\begin{lstlisting}
+1 mark for Statically typed - A language in which types are 
+  fixed at compile time
+1 mark for Dynamically typed - A language in which types are 
+  discovered at execution time
+\end{lstlisting}
+\color{black}
+
+% *** d ***
+\item[(d)]
+What is Encapsulation and Generalisation?
+\marks{2}
+\color{red}
+\begin{lstlisting}
+1 mark for encapsulation is wrapping a piece of code in a function
+1 mark for  taking something specific and making it more general
+\end{lstlisting}
+\color{black}
+
+\end{roster}
+\end{question}
+
+\clearpage
+
+% *** Question 2 - C ***
+\begin{question}
+% *** a ***
+\item[(a)]
+What is the definition of an Abstract Data Type?
+\marks{2}
+\color{red}
+\begin{lstlisting}
+1 mark for Data Structure
+1 mark for functions that operate on the Data Structure
+\end{lstlisting}
+\color{black}
+
+% *** b ***
+\item[(b)]
+Write a Abstract Data Type in C for a Stack that uses an array to store a maximum of 100 integers. 
+\marks{10}
+\color{red}
+\begin{lstlisting}
+1 mark for a Stack struct 
+1 mark for int max size
+1 mark for int array[100]
+1 mark for head
+2 marks for push function
+2 marks for pop function
+2 marks for peek function
+\end{lstlisting}
+\color{black}
+
+% *** c ***
+\item[(c)]
+Name three different kinds of {\em programming error}. Give an example of each one.
+\marks{6}
+\color{red}
+\begin{lstlisting}
+1 mark for each type, 1 for each example
+Syntax Error:
+e.g. (5+2))
+Logical Error
+e.g. Incorrectly written formula
+Run Time Error
+e.g. Divide by zero
+\end{lstlisting}
+\color{black}
+
+% *** d ***
+\item[(d)]
+What is the definition of a Tuple?
+\marks{2}
+\color{red}
+\begin{lstlisting}
+1 mark ordered collection of values
+1 mark of different types
+\end{lstlisting}
+\color{black}
+
+\end{question}
+\clearpage
+
+% *** Question 3 - Java ***
+\begin{question}
+% *** a ***
+\item[(a)]
+Explain the execution of this Java program and what its output is.
+\marks{10}
+\begin{lstlisting}
+1. public class AproxSquareRoot{
+2.
+3.     public static void main(String[] args){
+4.         AproxSquareRoot asr = new AproxSquareRoot();
+5.         System.out.println(asr.calculateFor(125, 5));
+6.     }
+7.	
+8.     public double calculateFor(int number, int accuracy){
+9.         String doubleAsString = Integer.toString(number);
+10.        int doubleLength = doubleAsString.length();
+11.        double x = number * doubleLength;
+12.        int i = 0;
+13.        while(i <= accuracy){
+14.            x = 0.5 * (x + (number/x));
+15.            i++;
+16.        }
+17.    return x;
+18.    }
+19. }
+\end{lstlisting}
+\color{red}
+\begin{lstlisting}
+2 marks for defining a class called AproxSquareRoot which 
+  is instantiated in the main method
+1 mark for method calculateFor called in main method and 
+  result printed to standard out
+1 mark for calculateFor takes two parameters number and accuracy 
+1 mark for line 9 using the Integer Java API to convert number to a String
+1 mark for line 10 using the String Java API to find 
+  the length of the String in line 9
+2 marks for while loop, looping from 0 to accuracy and 
+  performing the calculation on line 14
+  
+2 marks for out put is 11.6830
+\end{lstlisting}
+\color{black}
+
+% *** b ***
+\item[(b)]
+Explain the difference between Call-by-Reference and Call-by-Value when passing arguments to methods in Java.
+\marks{6}
+\color{red}
+\begin{lstlisting}
+Call-by-Reference 
+2 marks for the caller gives the called method the ability to 
+  directly access to the callers data 
+1 mark for caller can modify that data
+
+Call-by-Value 
+2 marks for a copy of the actual parameter is passed to the 
+  formal parameter of the called method
+1 mark for any change made to the formal parameter will have 
+  no effect on the actual parameter
+\end{lstlisting}
+\color{black}
+
+% *** c ***
+\item[(c)]
+What are the advantages of Inheritance?
+\marks{2}
+\color{red}
+\begin{lstlisting}
+2 marks from any of the following...
+avoids code duplication
+allows code reuse
+simplifies the code
+simplifies maintenance and extending
+\end{lstlisting}
+\color{black}
+
+% *** d ***
+\item[(d)]
+What are the advantages high-level programming languages?
+\marks{2}
+\color{red}
+\begin{lstlisting}
+2 marks for any of...
+Easier to program
+Less time to write
+Easier for people to read
+Easier for people to correct
+Much easier to port, or modify to run on different computers
+\end{lstlisting}
+\color{black}
+
+\end{question}
+\clearpage
+
+% *** Question 4 - Java ***
+\begin{question}
+% *** a ***
+\item[(a)]
+...
+\marks{10}
+\color{red}
+\begin{lstlisting}
+
+\end{lstlisting}
+\color{black}
+
+% *** b ***
+\item[(b)]
+Describe the Dimond Problem.  How does Java's inheritance rules address this problem? 
+\marks{6}
+\color{red}
+\begin{lstlisting}
+4 marks for description...
+(i) Two classes B and C inherit from A and 
+   class D inherits from both B and C.
+(ii) If there is a method in A that B and/or C has overridden, 
+  and D does not override it then which version of the 
+  method does D inherit:  that of B, or that of C?
+
+1 mark for Java does not allow multiple inheritance for classes 
+1 mark for Java does allow programmers to implement multiple Interfaces
+\end{lstlisting}
+\color{black}
+
+% *** c ***
+\item[(c)]
+How are the inheritance rules different for {\em interfaces} and {\em superclasses} in Java? 
+\marks{2}
+\color{red}
+\begin{lstlisting}
+subclasses can inherit from multiple interfaces (1)
+but only one superclass (1)
+\end{lstlisting}
+\color{black}
+
+% *** d ***
+\item[(d)]
+What is the difference between a Strongly typed and Weakly typed programming language?
+\marks{2}
+\color{red}
+\begin{lstlisting}
+1 mark for Strongly typed - A language in which types are always enforced
+1 mark for Weakly typed - A language in which types may be ignored
+\end{lstlisting}
+\color{black}
+\end{question}
+\clearpage
+
+% *** Question 5 - Java ***
+\begin{question}
+\begin{roster}
+% *** a ***
+\item[(a)]
+Explain the execution of this C program and what its output is.
+\marks{10}
+\begin{lstlisting}
+1. #include <stdio.h>
+2. #include <math.h>
+3.
+4. double aprox_pi(int term){
+5.     double pi = 1.0;
+6.     double denominator = 3.0;
+7.     int is_addition = 0;
+8.     int i;
+9.     for(i=0; i<=term; i++){
+10.         if(is_addition){
+11.             pi = pi + (1.0/denominator);
+12.             is_addition = 0;
+13.         }
+14.         else{
+15.             pi = pi - (1.0/denominator);
+16              is_addition = 1;
+17.         }
+18.         denominator = denominator + 2.0;
+19.     }
+20.     return (4*pi);
+21. }
+22. 
+23. int main(void) {
+24.     double pi = aprox_pi(5);
+25.     printf("%1.3f\n",pi);
+26.     return 0;
+27. }
+\end{lstlisting}
+\color{red}
+\begin{lstlisting}
+2 marks main defines a double pi which is set to the 
+  return value of aprox_pi
+2 marks for aprox_pi initialising variables and 
+  looping from 0 to term
+1 mark if statement determining whether to + or - 1/denominator
+1 mark setting is_addition to 0 or 1 which is like a boolean
+1 mark denominator incrementing by 2.0 on each loop
+1 mark for returning 4*pi
+
+2 marks for output 3.284 to 3 decimal places as specified 
+  by the format specifier
+\end{lstlisting}
+\color{black}
+
+% *** b ***
+\item[(b)]
+In Java ArrayLists, Stacks and arrays have different ways to add and remove elements.  Describe these differences with examples.
+\marks{6}
+\color{red}
+\begin{lstlisting}
+ArrayLists
+2 marks for ArrayLists using methods add and remove(index)
+Stacks
+2 marks for Stacks pushing and popping
+arrays
+2 marks for arrays adding via and index to an element and 
+  removing by setting the element to NULL
+\end{lstlisting}
+\color{black}
+
+% *** c ***
+\item[(c)]
+What are the advantages low level programming languages?
+\marks{2}
+\color{red}
+\begin{lstlisting}
+1 mark for program can be tuned to a specific computer 
+1 mark for above allows for maximum execution speed 
+  and minimum memory consumption.
+\end{lstlisting}
+\color{black}
+
+% *** d ***
+\item[(d)]
+What is the difference between an {\em argument} and a {\em parameter}?
+\marks{2}
+\color{red}
+\begin{lstlisting}
+a parameter is what appears in the definition of a method (1)
+an argument is the instance passed at runtime (1)
+\end{lstlisting}
+\color{black}
+\end{roster}
+\end{question}
+\clearpage
+\paperend{RH/MW}
+\end{document}

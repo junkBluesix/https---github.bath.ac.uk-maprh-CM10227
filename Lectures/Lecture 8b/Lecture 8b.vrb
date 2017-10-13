@@ -1,0 +1,19 @@
+\begin{block}{}
+\begin{lstlisting}
+public class Ping implements Payment{
+    public void makePayment(double debit) {
+        // logic for Ping payment
+        // e.g. mobile phone number
+        // ... and authorising with bank ??
+    }
+}
+
+public class Ping extends Payment{
+    public void makePayment(double debit) {
+        // logic for Ping payment
+        // e.g. mobile phone number
+        super.authoriseWithBank(authToken);
+    }
+}
+\end{lstlisting}
+\end{block}

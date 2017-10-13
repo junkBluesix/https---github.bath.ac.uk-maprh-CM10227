@@ -1,0 +1,6 @@
+\frametitle {Implementing Applications}
+\begin{itemize}
+\item the \lstinline!main! method of your application class should be relatively short
+\item normally a few objects are created and a few methods are invoked.
+\item the invoked methods will determine the behaviour of your application.
+\end{itemize}

@@ -1,0 +1,189 @@
+\documentclass[12pt, oneside]{article}   	% use "amsart" instead of "article" for AMSLaTeX format
+\usepackage{geometry}                		% See geometry.pdf to learn the layout options. There are lots.
+\geometry{a4paper}                   	% ... or a4paper or a5paper or ... 
+%\geometry{landscape}                	% Activate for rotated page geometry
+%\usepackage[parfill]{parskip}    	% Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{graphicx}		% Use pdf, png, jpg, or eps§ with pdflatex; use eps in DVI mode
+					% TeX will automatically convert eps --> pdf in pdflatex		
+\usepackage{amssymb}
+\usepackage{listings}
+
+\title{CM10277: Principles of Programming I \\ Large Coursework 1: Java SRPN}
+\author{Dr. Rachid Hourizi \& Dr. Michael Wright \\ Dept. of Computer Science \\ University of Bath}
+\date{}							% Activate to display a given date or no date
+
+\begin{document}
+\maketitle
+\section{Introduction}
+The coursework of this unit consists of three parts: the lab sheets and two larger Java courseworks. This document provides the specification for the first larger coursework: \textbf{SRPN}.
+
+You can use any Integrated Development Environment (IDE) for the development of your scripts, but \textbf{your scripts have to run when we use the command-line on LCPU (BUCS machine) without requiring the installation of libraries, modules or other programs}.
+
+Questions regarding the coursework can always be posted on the Moodle Forum and programming1@lists.bath.ac.uk mailing list.
+
+\section{Learning Objectives}
+At the end of this part of the coursework you will be able to design and write medium-sized program using the appropriate procedural software techniques of data encapsulation and decomposition.
+
+\clearpage
+\section{SRPN}
+Whilst performing some maintenance on a legacy system you find that it makes use of a program called \textbf{SRPN}. \textbf{SRPN} is not documented, you are not able to obtain the source code and no one seems to know who wrote it, so your boss tells you to rewrite it in Java. 
+
+Your task is to write a program, which matches the functionality of \textbf{SRPN} as closely as possible.  Note that this includes not adding or enhancing existing features.  \textbf{SRPN} is a reverse polish notation calculator with the extra feature that all arithmetic is saturated i.e. when it reaches the maximum value that can be stored in a variable, it stays at the maximum rather than wrapping around.
+
+\bigskip
+
+The \textbf{SRPN} program (which works on the LCPU) can be downloaded from the unit's Moodle pages.  Furthermore, your program has to be written in such a way that it runs with our marking script. A student version of the marking script is available on Moodle. It gives you the opportunity to test your code and get an indication of the marks you will received. Our marking script will be the same but will use different test-cases. The tutors in the lab can help you make sure that your program is recognised by our marking script.
+
+Your program will be tested on the following inputs and others that are similar.  Successfully completing each step will give you 15 marks each. The remaining marks 40 marks are for program structure and comments, for a total of 100.
+
+\subsubsection*{1. The program must be able to input at least two numbers and perform one operation correctly and output}
+
+\begin{lstlisting}
+Input:
+
+10
+2
++
+=
+
+Input:
+
+11 
+3
+- 
+=
+\end{lstlisting}
+\clearpage
+\begin{lstlisting}
+Input:
+
+9
+4
+* 
+=
+
+Input:
+
+11 
+3
+/
+=
+
+Input:
+
+11 
+3 
+% 
+=
+\end{lstlisting}
+
+\subsubsection*{2. The program must be able to handle multiple numbers and multiple operations}
+\begin{lstlisting}
+Input:
+
+3 
+3
+* 
+4 
+4 
+* 
++ 
+=
+\end{lstlisting}
+\clearpage
+\begin{lstlisting}
+Input:
+
+1234 
+2345 
+3456 
+d
++ 
+d 
++ 
+d 
+=
+\end{lstlisting}
+
+\subsubsection*{3. The program must be able to correctly handle saturation}
+\begin{lstlisting}
+Input:
+
+2147483647 
+1
++
+=
+
+Input:
+
+-2147483647 
+1
+-
+= 
+20 
+- 
+=
+
+Input:
+
+100000 
+0 
+-
+d
+* 
+=
+\end{lstlisting}
+
+\subsubsection*{4. The program includes the less obvious features of srpn. These include but are not limited to...}
+\begin{lstlisting}
+Input:
+
+1 
++
+
+Input:
+
+10 
+5 
+-5
++
+/
+
+Input: 
+
+11+1+1+d 
+
+Input:
+
+# This is a comment
+1 2 + # And so is this 
+d
+
+Input:
+
+3 3 ^ 3 ^ 3 ^=
+
+Input: 
+
+r r r r r r r r r r r r r r r r r r r r r r d r r r d
+\end{lstlisting}
+
+\clearpage
+\section{Assessment}
+\subsection{Conditions}
+The coursework will be conducted individually. Attention is drawn to the University rules on plagiarism. While software reuse (with referencing the source) is permitted, we will only be able to assess your contribution.
+
+\subsection{Marking}
+Key issues for marking the code will be: compiling, running with expected input, robustness (handling incorrect user input), module design, proper use of data encapsulation and decomposition, and the algorithms being used. You stand to loose marks for repeated or badly structured or documented code. Marks will also be deducted for ill-named variables or functions or for inconsistent indentation.
+
+In cases where it is not clear from the assignment how it should be marked, you may be called on to explain or demonstrate your program. Such cases include but are not limited to suspected plagiarism
+
+\section{Submission Instructions}
+The deadline for this part of coursework is \textbf{5pm 24th November 2016}. Before the deadline upload your solution via Moodle.
+
+Your program solutions should be a zip file that can be extracted to a directory with the name SRPN-yourusername. The directory should contain the files necessary to compile and run your code SRPN.java with any additional class files needed to allow your program to compile and run. Before you upload your solution, make sure that the zip file contains all necessary files and creates the correct directory. Please download the file from Moodle and double check that you have attached the right file, with the content that you want to be marked. You are responsible for checking that you are submitting the correct material to the correct assignment.
+
+\section{Feedback}
+Individual detailed feedback will be provided via Moodle within three weeks of the submission deadline. Note that marks will be moderated, this means that they become only final after the three weeks have expired. Clarification of the feedback can be obtained from the tutors during the labs.
+
+\end{document}  

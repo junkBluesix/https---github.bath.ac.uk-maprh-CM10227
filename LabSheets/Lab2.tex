@@ -1,0 +1,153 @@
+\documentclass[12pt, a4paper, oneside]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[british]{babel}
+\usepackage{lmodern}
+\usepackage{hyperref}
+
+\renewcommand{\familydefault}{\sfdefault}
+
+\author{}
+\date{}
+
+\title{CM10227 Lab2: Variables and Functions}
+
+\newcounter{qstncntr}
+\newcommand{\exerset}{ \vspace*{-11pt}\setcounter{qstncntr}{0} }
+\newenvironment{exer}[1]{\vspace*{11pt}\noindent {{\bf Exercise} \stepcounter{qstncntr} \theqstncntr:} #1}{}
+
+\begin{document}
+\maketitle
+
+Answer each question in a different file named \emph{Lab2ex<Number>.c }(e.g.\ Lab2ex1.c) (i.e. one file only per exercise).
+We must be able to compile your code on \href{http://www.bath.ac.uk/guides/connecting-to-linux-bath/}{linux.bath} by typing \emph{gcc -o Lab2ex1 Lab2ex1.c -lm}, etc.
+All your files should be submitted in a single zip, with all source (.c) files in one folder or the root of the zip:
+the file name should be of the form \emph{<username>-lab<number>.zip}, e.g. \emph{abc12-lab2.zip}.
+
+Your code will initially be marked by an automated process, followed by individual feedback and verification by a tutor.
+Please, therefore, adhere to the above instructions and use the \textbf{exact format as given}.
+Failure to do so will delay the marking process, and may incur penalties in the interest in providing everyone prompt feedback.
+You are advised to re-download your Moodle submission and check it thoroughly, in advance of the deadline.
+
+If you have questions about this lab sheet or are stuck with one of the questions talk to the tutors in the lab or post your question on Moodle.
+Please do not include code on Moodle: bring this to a lab session.
+
+This lab is part of your coursework.
+\textbf{Please check Moodle for the submission deadline.}
+
+\section*{Output format}
+We will use an automated checker to ensure that your code meets the requirements defined above.
+This means that the format of your outputs will matter.
+The automated marking tool assumes that each result or sentence (exercise 4) is output on a separate line.
+
+For example, if the five numbers in exercise 1 were one to five: the output must be as follows:
+\begin{verbatim}
+False
+True
+False
+True
+False
+\end{verbatim}
+
+\section*{Exercises}
+\setlength{\parindent}{0cm} %
+\exerset
+\begin{exer}
+Write a function called ``isEven'' that takes an integer as an argument and returns true if the argument is an even number and false if it is odd. Hint: Use ``\#include <stdbool.h>'' to obtain boolean type.
+Using another function (or otherwise), print either ``True\textbackslash n'' or ``False\textbackslash  n'', for example, the output for arguments 3 and 42 would be as follows:
+\begin{verbatim}
+False
+True
+\end{verbatim}
+
+Call this function with the following numbers: 10, 21, 33, 8, 200.
+\end{exer}
+
+\begin{exer}
+Write a function that takes in an integer input between one and one hundred and prints out the number expressed in English text, with spaces and no dashes (--), e.g. for number ``33'', we would expect to see ``thirty three''.
+
+Call this function with each of the following numbers: 10, 23, 100, 3, 30.
+As before, each number should be on a new line. Hint: we recommend you call ``printf'' multiple times; we suggest you don't attempt to concatenate strings.
+\end{exer}
+
+\begin{exer}
+Write a function that calculates the distance between two points.
+The function should take, as an input, four arguments consisting of the two points' coordinates:
+\begin{math}
+  (x_1, y_1)
+\end{math}
+and
+\begin{math}
+  (x_2, y_2)
+\end{math}.
+
+Call the function with the following values, printing the result each time on a new line, to two decimal places:
+\begin{enumerate}
+\item (0,0) and (4,3)
+\item  (21,3) and (7,9)
+\item (-2,5) and (17,1)
+\item  (-13,-5) and (9,2)
+\item (-6,-4) and (-14,19)
+\end{enumerate}
+For example, if the numbers were (0, 0) and (3, 4), we would expect to see ``5.00'' printed.
+
+Hint: you may wish to use the following print statement, or similar:
+\begin{verbatim}
+printf("%1.2f\n", calculateDistance(0, 0, 4, 3));
+\end{verbatim}
+\end{exer}
+
+\begin{exer}
+Write a function that is given an integer,
+\begin{math}
+  n
+\end{math},
+by the main method where
+\begin{math}
+  1 \leq n \leq 9999
+\end{math}
+and prints whether it is even, odd, or/and prime.
+Call the function with the following numbers: 11, 74, 307, 7402, 9357.
+Unlike other exercises, the output should be whole sentences.
+Here is an example for the numbers one to five:
+\begin{verbatim}
+1 is odd and not prime.
+2 is even and prime.
+3 is odd and prime.
+4 is even and not prime.
+5 is odd and prime.
+\end{verbatim}
+
+Use multiple functions to enhance readability.
+As before, we advise using multiple ``printf'' statements and not concatenating strings.
+
+\end{exer}
+
+\begin{exer}
+ Write a function which multiples two integers together, but \textbf{without} the use of ``*'' or any iterative functions (including ``for'' or while loops). Instead the result must be calculated in a recursive fashion. Hint: use ``+'' and recursion.
+
+Call the function five times from the main method with the following values, printing the results, one integer on each line e.g. ``10'' or ``-24'':
+\begin{enumerate}
+\item \begin{math}
+    6\times3
+  \end{math}
+
+\item \begin{math}
+  9\times9
+\end{math}
+
+\item \begin{math}
+  3\times0
+\end{math}
+
+\item \begin{math}
+  -1\times7
+\end{math}
+
+\item \begin{math}
+  -29 \times 803
+\end{math}
+\end{enumerate}
+\end{exer}
+
+\end{document}

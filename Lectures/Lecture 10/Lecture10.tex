@@ -1,0 +1,785 @@
+\documentclass{beamer}
+% September 2014 
+% Author: Dr Rachid Hourizi and Dr. Michael Wright 
+% Department of Computer Science, University of Bath
+\usepackage{listings}
+\usetheme{Boadilla} 
+\usepackage{fixltx2e}
+\usepackage{hyperref}
+\lstset{language=Java,,
+	basicstyle=\ttfamily\small,
+           keywordstyle=\color{blue}\ttfamily,
+           stringstyle=\color{red}\ttfamily,
+           commentstyle=\color{gray}\ttfamily,
+          breaklines=true}
+
+\begin{document}
+
+\AtBeginSection[]{
+  \begin{frame}
+  \vfill
+  \centering
+  \begin{beamercolorbox}[sep=8pt,center,shadow=true,rounded=true]{title}
+    \usebeamerfont{title}\insertsectionhead\par%
+  \end{beamercolorbox}
+  \vfill
+  \end{frame}
+}
+
+\title{CM 10227: Lecture 10}
+\author{Dr Rachid Hourizi and Dr. Michael Wright}
+\date{\today}
+\frame{\titlepage}
+
+\begin{frame} 
+\begin{center}
+\textbf{Resources}
+\end{center}
+\begin{itemize}
+\item More help with this course
+\begin{itemize}
+\item Moodle
+\item E-mail - programming1@lists.bath.ac.uk
+\end{itemize}
+\item Online C and Java IDE
+\begin{itemize}
+\item https://www.codechef.com/ide
+\item Remember to select Java from the drop down menu.
+\end{itemize}
+\item Books
+\begin{itemize}
+\item Java by Dissection (Free pdf online)
+\item The Java Tutorial (https://docs.oracle.com/javase/tutorial/)
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame} 
+\begin{center}
+\textbf{Resources}
+\end{center}
+\begin{itemize}
+\item The places that you can get additional support if you are finding the pace of the course a little fast now include
+\begin{itemize}
+\item A labs (Continued from week 1)
+\item B labs 
+\item ... Wednesday 11:15-13:05 EB0.7
+\item ... Fridays 17:15 to 19:15 in CB 5.13)
+\item The Drop in Session 
+\item ... booked 20 min appointments
+\item ... Friday 11.15-13.05 1E 3.9
+\item PAL sessions (Mondays 14:15 to 15:05 1E 3.9)
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{center}
+\textbf{Last week }
+\end{center}
+\begin{itemize}
+\item Errors
+\item Exceptions
+\item Style : Writing Better Code
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{center}
+\textbf{Last week }
+\end{center}
+\begin{itemize}
+\item Java API Libraries
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{itemize}
+\item As we have seen throughout the course, a large part of learning to program is learning how to re-use code e,g.
+\begin{itemize}
+\item Classes
+\item Methods
+\item Inheritance
+\item Abstract Classes
+\item Interfaces
+\end{itemize}
+\item As well as reusing our own code, we have also discussed opportunities to use those provided by the developers of the Java language
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{itemize}
+\item Java comes delivered with a library of useful classes, which are referred to as the Java API 
+\item There really is no point in reinventing the wheel...
+\end{itemize}
+\end{frame} 
+
+\begin{frame}
+\begin{itemize}
+\item Examples of Java library class include
+\bigskip
+\item Random - a library class used to generate random numbers
+\item Math - a library class for performing basic numeric operations
+\item ArrayList - a library class for storing and manipulating a resizable array
+\item StringBuilder - a library class for manipulating a mutable sequence of characters
+\end{itemize}
+\end{frame}
+
+\begin{frame} 
+\begin{itemize}
+\item The Java class library contains,
+\begin{itemize}
+\item Thousands of classes
+\item Tens of thousands of methods
+\item Many useful classes that make life much easier
+\end{itemize}
+\item These classes are organised in packages that follow a directory structure
+\item A competent Java programmer must be able to work with the libraries.
+\item (Just as competent programmers using other languages must be able to work with the libraries provided by those languages)
+\end{itemize}
+\end{frame} 
+
+\begin{frame}
+\begin{itemize}
+\item We have looked at the specification of individual clases
+\item Comprehensive documentation of the Java libraries is however available in HTML format; Readable in a web browser
+\item Class API: Application Programmers Interface: 
+\item Interface description for all library classes
+\item \url{http://docs.oracle.com/javase/7/docs/api/}
+\end{itemize}
+\end{frame} 
+
+\begin{frame}
+\begin{itemize}
+\item As you go forward with your Java programming, you should...
+\bigskip
+\item ... know some important classes by name; 
+\item ... know how to find out about other classes.
+\end{itemize}
+\end{frame} 
+
+\begin{frame}
+\begin{itemize}
+\item Remember! We only need to know the interface, not the implementation.
+\bigskip
+\item You will need to know about a library class because you will use objects of that class to provide common functionality within your programs
+\item e.g. you may use objects of the Random class to generate random numbers
+\end{itemize}
+\end{frame} 
+
+\begin{frame}[fragile]
+\begin{itemize}
+\item In this case, we use the class library in just the same way that we might use classes that we have created ourselves:
+\item We create a new instance of the class (a new Object) using the new keyword
+\begin{block}{}
+\begin{lstlisting}
+Random randomGenerator = new Random();
+\end{lstlisting}
+\end{block}
+\item And can then use that Object's methods to provide the functionality that we need within our own program
+\begin{block}{}
+\begin{lstlisting}
+int index2 = randomGenerator.nextInt(100);
+\end{lstlisting}
+\end{block}
+\end{itemize}
+\end{frame} 
+
+\begin{frame}[fragile]
+\begin{itemize}
+\item Other useful constructor and methods in the Random class include
+\begin{block}{}
+\begin{lstlisting}
+Random(long seed)
+// seed is the initial value of the internal state of the pseudorandom number generator
+
+public int nextInt()
+
+public long nextLong()
+
+public boolean nextBoolean()
+\end{lstlisting}
+\end{block}
+\end{itemize}
+\end{frame} 
+
+\begin{frame}
+\begin{itemize}
+\item Another useful class is ArrayList
+\bigskip
+\item Resizable-array
+\item Each ArrayList instance has a capacity and as elements are added its capacity grows automatically
+\end{itemize}
+\end{frame} 
+
+\begin{frame}[fragile]
+\begin{block}{}
+\begin{lstlisting}
+ArrayList<String> myArrayList 
+    = new ArrayList<String>();
+
+myArrayList.add("Hello");
+myArrayList.add("World");
+\end{lstlisting}
+\end{block}
+\end{frame} 
+
+\begin{frame}[fragile]
+\begin{itemize}
+\item Other useful methods in the ArrayList class include
+\begin{block}{}
+\begin{lstlisting}
+public boolean contains(Object o)
+
+public E get(int index)
+
+public int size()
+
+public Object[] toArray()
+\end{lstlisting}
+\end{block}
+\end{itemize}
+\end{frame} 
+
+\begin{frame}[fragile]
+\begin{itemize}
+\item Another really useful method in ArrayList is iterator()...
+\item ... which returns an Iterator for the ArrayList
+\end{itemize}
+\begin{block}{}
+\begin{lstlisting}
+public Iterator<E> iterator()
+\end{lstlisting}
+\end{block}
+\begin{itemize}
+\item Iterator is an interface...
+\item ... which defines a common set of methods to iterate over a collection
+\end{itemize}
+\end{frame} 
+
+\begin{frame}[fragile]
+\begin{itemize}
+\item Why is this useful?
+\item Lets think about generalisation and encapsulation of functionality
+\item If we have a collection of elements we want to iterate over (i.e. loop through)...
+\item ... do we really want to care about how find the size of the collection or get its next element?
+\end{itemize}
+\begin{block}{}
+\begin{lstlisting}
+for(int i=0; i<myArrayList.size(); i++){
+    System.out.println(myArrayList.get(i));
+}
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+\begin{frame}
+\begin{itemize}
+\item Although most collections implement the AbstractList interface so have the size and get methods...
+\item ... if these names were to change
+\item ... or we want to ensure we use the fastest possible method of iteration over a collection
+\item ... an Iterator object is preferable
+\end{itemize}
+\end{frame} 
+
+\begin{frame}[fragile]
+\begin{block}{}
+\begin{lstlisting}
+ArrayList<String> myArrayList 
+    = new ArrayList<String>();
+
+myArrayList.add("Hello");
+myArrayList.add("World");
+
+Iterator i = myArrayList.iterator();
+        
+while(i.hasNext()){
+    System.out.print(i.next());
+}
+\end{lstlisting}
+\end{block}
+
+\begin{block}{}
+\begin{lstlisting}
+$ Hello World
+\end{lstlisting}
+\end{block}
+\end{frame} 
+
+\begin{frame}[fragile]
+\begin{block}{}
+\begin{lstlisting}
+ArrayList<String> myArrayList 
+    = new ArrayList<String>();
+
+myArrayList.add("Hello");
+myArrayList.add("World");
+
+Iterator<String> i = myArrayList.iterator();
+for( ; i.hasNext(); ){
+    System.out.print(i.next());
+}
+\end{lstlisting}
+\end{block}
+
+\begin{block}{}
+\begin{lstlisting}
+$ Hello World
+\end{lstlisting}
+\end{block}
+\end{frame} 
+
+\begin{frame}
+\begin{center}
+\textbf{Aside: Generics}
+\end{center}
+\begin{itemize}
+\item Generics allows you to specify types (classes and interfaces) to be parameters when defining classes, interfaces and methods
+\bigskip
+\item Advantages are...
+\item ... stronger type checks at compile time
+\item ... elimination of casts
+\item ... enabling programmers to implement generic algorithms
+\end{itemize}
+\end{frame} 
+
+\begin{frame}
+\begin{center}
+\textbf{Aside: Generics}
+\end{center}
+\begin{itemize}
+\item Stronger type checks at compile time
+\bigskip
+\item Java compiler applies strong type checking to generic code 
+\item Issues errors if the code violates type safety
+\item Fixing compile-time errors is easier than fixing runtime errors
+\end{itemize}
+\end{frame} 
+
+\begin{frame}[fragile]
+\begin{center}
+\textbf{Aside: Generics}
+\end{center}
+\begin{itemize}
+\item Elimination of casts
+\end{itemize}
+\begin{block}{}
+\begin{lstlisting}
+List list = new ArrayList();
+list.add("hello");
+String s = (String) list.get(0);
+\end{lstlisting}
+\end{block}
+\begin{block}{}
+\begin{lstlisting}
+List<String> list = new ArrayList<String>();
+list.add("hello");
+String s = list.get(0); // no cast
+\end{lstlisting}
+\end{block}
+\end{frame} 
+
+\begin{frame}[fragile]
+\begin{center}
+\textbf{Aside: Generics}
+\end{center}
+\begin{itemize}
+\item Enabling programmers to implement generic algorithms
+\end{itemize}
+\begin{block}{}
+\begin{lstlisting}
+public class Box<T> {
+    // T stands for "Type"
+    private T t;
+
+    public void set(T t) { this.t = t; }
+    public T get() { return t; }
+}
+\end{lstlisting}
+\end{block}
+\begin{block}{}
+\begin{lstlisting}
+Box<Integer> box1 = new Box<Integer>();
+Box<String> box1 = new Box<String>();
+\end{lstlisting}
+\end{block}
+\end{frame} 
+
+\begin{frame}[fragile]
+\begin{center}
+\textbf{Aside: Generics}
+\end{center}
+\begin{itemize}
+\item The most commonly used type parameter names are...
+\end{itemize}
+\begin{block}{}
+\begin{lstlisting}
+E - Element (used extensively by the Java Collections Framework)
+K - Key
+N - Number
+T - Type
+V - Value
+\end{lstlisting}
+\end{block}
+\end{frame} 
+
+\begin{frame}
+\begin{center}
+\textbf{Back to Java API}
+\end{center}
+\begin{itemize}
+\item Interface vs. Implementation
+\item For each class provided by the Java API, the Java developers provide documentation
+\item The documentation includes:
+
+\begin{itemize}
+\item the name of the class;
+\item a general description of the class;
+\item a list of constructors and methods
+\item return values and parameters for constructors and methods
+\item a description of the purpose of each constructor and method
+\end{itemize}
+\item The interface of the class
+\end{itemize}
+\end{frame} 
+
+\begin{frame}
+\begin{itemize}
+\item The documentation does not include
+\item Private fields 
+\begin{itemize}
+\item (most fields are private) 
+\end{itemize}
+\item Private methods
+\item The bodies (implementation code) for each method
+\item Detailed implementation of the class
+\end{itemize}
+\end{frame} 
+
+\begin{frame}
+\begin{itemize}
+\item Most classes from the library must be imported using an import statement 
+\item (Those from java.lang, however, do not)
+\item They can then be used like classes from the current project.
+\end{itemize}
+\end{frame} 
+
+\begin{frame}[fragile]
+\begin{itemize}
+\item Classes are organised in packages. 
+\item Single classes may be imported:
+\item Whole packages can be imported:
+\end{itemize}
+
+\begin{block}{}
+\begin{lstlisting}
+import java.util.ArrayList;
+
+import java.util.*;
+\end{lstlisting}
+\end{block}
+\end{frame} 
+
+\begin{frame}[fragile]
+\begin{center}
+\textbf{Another Example of the Java API}
+\end{center}
+\begin{itemize}
+\item StringBuilder
+\bigskip
+\item Lets consider string concatenation 
+\end{itemize}
+
+\begin{block}{}
+\begin{lstlisting}
+String name = "Michael";
+String lastName = "Wright";
+
+System.out.println(name + " " + lastName);
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\begin{itemize}
+\item Remember that String is immutable
+\item So when we concatenate a new String is created
+\item For this example it is not a problem
+\item i.e. the ``performance'' of the program is not likely to suffer
+\end{itemize}
+
+\begin{block}{}
+\begin{lstlisting}
+String name = "Michael";
+String lastName = "Wright";
+
+System.out.println(name + " " + lastName);
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\begin{itemize}
+\item But what about this...
+\end{itemize}
+\begin{block}{}
+\begin{lstlisting}
+String s = "";
+for(int i=0; i<50000; i++){
+    s = s + " " + i;
+}
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+\begin{frame}
+\begin{itemize}
+\item For large amounts of concatenation, especially in loops...
+\item ... we might consider using a StringBuilder
+\bigskip
+\item A mutable sequence of characters
+\item Includes method to append, insert and reverse
+\item toString() is also a useful method
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\begin{itemize}
+\item StringBuilder example
+\end{itemize}
+\begin{block}{}
+\begin{lstlisting}
+StringBuilder s = new StringBuilder();
+
+for(int i=0; i<50000; i++){
+    s.append(" ");
+    s.append(i);        
+}
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\begin{itemize}
+\item Different ways to concatenate a String
+\end{itemize}
+\begin{block}{}
+\begin{lstlisting}
+// +
+String fullName = "Michael" + " " + "Wright";
+
+// concat method in String
+String fullName = "Michael".concat(" Wright");
+
+// StringBuilder
+StringBuilder fullName = new StringBuilder();
+fullName.append("Michael");
+fullName.append(" ");
+fullName.append("Wright");
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+\section{Class Variable and Methods}
+\begin{frame}
+\begin{itemize}
+\item Class libraries can also define constants
+\item A constant is an identifier (a name) with an associated value which cannot be altered by the program during normal execution -- the value is constant. 
+\item This is contrasted with a variable, which is an identifier (a name) associated with a value that can be changed during normal execution -- the value is variable.
+\end{itemize}
+\end{frame} 
+
+\begin{frame}
+\begin{itemize}
+\item Math.PI (the number pi) is and example of a constant 
+\item We only need to store pi once 
+\item And can then use it over and over again in our programs
+\item If we look at the documentation for Math.PI in the Java API 
+\item (i.e. the documentation for the field PI within the Math class)
+\item We can see it is a static final i.e. it is constant and stored at the class level
+\item \url{http://docs.oracle.com/javase/7/docs/api/java/lang/Math.html}
+\end{itemize}
+\end{frame} 
+
+\begin{frame}
+\begin{itemize}
+\item Static methods
+\bigskip
+\item Note that it is also possible to create class methods
+\item i.e. methods that are declared as static
+\item These methods can be called directly from the class rather than from an Object that instantiates that class
+\end{itemize} 
+\end{frame}
+
+
+\begin{frame}[fragile]
+\begin{itemize}
+\item The Math class, for example, provides a method that raises the first argument (a) to the power of the second argument (b):
+\end{itemize} 
+\begin{block}{}
+\begin{lstlisting}
+public static double pow(double a, double b);
+\end{lstlisting}
+\end{block}
+\end{frame} 
+
+\begin{frame}[fragile]
+\begin{block}{}
+\begin{lstlisting}
+public class MyClass{
+
+  public void printVolume(double radius){
+    double volume = Math.pow(Math.PI*radius, 2);
+    System.out.println("volume is: " +volume);
+  } 
+  
+}
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\begin{itemize}
+\item The Double class provides a method that parses a String into an double:
+\end{itemize} 
+\begin{block}{}
+\begin{lstlisting}
+public static double parseDouble(String s);
+\end{lstlisting}
+\end{block}
+\end{frame} 
+
+\begin{frame}[fragile]
+\begin{block}{}
+\begin{lstlisting}
+public class MyClass{
+
+  public void printVolume(String radiusString){
+    double radius = Double.parseDouble(radiusString);
+    
+    double volume = Math.pow(Math.PI*radius, 2);
+    System.out.println("volume is: " +volume);
+  } 
+  
+}
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\begin{itemize}
+\item Note that we can create our own
+\begin{itemize}
+\item constants
+\item class variables
+\item and class constants
+\end{itemize} 
+\item We can also create our own class methods
+\end{itemize} 
+\begin{block}{}
+\begin{lstlisting}
+final int myConstant = 1;
+static int myClassVariable = 2;
+static final int myClassConstant = 3;
+
+public static void myClassMethod(){
+    ...
+} 
+\end{lstlisting}
+\end{block}
+\end{frame} 
+
+\begin{frame}[fragile]
+\begin{itemize}
+\item \textbf{Instance methods ... }
+\item ... are associated with an object and 
+\item ... use the instance variables of that object. 
+\item This is the default. 
+\end{itemize} 
+\begin{block}{}
+\begin{lstlisting}
+public class MyClass{
+    
+    private int myVariable;
+    
+    public int getMyVariable(){
+        return myVariable;
+    }
+
+}
+\end{lstlisting}
+\end{block}
+\end{frame} 
+
+\begin{frame}
+\begin{itemize}
+\item \textbf{Static methods ... }
+\item ... use no instance variables of any object of the class they are defined in
+\item ... (if you define a method to be static, you will be given a rude message by the compiler if you try to access any instance variables) 
+\item ... you can access static variables, but except for constants, this is unusual. 
+\item ... typically take all they data from parameters and compute something from those parameters, with no reference to variables. 
+\item ... this is typical of methods which do some kind of generic calculation
+\end{itemize} 
+\end{frame} 
+
+\begin{frame}[fragile]
+\begin{block}{}
+\begin{lstlisting}
+public class MyUtilClass{
+    
+    public static double mean(int[] p) {
+        int sum = 0;  // sum of all the elements
+        for (int i=0; i<p.length; i++) {
+            sum += p[i];
+        }
+        return ((double)sum) / p.length;
+    }
+
+}
+\end{lstlisting}
+\end{block}
+\end{frame} 
+
+\begin{frame}[fragile]
+\begin{itemize}
+\item Other examples of static methods in the Java API
+\end{itemize} 
+\begin{block}{}
+\begin{lstlisting}
+java.awt.Color
+
+// static variables
+Color.BLACK
+Color.RED
+
+// static methods
+public static Color getColor(String nm)
+
+public static int HSBtoRGB(float hue,
+           float saturation,
+           float brightness)
+\end{lstlisting}
+\end{block}
+\end{frame} 
+
+\begin{frame}
+\begin{center}
+\textbf{Summary}
+\end{center}
+\begin{itemize}
+\item Java comes delivered with a library of useful classes, which are referred to as the Java API 
+\item There really is no point in reinventing the wheel...
+\end{itemize}
+\end{frame} 
+
+\begin{frame}
+\begin{itemize}
+\item As you go forward with your Java programming, you should...
+\bigskip
+\item ... know some important classes by name
+\item ... know how to find out about other classes
+\end{itemize}
+\end{frame} 
+
+\end{document}
+

@@ -1,0 +1,10 @@
+\begin{block}{}
+\begin{lstlisting}
+
+$ gcc HelloWorld.c
+$ a.out testing
+The argument supplied is testing
+The arguments first letter t
+
+\end{lstlisting}
+\end{block}

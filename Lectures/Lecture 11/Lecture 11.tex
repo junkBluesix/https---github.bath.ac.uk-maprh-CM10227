@@ -1,0 +1,312 @@
+\documentclass{beamer}
+% December 2016
+% Author: Dr Rachid Hourizi and Dr. Michael Wright 
+% Department of Computer Science, University of Bath
+\usepackage{listings}
+\usetheme{Boadilla} 
+\usepackage{fixltx2e}
+\usepackage{hyperref}
+\lstset{language=Java,,
+	basicstyle=\ttfamily\small,
+           keywordstyle=\color{blue}\ttfamily,
+           stringstyle=\color{red}\ttfamily,
+           commentstyle=\color{gray}\ttfamily,
+          breaklines=true}
+
+\begin{document}
+
+\AtBeginSection[]{
+  \begin{frame}
+  \vfill
+  \centering
+  \begin{beamercolorbox}[sep=8pt,center,shadow=true,rounded=true]{title}
+    \usebeamerfont{title}\insertsectionhead\par%
+  \end{beamercolorbox}
+  \vfill
+  \end{frame}
+}
+
+\title{CM 10227: Exam Prep}
+\author{Dr. Rachid Hourizi and Dr. Michael Wright}
+\date{\today}
+\frame{\titlepage}
+
+\begin{frame}
+\frametitle{Introduction}
+\begin{itemize}
+\item This week’s lectures will not follow the usual pattern
+\item This (rather shorter) lecture consists of
+\begin{itemize}
+\item Introduction to the Exam
+\item Exam and Coursework Q\&A
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Introduction}
+\begin{itemize}
+\item We will also hold one final session in revision week in January:
+\item Will be in the usual lecture room at 4pm on Tuesday 10th Jan
+\item Won't present new material
+\item But we will be availabale to answer your questions
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Reminder}
+\begin{itemize}
+\item Remember that the second large coursework is due tomorrow
+\item You should, at this stage be checking and debugging code rather than developing new functionality
+\item Check that your code compiles and runs on lcpu 
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Reminder}
+\begin{itemize}
+\item I am happy to answer questions on the coursework specification at the end of this lecture
+\item I will not (cannot practically), however, debug code ahead of tomorrows submission
+\item Take debugging questions to the remaining labs
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Further Help}
+\begin{itemize}
+\item There are still labs today and tomorrow
+\item For the rest of this week, you can email programming1 as usual
+\item You can also try programmng1 next week but you may not get an answer very quickly
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{center}
+The Exam
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Assessment Overview}
+\begin{itemize}
+\item Course is made up of \textbf{concepts} and \textbf{application}
+\bigskip
+\item Coursework builds and tests \textbf{application}
+\item Exam mainly tests \textbf{concepts}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{center}
+\includegraphics[height=8cm, keepaspectratio]{ExamCover}
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Exam}
+\begin{itemize}
+\item Note: Answer 3 questions from 5
+\item If you attempt more questions, \textbf{please indicate which should be marked}
+\item In case of doubt, we will simply mark the first 3
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Anatomy of our Exam Questions}
+\begin{itemize}
+\item Each question will have multiple (approx 4) parts
+\item Answer all parts of the 3 questions that you chose
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Anatomy of our Exam Questions}
+\begin{itemize}
+\item One part worth approx. 10 marks
+\item And other parts worth approx. 10 marks between them e.g.
+\end{itemize}
+
+\begin{block}{}
+\begin{lstlisting}
+Question 1
+1.  ..... [10 marks]
+2.  ..... [4 marks]
+3.  ..... [4 marks]
+4.  ..... [2 marks]
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Anatomy of our Exam Questions}
+\begin{itemize}
+\item The largest part (i.e. the part worth approx. 10 marks) will ask you to work with code
+\begin{itemize}
+\item e.g. Design the a code structure
+\item e.g. Explain the workings/output of given code
+\item e.g. Debug given code
+\end{itemize}
+\end{itemize}
+
+\begin{block}{}
+\begin{lstlisting}
+Question 1
+1.  Work with code [10 marks]
+2.  ..... [4 marks]
+3.  ..... [4 marks]
+4.  ..... [2 marks]
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Anatomy of our Exam Questions}
+\begin{itemize}
+\item The other parts of each question may ask you to define a term, compare two (or more terms), give examples and/or explain the importance of those terms.
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\begin{block}{}
+\begin{lstlisting}
+Question 1
+1. Write a recursive and an iterative version of a function that prints out all even numbers between 0 and 5000. The function/method should be able to operate with positive and negative numbers. You are not allowed to use the * operator [10 marks]
+2. Define a [4 marks]
+3. Explain the difference between b and c [4 marks]
+4. List the key advatages of d and e [2 marks]
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+\begin{frame}
+\frametitle{Marks}
+\begin{itemize}
+\item The exam is marked out of 60 (3*20)
+\item We then convert your final mark to a percentage,
+\item Combine it with your coursework marks (50/50)
+\item And submit it to the department unit and program boards
+\item All marks are provisional until those boards have taken place
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Tips}
+\begin{itemize}
+\item During the exam, it will help to
+\begin{itemize}
+\item Read through all five questions before answering
+\item Use all the time available i.e.  think carefully before leaving early
+\begin{itemize}
+\item check your answers
+\end{itemize}
+\item Submit both notes and final answers 
+\item Clearly mark the difference between your final answers, notes and rejected answers (cross through notes/rejected answers before submitting)
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Tips}
+\begin{itemize}
+\item It will also help to
+\begin{itemize}
+\item Prioritise the ``work with code'' parts when chosing which questions to answer
+\item Look for clues in the marks (3 marks probably means that we expect to see 3 parts to youranswer)
+\item e.g. The advantages of a are x, y and z [3 marks]
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Do's and Dont's}
+\begin{itemize}
+\item Don't Panic!
+\item Do spend time revising the course material.
+\item Make sure that you
+\begin{itemize}
+\item understand (and can explain) key concepts
+\item have practised for the coding exercises in the exam
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Do's and Dont's}
+\begin{itemize}
+\item Don't try to second guess the contents of the exam on the basis of this (or any other) individual lecture. 
+\item There are no guarentees that the material covered this week (including revision slides) will be either in or out of the exam.
+\item You will need to revise the lecture slides from the first week just as carefully as the ones from this week (and all those in between).
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Preparation}
+\begin{itemize}
+\item Re-read both C and Java lecture notes 
+\item Remember that we will not ask questions about material only covered in the Pointers and Memory lecture (Thursday, Week 4)
+\item Remember also that we may ask questions about any other subject covered in the course (C, Java, General programming)
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Preparation}
+\begin{itemize}
+\item Review the definitions and explanations embedded within each lecture
+\item Spend time on (but don't limit your efforts to) the definitions of terms dotted throughout the lectures.
+\item e.g. a variable is a name that refers to a value
+\bigskip
+\item Note that definitions may appear alone on a slide 
+\item ... or be included in a longer discussion / piece of code
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Preparation}
+\begin{itemize}
+\item Go through those slides/glossaries, making sure that you can provide definitions of as many keywords as possible (and examples of the concepts described by those keywords) e.g.
+\begin{itemize}
+\bigskip
+\item Q: Explain the importance of try/catch statements:
+\item A: They allow software clients to attempt reovery from thrown exceptions at runtime.
+\bigskip
+\item Q: Define garbage collection: 
+\item A: Garbage collection is a form of automatic memory management.
+\item A (contd): The garbage collector attempts to reclaim garbage, or memory occupied by objects that are no longer in use by the program.
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Preparation}
+\begin{itemize}
+\item Work through at least one previous CM10227 exam paper
+item \url{http://www.bath.ac.uk/library/exampapers/index.php}
+\item Note: We do not provide answers to exam questions
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Preparation}
+\begin{itemize}
+\item You can (and probably should) compile and run some of the ``Working with code'' parts of old exam questions
+\begin{itemize}
+\item e.g. parts of questions that ask you to explain code functionality
+\item e.g. parts of questions that ask you to debug code
+\end{itemize}
+\item N.B. Ifyou do compile and run exam code, it may be helpful to add print statements which provide insight into the state of our code at key points in it's execution
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{center}
+Any Questions?
+\end{center}
+\end{frame}
+
+\begin{frame}
+\begin{center}
+Enjoy The Holiday (Once Your Coursework is In)!
+\end{center}
+\end{frame}
+
+\end{document}

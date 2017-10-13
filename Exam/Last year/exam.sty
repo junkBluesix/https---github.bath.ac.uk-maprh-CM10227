@@ -1,0 +1,487 @@
+%% If you want to make changes to this file and you are not the
+%% maintainer there are two rules:
+%%
+%% 1.  Record yr changes in the changelog below.
+%%
+%% 2.  Don't make any changes EVER (is that clear, James?)
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% LaTeX exam macro style, B.W.Silverman, 25.02.92
+%% --later hacked by F.E Burstall, 26/2/62,27/2/92,28/2/92,29/11/93,10/2/95
+%%  2/11/95 and now I shall try and keep a proper changelog:
+%%  29/11/95  ---FEB:added rubric for midsessionals and added punctuation
+%%            to \calculatortext
+%%  07/05/96  ---FEB:fixed up the test for starting a long question on an
+%%            odd numbered page: this was completely broken.
+%%  06/11/96  ---FEB: added this years crop of new rubrics and
+%%            cleared out the old ones.
+%%  07/11/96  ---FEB: removed the setting of \footheight: it is never
+%%            used and latex2e does not define it!  These macros now
+%%            work under latex2e (hoorah!)
+%%  12/11/96  ---FEB: made \stage a no-op so as not to break old
+%%            papers too much.
+%%  04/02/97  ---FEB: added rubric for C2 (which I missed in
+%%            November)
+%%  22/09/97  ---FEB: made many changes for modularised system since
+%%  most papers now contain a single section.  Thus:
+%%            (a) usually \examsetup now called by \examcode rather
+%%            than the user and this provides default page
+%%            and question numbering: unless \maketitle is present,
+%%            page-numbering starts at 2 and questions at 1.
+%%            (b) installed new rubrics and caused the old ones to
+%%            complain.
+%%            (c) We have facultised (?) and are no longer a school
+%%            but a department.  Appropriate changes to macros names
+%%            made.
+%%            (d) Introduced a \sections macro (which I may not
+%%            document) so that \sections{three}, say, adds some text
+%%            to the rubric about handing in the answers to the three
+%%            sections separately.
+%%            (e) Moved the \marks macro from exam.cls so users of
+%%            latex209 syntax can access it.
+%%  24/09/97  ---FEB: made \date accept \\ following a suggestion of
+%%  AFS.  I don't think I'll document this---just let it be a nice surprise!
+%%  15/10/97  ---FEB: made a default rubric for people who use
+%%  \maketitle before they set \papertype (such people exist and were
+%%  getting an error!)
+%%  01/10/01  ---NNV: replaced on title page MATHEMATICAL SCIENCES by
+%%  COMPUTER SCIENCE
+%%  07/04/03  ---NNV: replaced the rubric text which is now the same
+%%  for Parts I and II
+
+
+%%  get printing area right
+%%
+\setlength{\oddsidemargin}{0pt} \setlength{\evensidemargin}{0pt}
+\setlength{\textwidth}{6.2in} \setlength{\topmargin}{-0.0625in}
+\setlength{\headheight}{0.2in} \setlength{\headsep}{0.5in}
+\setlength{\textheight}{7.8in} \setlength{\footskip}{0.4in}
+\setlength{\parindent}{0pt} \setlength{\parskip}{6pt}
+\pretolerance=10000
+%%
+%%  We print two sided:
+\@twosidetrue
+%%  We use 11pt fonts...
+\lineskip 1pt
+\normallineskip 1pt
+\def\baselinestretch{1}
+
+\def\@normalsize{\@setsize\normalsize{13.6pt}\xipt\@xipt
+\abovedisplayskip 11\p@ plus3\p@ minus6\p@
+\belowdisplayskip \abovedisplayskip
+\abovedisplayshortskip  \z@ plus3\p@
+\belowdisplayshortskip  6.5\p@ plus3.5\p@ minus3\p@
+\let\@listi\@listI}
+%% need this because latex2e in compatibility mode does not do this
+%% since both \normalsize _and_ \@normalsize are defined in various places:
+\let\normalsize\@normalsize
+
+\def\small{\@setsize\small{12pt}\xpt\@xpt
+\abovedisplayskip 10\p@ plus2\p@ minus5\p@
+\belowdisplayskip \abovedisplayskip
+\abovedisplayshortskip  \z@ plus3\p@
+\belowdisplayshortskip  6\p@ plus3\p@ minus3\p@
+\def\@listi{\leftmargin\leftmargini
+\topsep 6\p@ plus2\p@ minus2\p@\parsep 3\p@ plus2\p@ minus\p@
+\itemsep \parsep}}
+
+\def\footnotesize{\@setsize\footnotesize{11pt}\ixpt\@ixpt
+\abovedisplayskip 8\p@ plus2\p@ minus4\p@
+\belowdisplayskip \abovedisplayskip
+\abovedisplayshortskip \z@ plus\p@
+\belowdisplayshortskip 4\p@ plus2\p@ minus2\p@
+\def\@listi{\leftmargin\leftmargini
+\topsep 4\p@ plus2\p@ minus2\p@\parsep 2\p@ plus\p@ minus\p@
+\itemsep \parsep}}
+
+\def\scriptsize{\@setsize\scriptsize{9.5pt}\viiipt\@viiipt}
+\def\tiny{\@setsize\tiny{7pt}\vipt\@vipt}
+\def\large{\@setsize\large{14pt}\xiipt\@xiipt}
+\def\Large{\@setsize\Large{18pt}\xivpt\@xivpt}
+\def\LARGE{\@setsize\LARGE{22pt}\xviipt\@xviipt}
+\def\huge{\@setsize\huge{25pt}\xxpt\@xxpt}
+\def\Huge{\@setsize\Huge{30pt}\xxvpt\@xxvpt}
+
+
+%%
+%%  dimens for questions
+%%
+\newlength{\qtextoffset}
+\setlength{\qtextoffset}{2.5em}%distance from left margin to question text
+
+%%  question number counter
+\newcounter{qnum}\setcounter{qnum}{1}%default first question is 1
+
+%%
+%%  question label (we like them flush left)
+%%
+\def\questionlabel#1{#1\hfil}
+%%
+%%  question environment: just a list but we disable \pagebreak and
+%%  subvert \newpage for reasons described below...
+%%
+\newenvironment{question}{%
+\samepage\let\pagebreak\relax\let\newpage\questionbreak%
+\firstpagetrue% To keep track of how many pages this question extends over
+\begin{list}{\arabic{qnum}.}%
+{\setlength{\leftmargin}{\qtextoffset}\setlength{\rightmargin}{0pt}%
+\setlength{\labelwidth}{\leftmargin}\addtolength{\labelwidth}{-\labelsep}%
+\setlength{\topsep}{\bigskipamount}\let\makelabel\questionlabel}%
+\item}{\end{list}\addtocounter{qnum}{1}\vfil\penalty-200\vfilneg}
+%%
+%% questionbreak macro: we want to discourage page breaks in the
+%% middle of a question.  However, experience shows that some users
+%% (especially those in Statistics) are hopelessly addicted to long
+%% questions so we must force them to
+%% (a) break pages in a controlled manner, warning the student what
+%% is going on.
+%% (b) discourage them from starting such a question on an odd
+%% numbered page by issuing a warning.
+%%
+%% Part (b) actually needs a certain amount of thought (I got it
+%% wrong first time) since we only reliably know the page number at
+%% \shipout time.  This means we must issue the warning at \shipout
+%% time which is often much later than when the question is broken...
+%%
+%% We begin by collecting some ingredients:
+%% 1. test for how many pages a question extends over
+\newif\iffirstpage
+%% 2. penalties for page breaks
+\mathchardef\warningpenalty=9999
+\mathchardef\nowarningpenalty=10000
+\def\newpagepenalty{\nowarningpenalty}
+%% 3. Redefine \newpage so it can carry information (via penalties)
+%% to the output routines
+\def\newpage{\par\vfil\penalty-\newpagepenalty}
+\let\qnewpage\newpage
+%% 4. The warning:
+\def\longqwarning{%
+\typeout{}
+\typeout{************************************************************}
+\typeout{************************************************************}
+\typeout{WARNING!!!  You have started a long exam question on page \thepage.}
+\typeout{This is an odd-numbered page!  }
+\typeout{}
+\typeout{----------ARE YOU SURE YOU WANT TO DO THIS?-----------------}
+\typeout{************************************************************}
+\typeout{************************************************************}
+\typeout{}}
+%% 5. We now subvert the output routine
+\output{\let\par\@@par
+  \ifnum\outputpenalty =-\warningpenalty\ifodd\count0\longqwarning\fi\fi
+  \ifnum\outputpenalty <-\@M\@specialoutput\else
+  \@makecol\@opcol\@floatplacement\@startcolumn
+  \@whilesw\if@fcolmade \fi{\@opcol\@startcolumn}\fi
+  \global\vsize\ifnum\outputpenalty >-\@Miv \@colroom
+                  \else \maxdimen\fi}
+%% 6. Finally the entry point into the whole damn shooting match:
+%% \questionbreak adds suitable text to a mid-question page break and
+%% sets the penalties so that the output routine knows we are on the
+%% first page of a question if necessary.
+\newcommand{\questionbreak}{\par\vspace{0.2in}{\raggedleft
+\large \it Question \theqnum\ continues on next page
+$\ldots$\par}%
+\iffirstpage\gdef\newpagepenalty{\warningpenalty}\fi
+\qnewpage\firstpagefalse\gdef\newpagepenalty{\nowarningpenalty}%
+{\raggedright\it Question \theqnum\ continued $\ldots$\par}}
+%%
+%%  roster environment for indented subquestions (labels to be
+%%  supplied by user)
+%%
+\newenvironment{roster}{\begin{list}{}%
+{\setlength{\leftmargin}{\qtextoffset}\setlength{\rightmargin}{0pt}%
+\setlength{\labelwidth}{\leftmargin}\addtolength{\labelwidth}{-\labelsep}%
+\setlength{\topsep}{\medskipamount}\let\makelabel\questionlabel}}%
+{\end{list}}
+%%
+%%  section macro
+%%
+\newcommand{\examsection}[1]{\begin{center}{\bf Section #1}\end{center}\medskip}
+%% Marks macro: use as \marks{20}--but not in math mode!
+\DeclareRobustCommand*{\marks}[1]{%
+  \ifmmode % math-mode: we bail out since there is nothing sensible
+           % to do
+  \ClassError{exam}{You cannot use \protect\marks\space in math mode}%
+  {You have used the \protect\marks\space macro inside an
+ equation\MessageBreak
+ and this is not allowed.\MessageBreak\MessageBreak
+ Type \space <return> \space to continue.\MessageBreak
+ You will need to reposition your \protect\marks\space macro afterwards.}
+  \else%
+\leavevmode\unskip\penalty9999\hskip2em\hbox{}\nobreak\hfill\fi%
+\hbox{[#1]}}
+
+%%
+%%  pagestyle definition
+%%
+\input{fancyheadings.sty}% get header macros
+\setlength{\headrulewidth}{0pt}
+%% Now we do the deed: we want to define both plain and fancy
+%% headers: we want plain on pages 1 and 2 (the title page and the
+%% first page of the exam) and fancy elsewhere.  Moreover, the plain
+%% headers must be different on pages 1 and 2.  Luckily, we can give
+%% different headers for odd and even pages. (This is why we are
+%% printing two sided.)
+%%
+%% The left header is blank on page 1, gives \examcodetext on page 2 and
+%% \examctdtext thereafter.
+\lhead[\fancyplain{\examcodetext}{\examctdtext}]{\fancyplain{}{\examctdtext}}
+%% The right header has \topcode on page 1 and is blank thereafter
+\rhead[\fancyplain{}{}]{\fancyplain{\topcode}{}}
+%% The centre header is the page number except on page 1
+\chead[\thepage.]{\fancyplain{}{\thepage.}}
+%% The right footer gives \examcodetext on page 1 and \examctdtext
+%% thereafter
+\rfoot[\examctdtext]{\fancyplain{\examcodetext}{\examctdtext}}
+%% the centre footer is empty on all pages
+\cfoot{}
+\pagestyle{fancyplain}
+%%
+%% All this needs to be initialised.  The \examsetup macro does this:
+%%
+\def\theexamcode{}
+\def\examcodetext{}
+\def\examctdtext{}
+% get page number, question number and examcode--and use this to set
+% page style plain on pages one and two else fancy.  If the exam code
+% is not empty we define appropriate stuff for the headers and
+% footers using it.
+\newcommand{\examsetup}[3]{\setcounter{page}{#1}
+\ifnum\thepage<3\thispagestyle{plain}\else\thispagestyle{fancy}\fi
+\setcounter{qnum}{#2}\def\theexamcode{#3}
+\ifx\theexamcode\empty\else\def\examcodetext{\theexamcode}
+\def\examctdtext{\theexamcode\
+%continue
+}\fi}
+% the default behaviour is to start at page 2 with question 1:
+\newcommand{\examcode}[1]{\examsetup{2}{1}{#1}}
+%
+%  Set up a default:
+\examcode{}
+%
+%  paperend macro
+%
+\newcommand{\paperend}[1]{\lfoot{#1}\rfoot{\examcodetext}}
+%
+
+%% Now for macros to produce the front page of the exam
+%%
+%% The user must tell us several things:
+%% 1.  The title of the exam.  This is done with \title.
+%% 2.  The date of the exam.  This is done with \date.
+%% 3.  Whether calculators are to be used.  This is done in the
+%% preamble by declaring \calculators or \nocalculators--at least for
+%% exams for the Dept of Mathematics.
+%% 4.  What kind of rubric is required.  A variety of rubrics have
+%% been defined as macros of the form \foorubric and the correct one
+%% is selected by saying \papertype{foo}.  Thus it is easy (and
+%% doubtless will be necessary) to add new rubrics as our
+%% examinations procedure gets more and more arcane.
+%%
+%% Also, we provide \specialrubric which sets up a user defined
+%% rubric built with the \rubric macro.
+%%
+%% Finally, when exams for other Depts are being prepared, not only
+%% do we need a special rubric but we must also provide the list of
+%% degrees for which this paper examines candidates, any blurb and
+%% year/part of degree and also the Dept's exam code.  \degree, \blurb and
+%% \deptcode provide this.
+
+%% First the title:
+\def\title#1{\gdef\thetitle{#1}}
+
+%% The blurb, if necessary
+\def\theblurb{\mbox{}}
+\def\blurb#1{\gdef\theblurb{#1}}
+%% The date:
+\def\thedate{}
+\def\date#1{\gdef\thedate{#1}}
+%% This will be between two \hrules on the page so we need its width.
+%% We reserve a box for the date:
+\newbox\datebox\newdimen\datewidth\newdimen\daterulewidth
+%% Test for whether we want calculators or not
+\newif\ifcalculators
+%% Default is no calculators
+\calculatorsfalse
+\def\calculators{\calculatorstrue}
+\def\nocalculators{\calculatorsfalse}
+%% This text goes into the rubric
+\def\calculatortext{\ifcalculators Candidates may use
+university-supplied calculators.\else No calculators may be brought in
+or used.\fi}
+%% If the exam is split into sections, we add a ``please hand in
+%% separate sections separately'' tag to the rubric.  We need to know
+%% how many sections there are so...
+\def\sectiontext{}
+\newcommand{\sections}[1]{\gdef\sectiontext{%
+\\\bigskip Answers to the #1 sections must be handed in separately.}}
+
+%% Little macro for 1/2 (as in 1 1/2 hour exam)
+\def\@half{\frac{1}{2}} %Got burnt almost as soon as original
+                        %version got released--other users like to
+                        %define \half!!
+
+%% Give user a chance to define a rubric:
+\def\myrubric{}
+\long\def\rubric#1{\gdef\myrubric{#1}}
+
+%% We find out what type of rubric is required.  If the chosen
+%% rubric is not known to us, we put in a default one which
+%% complains!
+
+\def\papertype#1{\expandafter\ifx\csname#1rubric\endcsname\relax\gdef\therubric{\unknownrubric}\else\gdef\therubric{\csname#1rubric\endcsname}\fi}
+
+%% We also provide a default (which reminds the punters to insert it
+%% sooner or later):
+\def\therubric{\defaultrubric}
+%% The list of degrees or just a header: at present, we do not give
+%% the list of degrees because there are too damn many of them!
+%% However, for service courses, this information must be provided so this
+%% can be changed by the user if necessary.
+\def\thedegree{%
+\large\bf DEPARTMENT OF COMPUTER SCIENCE\\
+EXAMINATION}
+\def\degree#1{\gdef\thedegree{#1}}
+
+%% The exam code for the paper.  By default, this is just \theexamcode
+%% unless reset by \deptcode
+\def\topcode{\theexamcode}
+\def\deptcode#1{\gdef\topcode{#1}}
+
+%% Now we do the deed and create the title page
+%%
+%% We set the date in a tabular so it will accept \\ and wrap this in
+%% a box so we can calculate the width of the lines above and below
+\def\maketitle{\thispagestyle{plain}\setcounter{page}{1}%
+\setbox\datebox=\hbox{\large\begin{tabular}{@{}c@{}}\thedate\end{tabular}}%
+\datewidth=\wd\datebox%
+\ifdim\datewidth>3in\daterulewidth\datewidth\else\daterulewidth 3in\fi%
+\vspace*{-0.75in}
+\begin{center}
+\large University of Bath
+\end{center}
+\begin{center}
+\small\bf\thedegree
+\end{center}
+\begin{center}
+\large\theblurb
+\end{center}
+\begin{center}
+\large\bf\thetitle
+\end{center}
+\smallskip
+\hbox to\hsize{\hss\vbox{\hrule width \daterulewidth\vskip 6pt
+\hbox to \daterulewidth{\hss\usebox\datebox\hss}
+\vskip 3pt
+\hrule width \daterulewidth}\hss}
+\vspace*{1in}\therubric\newpage\thispagestyle{plain}}
+
+%% Finally our collection of rubrics:
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Part I: that is to say Years 1 and 2
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+\def\PartIrubric{%
+\begin{center}
+\calculatortext\\
+\end{center}
+\bigskip
+Full marks will be given for correct answers to THREE questions.
+If you opt to answer more than the specified number of questions,
+you should clearly identify which of your answers you wish to have marked.
+In cases where you have failed to identify the correct number of answers
+the marker is only obliged to consider the answers in the order they
+appear up to the number of answers required.
+\bigskip
+
+PLEASE FILL IN THE DETAILS ON THE FRONT OF YOUR ANSWER BOOK/COVER AND
+SIGN IN THE SECTION ON THE RIGHT OF YOUR ANSWER BOOK/COVER, PEEL AWAY ADHESIVE STRIP AND SEAL.
+\medskip
+
+TAKE CARE TO ENTER THE CORRECT CANDIDATE NUMBER AS DETAILED ON YOUR DESK LABEL.
+\medskip
+
+DO NOT TURN OVER YOUR QUESTION PAPER UNTIL INSTRUCTED TO BY THE CHIEF INVIGILATOR.
+\sectiontext
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Part II: that is to say Years 3 and 4
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+\def\PartIIrubric{%
+\begin{center}
+\calculatortext\\
+\end{center}
+\bigskip
+Full marks will be given for correct answers to THREE questions.
+If you opt to answer more than the specified number of questions,
+you should clearly identify which of your answers you wish to have marked.
+In cases where you have failed to identify the correct number of answers
+the marker is only obliged to consider the answers in the order they
+appear up to the number of answers required.
+\bigskip
+
+PLEASE FILL IN THE DETAILS ON THE FRONT OF YOUR ANSWER BOOK/COVER AND
+SIGN IN THE SECTION ON THE RIGHT OF YOUR ANSWER BOOK/COVER, PEEL AWAY ADHESIVE STRIP AND SEAL.
+\medskip
+
+TAKE CARE TO ENTER THE CORRECT CANDIDATE NUMBER AS DETAILED ON YOUR DESK LABEL.
+\medskip
+
+DO NOT TURN OVER YOUR QUESTION PAPER UNTIL INSTRUCTED TO BY THE CHIEF INVIGILATOR.
+
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% ROLL YOUR OWN
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% This takes a user defined rubric and centers it etc
+\def\specialrubric{%
+\begin{center}
+\myrubric
+\end{center}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% DEFAULTS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% One for if we do not recognise the papertype:
+\def\unknownrubric{%
+  \begin{center}
+  {\Huge\bf Help!}\\
+  \medskip
+  \large I do not know what kind of exam paper this is.\\
+  Are you sure you have set {\tt\string\papertype} correctly?
+  \end{center}}
+%% One for people who have not set papertype yet
+\def\defaultrubric{%
+  \begin{center}
+  \large Don't forget to set {\tt\string\papertype} correctly\\
+  before printing out the final version!
+  \end{center}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Obsolete rubrics from yesteryear: we give a short message
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\def\Obsoleterubric{%
+\begin{center}
+You have used an obsolete rubric.\\
+\medskip
+If you are preparing a new exam, please check {\tt examdoc} for the
+correct\\
+arguments to {\tt\string\papertype}.
+\end{center}}
+\let\YearIIShortOneSecrubric\Obsoleterubric
+\let\YearIIShortTwoSecrubric\Obsoleterubric
+\let\YearIILongTwoSecrubric\Obsoleterubric
+\let\YearIILongThreeSecrubric\Obsoleterubric
+\let\YearIIQRSFourrubric\Obsoleterubric
+\let\YearIPapersItoIVrubric\Obsoleterubric
+\let\YearIPaperVrubric\Obsoleterubric
+\let\YearIPaperVIarubric\Obsoleterubric
+\let\YearIPaperVIbrubric\Obsoleterubric
+\let\YearIPaperVIIrubric\Obsoleterubric
+\let\Midsessionalrubric\Obsoleterubric
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Backwards compatiblity
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% \stage was used in past exams.  Make it a no-op now.
+\newcommand{\stage}[1]{\relax}

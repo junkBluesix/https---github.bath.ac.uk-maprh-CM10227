@@ -1,0 +1,15 @@
+\frametitle{Next Steps}
+\begin{itemize}
+\item A practical next step to work through the university pages on UNIX/Linux
+\begin{itemize}
+\item http://www.bath.ac.uk/bucs/tools/unix/basicunixcommands/
+\end{itemize}
+\item Since many of you have asked, it is also worth noting that the University maintains a page on how to access the campus machines from outside (e.g. from your own laptops)
+\begin{itemize}
+\item http://www.bath.ac.uk/bucs/networking/ssh.html
+\end{itemize}
+\item We will look at connecting to one computer from another in the next UNIX lecture
+\item .... but, for now, using the applications recommended by the University is not a bad starting point
+\item As always, help is available in the labs
+
+\end{itemize}

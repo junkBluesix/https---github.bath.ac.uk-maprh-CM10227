@@ -1,0 +1,18 @@
+\begin{center}
+\textbf{Aside : Multiple Inheritance}
+\end{center}
+\begin{block}{}
+\begin{lstlisting}
+public class MultiMediaBook extends AudioBook, EBook{
+
+    // other methods BUT NOT getContent()!
+
+    public static void main(String[] args){
+        MultiMediaBook mmb = new MultiMediaBook();
+        mmb.getContent();
+        // which getContent do we use?
+        // AudioBook or EBook?
+    }
+}
+\end{lstlisting}
+\end{block}

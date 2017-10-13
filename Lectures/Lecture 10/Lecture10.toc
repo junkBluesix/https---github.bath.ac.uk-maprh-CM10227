@@ -1,0 +1,2 @@
+\beamer@endinputifotherversion {3.36pt}
+\beamer@sectionintoc {1}{Class Variable and Methods}{38}{0}{1}

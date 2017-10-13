@@ -1,0 +1,10 @@
+\begin{block}{}
+\begin{lstlisting}
+$ gcc test_map test_map.c
+
+$ ./test_map
+10
+12
+15
+\end{lstlisting}
+\end{block}

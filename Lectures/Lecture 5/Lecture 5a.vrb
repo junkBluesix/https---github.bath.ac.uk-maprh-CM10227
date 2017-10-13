@@ -1,0 +1,18 @@
+\begin{itemize}
+\item Finally, to start our digital clock, we need a third class containing a main() method, which creates a new ClockDisplay
+\item NB we dont need to do any more work to create the NumberDisplays, the ClockDisplay will do that
+\end{itemize}
+\begin{block}{}
+\begin{lstlisting}
+public class DigitalClock {
+
+    public static void main(String[] args) {
+
+    	//Call String constructor to create new ClockDisplay
+    	ClockDisplay cd = new ClockDisplay();
+
+    }
+
+}
+\end{lstlisting}
+\end{block}
